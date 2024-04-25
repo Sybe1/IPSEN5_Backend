@@ -12,5 +12,6 @@ public interface CategoryRepository extends JpaRepository<Category, UUID> {
 
     @Transactional
     void deleteCategoryById(UUID id);
+
 }
 

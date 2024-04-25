@@ -31,6 +31,7 @@ public class PostDAO {
     }
 
     public void deletePost(UUID id) {
-        this.postRepository.deletePostById(id);
+        this.postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
+        this.postRepository.deleteById(id);
     }
 }

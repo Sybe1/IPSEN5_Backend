@@ -32,6 +32,7 @@ public class CategoryDAO {
     }
 
     public void deleteCategory(UUID id) {
-        this.categoryRepository.deleteCategoryById(id);
+        this.categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category not found"));
+        this.categoryRepository.deleteById(id);
     }
 }
