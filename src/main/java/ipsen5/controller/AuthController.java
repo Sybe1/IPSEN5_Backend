@@ -5,7 +5,7 @@ import ipsen5.dao.UserRepository;
 import ipsen5.dto.AuthenticationDTO;
 import ipsen5.dto.LoginResponse;
 import ipsen5.models.User;
-import ipsen5.services.CredentialValidator;
+import ipsen5.services.UserInputValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,10 +24,10 @@ public class AuthController {
     private final JWTUtil jwtUtil;
     private final AuthenticationManager authManager;
     private final PasswordEncoder passwordEncoder;
-    private CredentialValidator validator;
+    private UserInputValidator validator;
 
     public AuthController(UserRepository userDAO, JWTUtil jwtUtil, AuthenticationManager authManager,
-                          PasswordEncoder passwordEncoder, CredentialValidator validator) {
+                          PasswordEncoder passwordEncoder, UserInputValidator validator) {
         this.userDAO = userDAO;
         this.jwtUtil = jwtUtil;
         this.authManager = authManager;
@@ -49,6 +49,24 @@ public class AuthController {
             );
         }
 
+        if (!validator.isValidFirstName(authenticationDTO.first_name)) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "No valid first name provided"
+            );
+        }
+
+        if (!validator.isValidLastName(authenticationDTO.last_name)) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "No valid last name provided"
+            );
+        }
+
+        if (!validator.isValidDonationLink(authenticationDTO.donation_link)) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "No valid donation link provided"
+            );
+        }
+
         User user = userDAO.findByEmail(authenticationDTO.email);
 
         if (user != null){
@@ -58,7 +76,7 @@ public class AuthController {
         }
         String encodedPassword = passwordEncoder.encode(authenticationDTO.password);
 
-        User registerdCustomUser = new User(authenticationDTO.email, encodedPassword);
+        User registerdCustomUser = new User(authenticationDTO.first_name, authenticationDTO.last_name, authenticationDTO.email, encodedPassword, authenticationDTO.donation_link);
         userDAO.save(registerdCustomUser);
         String token = jwtUtil.generateToken(registerdCustomUser.getEmail());
         LoginResponse loginResponse = new LoginResponse(registerdCustomUser.getEmail(), token);

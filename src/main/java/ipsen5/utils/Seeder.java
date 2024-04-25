@@ -16,7 +16,7 @@ public class Seeder {
     }
 
     @EventListener
-    public void seed(){
+    public void seed(ContextRefreshedEvent event){
         this.seedUser();
     }
 
