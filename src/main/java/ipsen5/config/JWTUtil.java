@@ -24,14 +24,14 @@ public class JWTUtil {
                 .withClaim("email", email)
                 .withIssuedAt(new Date())
                 .withExpiresAt(this.createExpirationDate())
-                .withIssuer("Duck Studios")
+                .withIssuer("The Babel Company")
                 .sign(Algorithm.HMAC256(secret));
     }
 
     public String validateTokenAndRetrieveSubject(String token) throws JWTVerificationException {
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret))
                 .withSubject("User Details")
-                .withIssuer("Duck Studios")
+                .withIssuer("The Babel Company")
                 .build();
         DecodedJWT jwt = verifier.verify(token);
         return jwt.getClaim("email").asString();

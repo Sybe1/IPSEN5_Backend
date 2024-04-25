@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/aq
+    url: jdbc:postgresql://localhost:5432/ipsen5
     username: postgres
     password: Kader123
   jpa:
@@ -15,3 +15,7 @@ spring:
 jwt:
   secret: XksbXmLsdw3v9kGFcHyQG4waU9BlQvgpn5Tdo4Sns6V3QoiqrEVfxX0FhcEArA5g
   expiration: 86400000
+
+server:
+  error:
+    include-stacktrace: never
