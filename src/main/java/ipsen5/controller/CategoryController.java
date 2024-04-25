@@ -41,6 +41,6 @@ public class CategoryController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCategory(@PathVariable("id") UUID id){
         this.categoryDAO.deleteCategory(id);
-        return ResponseEntity.ok("delete category with id: " + id);
+        return ResponseEntity.ok("deleted category with id: " + id);
     }
 }
