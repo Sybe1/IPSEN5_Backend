@@ -1,9 +1,6 @@
 package ipsen5.utils;
 
-import ipsen5.dao.CategoryRepository;
-import ipsen5.dao.PostCategoryRepository;
-import ipsen5.dao.PostRepository;
-import ipsen5.dao.UserRepository;
+import ipsen5.dao.*;
 import ipsen5.models.*;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -18,14 +15,17 @@ public class Seeder {
     private PostRepository postRepository;
     private CategoryRepository categoryRepository;
     private PostCategoryRepository postCategoryRepository;
+    private RubricRepository rubricRepository;
 
 
     public Seeder(UserRepository userRepository, PostRepository postRepository,
-                  CategoryRepository categoryRepository, PostCategoryRepository postCategoryRepository) {
+                  CategoryRepository categoryRepository, PostCategoryRepository postCategoryRepository,
+                  RubricRepository rubricRepository) {
         this.userRepository = userRepository;
         this.postRepository = postRepository;
         this.categoryRepository = categoryRepository;
         this.postCategoryRepository = postCategoryRepository;
+        this.rubricRepository = rubricRepository;
     }
 
     @EventListener
@@ -34,6 +34,7 @@ public class Seeder {
         this.seedPost();
         this.seedCategory();
         this.seedPostCategory();
+        this.seedRubric();
     }
 
 
@@ -75,5 +76,11 @@ public class Seeder {
         PostCategory postCategory = new PostCategory();
         postCategory.setId(postCategoryId);
         postCategoryRepository.save(postCategory);
+    }
+
+    private void seedRubric(){
+        Rubric rubric = new Rubric();
+        rubric.setTitle("First Rubric");
+        rubricRepository.save(rubric);
     }
 }
