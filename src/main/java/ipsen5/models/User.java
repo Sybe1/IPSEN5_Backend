@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.management.relation.Role;
+import java.util.UUID;
 
 @Entity(name = "Users")
 @Getter
@@ -15,7 +16,7 @@ import javax.management.relation.Role;
 public class User {
     @Id
     @GeneratedValue
-    private Long id;
+    private UUID id;
 
     private String first_name;
     private String last_name;
