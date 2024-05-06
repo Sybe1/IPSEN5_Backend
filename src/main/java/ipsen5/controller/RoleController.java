@@ -29,4 +29,16 @@ public class RoleController {
         this.roleDAO.createRole(roleDTO);
         return ResponseEntity.ok("Created a new Role named " + roleDTO.name);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> editRole(@PathVariable Long id, @RequestBody RoleDTO roleDTO){
+        this.roleDAO.editRole(id, roleDTO);
+        return ResponseEntity.ok("Edited role with id: " + id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteRole(@PathVariable("id") Long id){
+        this.roleDAO.deleteRole(id);
+        return ResponseEntity.ok("deleted role with id: " + id);
+    }
 }

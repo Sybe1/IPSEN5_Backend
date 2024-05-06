@@ -29,5 +29,17 @@ public class RightsController {
         this.rightsDAO.createRights(rightsDTO);
         return ResponseEntity.ok("Created a new Rights named " + rightsDTO.name);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> editRights(@PathVariable Long id, @RequestBody RightsDTO rightsDTO){
+        this.rightsDAO.editRights(id, rightsDTO);
+        return ResponseEntity.ok("Edited rights with id: " + id);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteRights(@PathVariable("id") Long id){
+        this.rightsDAO.deleteRights(id);
+        return ResponseEntity.ok("deleted rights with id: " + id);
+    }
 }
 
