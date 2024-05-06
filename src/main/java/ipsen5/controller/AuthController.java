@@ -49,19 +49,19 @@ public class AuthController {
             );
         }
 
-        if (!validator.isValidFirstName(authenticationDTO.first_name)) {
+        if (!validator.isValidName(authenticationDTO.first_name)) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "No valid first name provided"
             );
         }
 
-        if (!validator.isValidLastName(authenticationDTO.last_name)) {
+        if (!validator.isValidName(authenticationDTO.last_name)) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "No valid last name provided"
             );
         }
 
-        if (!validator.isValidDonationLink(authenticationDTO.donation_link)) {
+        if (!validator.isValidLink(authenticationDTO.donation_link)) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "No valid donation link provided"
             );
