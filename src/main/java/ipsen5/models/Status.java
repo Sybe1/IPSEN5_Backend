@@ -15,4 +15,15 @@ public class Status {
     @Id
     @GeneratedValue
     private UUID id;
+
+    private String status;
+
+    public Status(String status) {
+        this.id = id;
+        this.status = status;
+    }
+
+    public Status() {
+
+    }
 }
