@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/rubric")
+@RequestMapping("/status")
 public class StatusController {
     private final StatusDAO statusDAO;
     private UserInputValidator validator;

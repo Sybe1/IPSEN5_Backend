@@ -1,7 +1,6 @@
 package ipsen5.dto;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import ipsen5.models.Role;
 
 public class AuthenticationDTO {
 
@@ -12,12 +11,14 @@ public class AuthenticationDTO {
     public String password;
 
     public String donation_link;
+    public Role role;
 
-    public AuthenticationDTO(String first_name, String last_name, String email, String password, String donation_link) {
+    public AuthenticationDTO(String first_name, String last_name, String email, String password, String donation_link, Role role) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
         this.password = password;
         this.donation_link = donation_link;
+        this.role = role;
     }
 }

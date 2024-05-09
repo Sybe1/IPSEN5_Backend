@@ -42,28 +42,29 @@ public class AuthController {
                     HttpStatus.BAD_REQUEST, "No valid email provided"
             );
         }
-
         if (!validator.isValidPassword(authenticationDTO.password)) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "No valid password provided"
             );
         }
-
         if (!validator.isValidName(authenticationDTO.first_name)) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "No valid first name provided"
             );
         }
-
         if (!validator.isValidName(authenticationDTO.last_name)) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "No valid last name provided"
             );
         }
-
         if (!validator.isValidLink(authenticationDTO.donation_link)) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "No valid donation link provided"
+            );
+        }
+        if (!validator.isNotNull(authenticationDTO.role)) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "No role provided"
             );
         }
 
@@ -76,7 +77,7 @@ public class AuthController {
         }
         String encodedPassword = passwordEncoder.encode(authenticationDTO.password);
 
-        User registerdCustomUser = new User(authenticationDTO.first_name, authenticationDTO.last_name, authenticationDTO.email, encodedPassword, authenticationDTO.donation_link);
+        User registerdCustomUser = new User(authenticationDTO.first_name, authenticationDTO.last_name, authenticationDTO.email, encodedPassword, authenticationDTO.donation_link, authenticationDTO.role);
         userDAO.save(registerdCustomUser);
         String token = jwtUtil.generateToken(registerdCustomUser.getEmail());
         LoginResponse loginResponse = new LoginResponse(registerdCustomUser.getEmail(), token);
