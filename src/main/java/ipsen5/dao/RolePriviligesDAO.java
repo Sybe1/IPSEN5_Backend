@@ -5,7 +5,6 @@ import ipsen5.models.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.UUID;
 
 @Component
 public class RolePriviligesDAO {

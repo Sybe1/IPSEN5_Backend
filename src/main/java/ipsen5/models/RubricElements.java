@@ -8,14 +8,14 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class RolePriviliges {
+public class RubricElements {
     @EmbeddedId
-    private RolePriviligesId id;
+    private RubricElementsId id;
 
-    public RolePriviliges(RolePriviligesId id) {
-        this.id = id;
+    public RubricElements() {
     }
 
-    public RolePriviliges() {
+    public RubricElements(RubricElementsId id) {
+        this.id = id;
     }
 }
