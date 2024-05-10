@@ -21,13 +21,13 @@ public class Seeder {
     private PostSeeder postSeeder;
     private RoleSeeder roleSeeder;
     private UserSeeder userSeeder;
-
+    private CategorySeeder categorySeeder;
 
     public Seeder(UserRepository userRepository, PostRepository postRepository,
                   CategoryRepository categoryRepository, PostCategoryRepository postCategoryRepository,
                   RubricRepository rubricRepository, RoleRepository roleRepository,
 
-                  PostSeeder postSeeder, RoleSeeder roleSeeder, UserSeeder userSeeder
+                  PostSeeder postSeeder, RoleSeeder roleSeeder, UserSeeder userSeeder, CategorySeeder categorySeeder
     ) {
         this.userRepository = userRepository;
         this.postRepository = postRepository;
@@ -39,6 +39,7 @@ public class Seeder {
         this.postSeeder = postSeeder;
         this.roleSeeder = roleSeeder;
         this.userSeeder = userSeeder;
+        this.categorySeeder = categorySeeder;
     }
 
     @EventListener
@@ -46,21 +47,11 @@ public class Seeder {
         roleSeeder.seedRole();
         userSeeder.seedUser();
         postSeeder.seedPost();
-        this.seedCategory();
+        categorySeeder.seedCategory();
         this.seedPostCategory();
         this.seedRubric();
     }
 
-
-
-
-
-    private void seedCategory(){
-        Category category = new Category();
-        category.setName("Official Selection");
-        category.setDescription("Hier staan alle posts in die door de keuring zijn gekomen.");
-        categoryRepository.save(category);
-    }
 
     private void seedPostCategory(){
         List<Post> allPosts = postRepository.findAll();
