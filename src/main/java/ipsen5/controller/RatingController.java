@@ -1,11 +1,10 @@
 package ipsen5.controller;
 
 import ipsen5.dao.RatingDAO;
-import ipsen5.dto.PostDTO;
 import ipsen5.dto.RatingDTO;
-import ipsen5.models.Post;
 import ipsen5.models.Rating;
-import ipsen5.services.UserInputValidator;
+import ipsen5.services.InputValidator;
+import ipsen5.services.RatingValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +18,9 @@ import java.util.UUID;
 @RequestMapping("/rating")
 public class RatingController {
     private final RatingDAO ratingDAO;
-    private UserInputValidator validator;
+    private RatingValidator validator;
 
-    public RatingController(RatingDAO ratingDAO, UserInputValidator validator) {
+    public RatingController(RatingDAO ratingDAO, RatingValidator validator) {
         this.ratingDAO = ratingDAO;
         this.validator = validator;
     }
@@ -31,31 +30,13 @@ public class RatingController {
     }
     @PostMapping
     public ResponseEntity<String> createRating(@RequestBody RatingDTO ratingDTO){
-        if (!validator.isNotNull(ratingDTO.grade)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid grade provided"
-            );
-        }
-        if (!validator.isNotNull(ratingDTO.post_id)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid post provided"
-            );
-        }
+        validator.ratingValidations(ratingDTO);
         this.ratingDAO.createRating(ratingDTO);
         return ResponseEntity.ok("Created a new Rating");
     }
     @PutMapping("/{id}")
     public ResponseEntity<String> editRating(@PathVariable UUID id, @RequestBody RatingDTO ratingDTO){
-        if (!validator.isNotNull(ratingDTO.grade)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid grade provided"
-            );
-        }
-        if (!validator.isNotNull(ratingDTO.grade)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid post provided"
-            );
-        }
+        validator.ratingValidations(ratingDTO);
         this.ratingDAO.editRating(id, ratingDTO);
         return ResponseEntity.ok("Edited rating with id: " + id);
     }
