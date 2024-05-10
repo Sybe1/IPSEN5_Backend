@@ -2,6 +2,7 @@ package ipsen5.dao;
 
 import ipsen5.dto.RolePriviligesDTO;
 import ipsen5.models.*;
+import ipsen5.models.enums.Rights;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

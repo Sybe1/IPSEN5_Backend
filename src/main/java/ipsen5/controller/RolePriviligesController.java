@@ -3,6 +3,7 @@ package ipsen5.controller;
 import ipsen5.dao.RolePriviligesDAO;
 import ipsen5.dto.RolePriviligesDTO;
 import ipsen5.models.*;
+import ipsen5.models.enums.Rights;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
