@@ -3,7 +3,8 @@ package ipsen5.controller;
 import ipsen5.dao.PostDAO;
 import ipsen5.dto.PostDTO;
 import ipsen5.models.Post;
-import ipsen5.services.UserInputValidator;
+import ipsen5.services.InputValidator;
+import ipsen5.services.PostValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +18,8 @@ import java.util.UUID;
 @RequestMapping("/post")
 public class PostController {
     private final PostDAO postDAO;
-    private UserInputValidator validator;
-    public PostController(PostDAO postDAO, UserInputValidator validator) {
+    private PostValidator validator;
+    public PostController(PostDAO postDAO, PostValidator validator) {
         this.postDAO = postDAO;
         this.validator = validator;
     }
@@ -30,32 +31,14 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<String> createPost(@RequestBody PostDTO postDTO){
-        if (!validator.isValidDescription(postDTO.text)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid text provided"
-            );
-        }
-        if (!validator.isNotNull(postDTO.user)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid user provided"
-            );
-        }
+        validator.postValidations(postDTO);
         this.postDAO.createPost(postDTO);
         return ResponseEntity.ok("Created a new Post");
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> editPost(@PathVariable UUID id, @RequestBody PostDTO postDTO){
-        if (!validator.isValidDescription(postDTO.text)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid text provided"
-            );
-        }
-        if (!validator.isNotNull(postDTO.user)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid user provided"
-            );
-        }
+        validator.postValidations(postDTO);
         this.postDAO.editPost(id, postDTO);
         return ResponseEntity.ok("Edited post with id: " + id);
     }
