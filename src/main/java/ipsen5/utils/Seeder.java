@@ -16,20 +16,22 @@ public class Seeder {
     private CategoryRepository categoryRepository;
     private PostCategoryRepository postCategoryRepository;
     private RubricRepository rubricRepository;
-
+    private RoleRepository roleRepository;
 
     public Seeder(UserRepository userRepository, PostRepository postRepository,
                   CategoryRepository categoryRepository, PostCategoryRepository postCategoryRepository,
-                  RubricRepository rubricRepository) {
+                  RubricRepository rubricRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.postRepository = postRepository;
         this.categoryRepository = categoryRepository;
         this.postCategoryRepository = postCategoryRepository;
         this.rubricRepository = rubricRepository;
+        this.roleRepository = roleRepository;
     }
 
     @EventListener
     public void seed(ContextRefreshedEvent event){
+        this.seedRole();
         this.seedUser();
         this.seedPost();
         this.seedCategory();
@@ -45,6 +47,9 @@ public class Seeder {
         user.setEmail("test@mail.com");
         user.setPassword(new BCryptPasswordEncoder().encode("Test123!"));
         user.setDonation_link("https://www.paypal.com/nl/home");
+
+        List<Role> allRoles = roleRepository.findAll();
+        user.setRole(allRoles.get(0));
         userRepository.save(user);
     }
 
@@ -82,5 +87,15 @@ public class Seeder {
         Rubric rubric = new Rubric();
         rubric.setTitle("First Rubric");
         rubricRepository.save(rubric);
+    }
+
+    private void seedRole(){
+        Role role = new Role();
+        role.setName("Admin");
+        roleRepository.save(role);
+
+        Role role2 = new Role();
+        role2.setName("User");
+        roleRepository.save(role2);
     }
 }

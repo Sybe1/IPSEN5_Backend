@@ -1,0 +1,54 @@
+package ipsen5.controller;
+
+import ipsen5.dao.FeedbackPerElementDAO;
+import ipsen5.dto.FeedbackPerElementDTO;
+import ipsen5.models.Criteria;
+import ipsen5.models.Feedback;
+import ipsen5.models.FeedbackPerElement;
+import ipsen5.services.FeedbackPerElementValidator;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/feedbackperelement")
+public class FeedbackPerElementController {
+
+    private final FeedbackPerElementDAO feedbackPerElementDAO;
+    private FeedbackPerElementValidator validator;
+
+
+    public FeedbackPerElementController(FeedbackPerElementDAO feedbackPerElementDAO, FeedbackPerElementValidator validator) {
+        this.feedbackPerElementDAO = feedbackPerElementDAO;
+        this.validator = validator;
+    }
+
+    @GetMapping
+    public ResponseEntity<List<FeedbackPerElement>> getPostCategories() {
+        return ResponseEntity.ok(this.feedbackPerElementDAO.getPostCategories());
+    }
+
+    @PostMapping
+    public  ResponseEntity<String> createFeedbackPerElement(@RequestBody FeedbackPerElementDTO feedbackPerElementDTO) {
+        validator.feedbackPerElementValidations(feedbackPerElementDTO);
+        this.feedbackPerElementDAO.createFeedbackPerElement(feedbackPerElementDTO);
+        return ResponseEntity.ok("Created a new FeedbackPerElement with feedbackID " + feedbackPerElementDTO.feedbackId + "and CriteriaID " + feedbackPerElementDTO.criteriaId);
+    }
+
+    @PutMapping("/{feedbackId}/{criteriaId}")
+    public ResponseEntity<String> updateFeedbackPerElement(@PathVariable Feedback feedbackId, @PathVariable Criteria criteriaId, @RequestBody FeedbackPerElementDTO feedbackPerElementDTO) {
+        validator.feedbackPerElementValidations(feedbackPerElementDTO);
+        this.feedbackPerElementDAO.updateFeedbackPerElement(feedbackId, criteriaId, feedbackPerElementDTO);
+        return ResponseEntity.ok("Updated FeedbackPerElement with feedbackID " + feedbackId + " and CriteriaID " + criteriaId);
+    }
+
+
+    @DeleteMapping("/{postId}/{categoryId}")
+    public ResponseEntity<?> deleteFeedbackPerElement(@PathVariable Feedback feedbackId, @PathVariable Criteria criteriaId) {
+        this.feedbackPerElementDAO.deleteFeedbackPerElement(feedbackId, criteriaId);
+        return ResponseEntity.ok("Deleted FeedbackPerElement with feedbackID " + feedbackId + "and CriteriaID " + criteriaId);
+    }
+}
+
+

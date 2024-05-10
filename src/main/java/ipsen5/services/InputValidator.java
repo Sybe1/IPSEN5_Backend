@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class UserInputValidator {
+public class InputValidator {
     public boolean isValidPassword(String password) {
         PasswordValidator validator = new PasswordValidator(Arrays.asList(
                 new LengthRule(8, 30),

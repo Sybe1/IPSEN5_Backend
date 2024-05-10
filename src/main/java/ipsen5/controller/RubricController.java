@@ -3,7 +3,9 @@ package ipsen5.controller;
 import ipsen5.dao.RubricDAO;
 import ipsen5.dto.RubricDTO;
 import ipsen5.models.Rubric;
-import ipsen5.services.UserInputValidator;
+import ipsen5.services.InputValidator;
+import ipsen5.services.RatingValidator;
+import ipsen5.services.RubricValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,8 +19,8 @@ import java.util.UUID;
 @RequestMapping("/rubric")
 public class RubricController {
     private final RubricDAO rubricDAO;
-    private UserInputValidator validator;
-    public RubricController(RubricDAO rubricDAO, UserInputValidator validator) {
+    private RubricValidator validator;
+    public RubricController(RubricDAO rubricDAO, RubricValidator validator) {
         this.rubricDAO = rubricDAO;
         this.validator = validator;
     }
@@ -30,22 +32,14 @@ public class RubricController {
 
     @PostMapping
     public ResponseEntity<String> createRubric(@RequestBody RubricDTO rubricDTO){
-        if (!validator.isValidDescription(rubricDTO.title)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid title provided"
-            );
-        }
+        validator.rubricValidations(rubricDTO);
         this.rubricDAO.createRubric(rubricDTO);
         return ResponseEntity.ok("Created a new Rubric");
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> editRubric(@PathVariable UUID id, @RequestBody RubricDTO rubricDTO){
-        if (!validator.isValidDescription(rubricDTO.title)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid title provided"
-            );
-        }
+        validator.rubricValidations(rubricDTO);
         this.rubricDAO.editRubric(id, rubricDTO);
         return ResponseEntity.ok("Edited rubric with id: " + id);
     }
