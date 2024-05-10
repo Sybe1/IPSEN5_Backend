@@ -22,12 +22,13 @@ public class RatingDAO {
     }
 
     public void createRating(RatingDTO ratingDTO) {
-        this.ratingRepository.save(new Rating(ratingDTO.grade, ratingDTO.post_id));
+        this.ratingRepository.save(new Rating(ratingDTO.grade, ratingDTO.user_id, ratingDTO.post_id));
     }
 
     public void editRating(UUID id, RatingDTO ratingDTO) {
         Rating rating = this.ratingRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         rating.setGrade(ratingDTO.grade);
+        rating.setUser_id(ratingDTO.user_id);
         rating.setPost_id(ratingDTO.post_id);
         this.ratingRepository.save(rating);
     }

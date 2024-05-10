@@ -18,14 +18,17 @@ public class Rating {
     private UUID id;
 
     private int grade;
+
     @ManyToOne
     private User user_id;
 
     @ManyToOne
     private Post post_id;
 
-    public Rating(int grade, Post postId) {
-
+    public Rating(int grade, User user_id, Post post_id) {
+        this.grade = grade;
+        this.user_id = user_id;
+        this.post_id = post_id;
     }
 
     public Rating() {
