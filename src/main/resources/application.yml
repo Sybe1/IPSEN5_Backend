@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ipsen5
-    username: postgres
-    password: Kader123
+    url: jdbc:postgresql://localhost:5432/postgres2
+    username: postgres2
+    password: 1234
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -19,3 +19,4 @@ jwt:
 server:
   error:
     include-stacktrace: never
+
