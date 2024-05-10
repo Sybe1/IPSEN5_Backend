@@ -18,14 +18,23 @@ public class SubmissionDAO {
         return this.submissionRespository.findAll();
     }
     public void createSubmission(SubmissionDTO submissionDTO) {
-        this.submissionRespository.save(new Submission(submissionDTO.text, submissionDTO.user_id, submissionDTO.story_Details,submissionDTO.statusID, submissionDTO.feedbackID));
+        Submission submission = new Submission();
+        submission.setExtra_feedback(submissionDTO.extra_feedback);
+        submission.setStory_Details(submissionDTO.story_Details);
+        submission.setText(submissionDTO.text);
+        submission.setFeedbackID(submissionDTO.feedbackID);
+        submission.setStatusID(submissionDTO.statusID);
+        submission.setUser_id(submissionDTO.user_id);
+        this.submissionRespository.save(submission);
     }
     public void editSubmission(UUID id, SubmissionDTO submissionDTO) {
         Submission submission = this.submissionRespository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));;
+        submission.setExtra_feedback(submissionDTO.extra_feedback);
+        submission.setStory_Details(submissionDTO.story_Details);
         submission.setText(submissionDTO.text);
-        submission.setUser_id(submissionDTO.user_id);
-        submission.setStatusID(submissionDTO.statusID);
         submission.setFeedbackID(submissionDTO.feedbackID);
+        submission.setStatusID(submissionDTO.statusID);
+        submission.setUser_id(submissionDTO.user_id);
         this.submissionRespository.save(submission);
     }
 
