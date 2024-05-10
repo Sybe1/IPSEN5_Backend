@@ -3,11 +3,9 @@ package ipsen5.controller;
 import ipsen5.dao.CategoryDAO;
 import ipsen5.dto.CategoryDTO;
 import ipsen5.models.Category;
-import ipsen5.services.UserInputValidator;
-import org.springframework.http.HttpStatus;
+import ipsen5.services.CategoryValidator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,10 +16,10 @@ import java.util.UUID;
 public class CategoryController {
 
     private final CategoryDAO categoryDAO;
-    private UserInputValidator validator;
+    private CategoryValidator validator;
 
 
-    public CategoryController(CategoryDAO categoryDAO, UserInputValidator validator) {
+    public CategoryController(CategoryDAO categoryDAO, CategoryValidator validator) {
         this.categoryDAO = categoryDAO;
         this.validator = validator;
     }
@@ -33,32 +31,14 @@ public class CategoryController {
 
     @PostMapping
     public ResponseEntity<String> createCategory(@RequestBody CategoryDTO categoryDTO){
-        if (!validator.isValidName(categoryDTO.name)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid name provided"
-            );
-        }
-        if (!validator.isValidDescription(categoryDTO.description)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid description provided"
-            );
-        }
+        validator.categoryValidations(categoryDTO);
         this.categoryDAO.createCategory(categoryDTO);
         return ResponseEntity.ok("Created a new category named " + categoryDTO.name);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> editCategory(@PathVariable UUID id, @RequestBody CategoryDTO categoryDTO){
-        if (!validator.isValidName(categoryDTO.name)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid name provided"
-            );
-        }
-        if (!validator.isValidDescription(categoryDTO.description)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid description provided"
-            );
-        }
+        validator.categoryValidations(categoryDTO);
         this.categoryDAO.editCategory(id, categoryDTO);
         return ResponseEntity.ok("Edited category with id: " + id);
     }

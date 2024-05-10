@@ -5,7 +5,7 @@ import ipsen5.dao.UserRepository;
 import ipsen5.dto.AuthenticationDTO;
 import ipsen5.dto.LoginResponse;
 import ipsen5.models.User;
-import ipsen5.services.UserInputValidator;
+import ipsen5.services.InputValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,10 +24,10 @@ public class AuthController {
     private final JWTUtil jwtUtil;
     private final AuthenticationManager authManager;
     private final PasswordEncoder passwordEncoder;
-    private UserInputValidator validator;
+    private InputValidator validator;
 
     public AuthController(UserRepository userDAO, JWTUtil jwtUtil, AuthenticationManager authManager,
-                          PasswordEncoder passwordEncoder, UserInputValidator validator) {
+                          PasswordEncoder passwordEncoder, InputValidator validator) {
         this.userDAO = userDAO;
         this.jwtUtil = jwtUtil;
         this.authManager = authManager;
