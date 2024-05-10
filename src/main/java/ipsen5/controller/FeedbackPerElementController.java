@@ -44,7 +44,7 @@ public class FeedbackPerElementController {
     }
 
 
-    @DeleteMapping("/{postId}/{categoryId}")
+    @DeleteMapping("/{feedbackId}/{criteriaId}")
     public ResponseEntity<?> deleteFeedbackPerElement(@PathVariable Feedback feedbackId, @PathVariable Criteria criteriaId) {
         this.feedbackPerElementDAO.deleteFeedbackPerElement(feedbackId, criteriaId);
         return ResponseEntity.ok("Deleted FeedbackPerElement with feedbackID " + feedbackId + "and CriteriaID " + criteriaId);

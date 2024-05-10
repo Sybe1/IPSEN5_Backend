@@ -28,7 +28,7 @@ public class RubricElementsController {
         return ResponseEntity.ok("Created a new RubricElements with RubricID " + rubricElementsDTO.rubric + "and CriteriaID " + rubricElementsDTO.criteria);
     }
 
-    @DeleteMapping("/{postId}/{categoryId}")
+    @DeleteMapping("/{rubricId}/{criteriaId}")
     public ResponseEntity<?> deleteRubricElements(@PathVariable Rubric rubricId, @PathVariable Criteria criteriaId) {
         this.rubricElementsDAO.deleteRubricElements(rubricId, criteriaId);
         return ResponseEntity.ok("Deleted RubricElements with RubricID " + rubricId + "and CriteriaID " + criteriaId);

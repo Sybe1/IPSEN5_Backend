@@ -3,6 +3,7 @@ package ipsen5.controller;
 import ipsen5.dao.RolePriviligesDAO;
 import ipsen5.dto.RolePriviligesDTO;
 import ipsen5.models.*;
+import ipsen5.models.enums.Rights;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class RolePriviligesController {
         return ResponseEntity.ok("Created a new RolePriviliges with RoleID " + rolePriviligesDTO.role + "and RightsID " + rolePriviligesDTO.rights);
     }
 
-    @DeleteMapping("/{postId}/{categoryId}")
+    @DeleteMapping("/{roleId}/{rightsId}")
     public ResponseEntity<?> deleteRolePriviliges(@PathVariable Role roleId, @PathVariable Rights rightsId) {
         this.rolePriviligesDAO.deleteRolePriviliges(roleId, rightsId);
         return ResponseEntity.ok("Deleted RolePriviliges with RoleID " + roleId + "and RightsID " + rightsId);

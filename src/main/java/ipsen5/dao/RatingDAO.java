@@ -2,9 +2,7 @@ package ipsen5.dao;
 
 import ipsen5.dto.PostDTO;
 import ipsen5.dto.RatingDTO;
-import ipsen5.models.Post;
-import ipsen5.models.Rating;
-import ipsen5.models.Rubric;
+import ipsen5.models.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,19 +20,24 @@ public class RatingDAO {
     }
 
     public void createRating(RatingDTO ratingDTO) {
-        this.ratingRepository.save(new Rating(ratingDTO.grade, ratingDTO.post_id));
+        RatingId ratingId = new RatingId(ratingDTO.user_id, ratingDTO.post_id);
+        this.ratingRepository.save(new Rating(ratingId, ratingDTO.grade));
     }
 
-    public void editRating(UUID id, RatingDTO ratingDTO) {
-        Rating rating = this.ratingRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
+    public void editRating(User userId, Post postId, RatingDTO ratingDTO) {
+        RatingId ratingId = new RatingId(userId, postId);
+        Rating rating = this.ratingRepository.findById(ratingId)
+                .orElseThrow(() -> new RuntimeException("Rating not found"));
+
         rating.setGrade(ratingDTO.grade);
-        rating.setPost_id(ratingDTO.post_id);
+        rating.setId(ratingId);
         this.ratingRepository.save(rating);
     }
 
-    public void deleteRating(UUID id) {
-        this.ratingRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
-        this.ratingRepository.deleteById(id);
+    public void deleteRating(User userId, Post postId) {
+        RatingId ratingId = new RatingId(userId, postId);
+        this.ratingRepository.findById(ratingId).orElseThrow(() -> new RuntimeException("Rating not found"));
+        this.ratingRepository.deleteById(ratingId);
     }
 
 }
