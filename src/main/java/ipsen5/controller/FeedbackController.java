@@ -3,11 +3,9 @@ package ipsen5.controller;
 import ipsen5.dao.FeedbackDAO;
 import ipsen5.dto.FeedbackDTO;
 import ipsen5.models.Feedback;
-import ipsen5.services.UserInputValidator;
-import org.springframework.http.HttpStatus;
+import ipsen5.services.FeedbackValidator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,8 +15,8 @@ import java.util.UUID;
 @RequestMapping("/feedback")
 public class FeedbackController {
     private final FeedbackDAO feedbackDAO;
-    private UserInputValidator validator;
-    public FeedbackController(FeedbackDAO feedbackDAO, UserInputValidator validator) {
+    private FeedbackValidator validator;
+    public FeedbackController(FeedbackDAO feedbackDAO, FeedbackValidator validator) {
         this.feedbackDAO = feedbackDAO;
         this.validator = validator;
     }
@@ -30,42 +28,14 @@ public class FeedbackController {
 
     @PostMapping
     public ResponseEntity<String> createFeedback(@RequestBody FeedbackDTO feedbackDTO){
-        if (!validator.isValidDescription(feedbackDTO.general_text)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid text provided"
-            );
-        }
-        if (!validator.isNotNull(feedbackDTO.user)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid user provided"
-            );
-        }
-        if (!validator.isNotNull(feedbackDTO.rubric)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid rubric provided"
-            );
-        }
+        validator.feedbackValidations(feedbackDTO);
         this.feedbackDAO.createFeedback(feedbackDTO);
         return ResponseEntity.ok("Created a new Feedback");
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> editFeedback(@PathVariable UUID id, @RequestBody FeedbackDTO feedbackDTO){
-        if (!validator.isValidDescription(feedbackDTO.general_text)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid text provided"
-            );
-        }
-        if (!validator.isNotNull(feedbackDTO.user)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid user provided"
-            );
-        }
-        if (!validator.isNotNull(feedbackDTO.rubric)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid rubric provided"
-            );
-        }
+        validator.feedbackValidations(feedbackDTO);
         this.feedbackDAO.editFeedback(id, feedbackDTO);
         return ResponseEntity.ok("Edited feedback with id: " + id);
     }
