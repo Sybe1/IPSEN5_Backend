@@ -23,11 +23,13 @@ public class Seeder {
     private FeedbackSeeder feedbackSeeder;
     private CriteriaSeeder criteriaSeeder;
     private RubricElementsSeeder rubricElementsSeeder;
+    private FeedbackPerElementSeeder feedbackPerElementSeeder;
 
     public Seeder(PostSeeder postSeeder, RoleSeeder roleSeeder, UserSeeder userSeeder, CategorySeeder categorySeeder,
                   PostCategorySeeder postCategorySeeder, RubricSeeder rubricSeeder, ReactionSeeder reactionSeeder,
                   SubmissionSeeder submissionSeeder, StatusSeeder statusSeeder, FeedbackSeeder feedbackSeeder,
-                  CriteriaSeeder criteriaSeeder, RubricElementsSeeder rubricElementsSeeder
+                  CriteriaSeeder criteriaSeeder, RubricElementsSeeder rubricElementsSeeder,
+                  FeedbackPerElementSeeder feedbackPerElementSeeder
     ) {
         this.postSeeder = postSeeder;
         this.roleSeeder = roleSeeder;
@@ -41,6 +43,7 @@ public class Seeder {
         this.feedbackSeeder = feedbackSeeder;
         this.criteriaSeeder = criteriaSeeder;
         this.rubricElementsSeeder = rubricElementsSeeder;
+        this.feedbackPerElementSeeder = feedbackPerElementSeeder;
     }
 
     @EventListener
@@ -57,5 +60,6 @@ public class Seeder {
         feedbackSeeder.seedFeedback();
         criteriaSeeder.seedCriteria();
         rubricElementsSeeder.seedRubricElements();
+        feedbackPerElementSeeder.seedRubricElements();
     }
 }
