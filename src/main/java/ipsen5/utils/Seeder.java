@@ -19,12 +19,13 @@ public class Seeder {
     private RoleRepository roleRepository;
 
     private PostSeeder postSeeder;
+    private RoleSeeder roleSeeder;
 
     public Seeder(UserRepository userRepository, PostRepository postRepository,
                   CategoryRepository categoryRepository, PostCategoryRepository postCategoryRepository,
                   RubricRepository rubricRepository, RoleRepository roleRepository,
 
-                  PostSeeder postSeeder
+                  PostSeeder postSeeder, RoleSeeder roleSeeder
     ) {
         this.userRepository = userRepository;
         this.postRepository = postRepository;
@@ -34,11 +35,12 @@ public class Seeder {
         this.roleRepository = roleRepository;
 
         this.postSeeder = postSeeder;
+        this.roleSeeder = roleSeeder;
     }
 
     @EventListener
     public void seed(ContextRefreshedEvent event){
-        this.seedRole();
+        roleSeeder.seedRole();
         this.seedUser();
         postSeeder.seedPost();
         this.seedCategory();
@@ -85,13 +87,5 @@ public class Seeder {
         rubricRepository.save(rubric);
     }
 
-    private void seedRole(){
-        Role role = new Role();
-        role.setName("Admin");
-        roleRepository.save(role);
 
-        Role role2 = new Role();
-        role2.setName("User");
-        roleRepository.save(role2);
-    }
 }
