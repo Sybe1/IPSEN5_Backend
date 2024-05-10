@@ -26,22 +26,5 @@ public class SubmissionSeeder {
         List<User> allUsers = userRepository.findAll();
         List<Post> allPosts = postRepository.findAll();
 
-        Submission submission = new Submission();
-        submission.setText("Er was eens een monster. Die at mensen op!");
-        submission.setPost_id(allPosts.get(0));
-        submission.setUser_id(allUsers.get(0));
-        submissionRespository.save(submission);
-
-        Submission submission2 = new Submission();
-        submission2.setText("Dit is een formeel verhaal over hekserij. Vroeger was dit normaal.");
-        submission2.setPost_id(allPosts.get(0));
-        submission2.setUser_id(allUsers.get(1));
-        submissionRespository.save(submission2);
-
-        Submission submission3 = new Submission();
-        submission3.setText("Dit is een fanfiction over The Hobbit.");
-        submission3.setPost_id(allPosts.get(1));
-        submission3.setUser_id(allUsers.get(1));
-        submissionRespository.save(submission3);
     }
 }
