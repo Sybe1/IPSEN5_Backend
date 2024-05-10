@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/rating")
+@RequestMapping("/reaction")
 public class ReactionController {
     private final ReactionDAO reactionDAO;
     private ReactionValidator validator;
