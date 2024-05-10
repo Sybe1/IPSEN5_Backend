@@ -1,8 +1,9 @@
 package ipsen5.controller;
 
 import ipsen5.dao.RatingDAO;
+import ipsen5.dto.FeedbackPerElementDTO;
 import ipsen5.dto.RatingDTO;
-import ipsen5.models.Rating;
+import ipsen5.models.*;
 import ipsen5.services.InputValidator;
 import ipsen5.services.RatingValidator;
 import org.springframework.http.HttpStatus;
@@ -34,16 +35,16 @@ public class RatingController {
         this.ratingDAO.createRating(ratingDTO);
         return ResponseEntity.ok("Created a new Rating");
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<String> editRating(@PathVariable UUID id, @RequestBody RatingDTO ratingDTO){
+    @PutMapping("/{userId}/{postId}")
+    public ResponseEntity<String> editRating(@PathVariable User userId, @PathVariable Post postId, @RequestBody RatingDTO ratingDTO){
         validator.ratingValidations(ratingDTO);
-        this.ratingDAO.editRating(id, ratingDTO);
-        return ResponseEntity.ok("Edited rating with id: " + id);
+        this.ratingDAO.editRating(userId, postId, ratingDTO);
+        return ResponseEntity.ok("Edited rating with userId: " + userId + " and postID: " + postId);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteRating(@PathVariable("id") UUID id){
-        this.ratingDAO.deleteRating(id);
-        return ResponseEntity.ok("deleted rating with id: " + id);
+    @DeleteMapping("/{userId}/{postId}")
+    public ResponseEntity<?> deleteRating(@PathVariable User userId, @PathVariable Post postId){
+        this.ratingDAO.deleteRating(userId, postId);
+        return ResponseEntity.ok("deleted rating with userId: " + userId + " and postId: " + postId);
     }
 }

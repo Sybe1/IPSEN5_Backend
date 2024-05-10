@@ -30,7 +30,7 @@ public class RolePriviligesController {
         return ResponseEntity.ok("Created a new RolePriviliges with RoleID " + rolePriviligesDTO.role + "and RightsID " + rolePriviligesDTO.rights);
     }
 
-    @DeleteMapping("/{postId}/{categoryId}")
+    @DeleteMapping("/{roleId}/{rightsId}")
     public ResponseEntity<?> deleteRolePriviliges(@PathVariable Role roleId, @PathVariable Rights rightsId) {
         this.rolePriviligesDAO.deleteRolePriviliges(roleId, rightsId);
         return ResponseEntity.ok("Deleted RolePriviliges with RoleID " + roleId + "and RightsID " + rightsId);
