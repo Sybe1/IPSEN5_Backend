@@ -3,6 +3,7 @@ package ipsen5.controller;
 import ipsen5.dao.RoleDAO;
 import ipsen5.dto.RoleDTO;
 import ipsen5.models.Role;
+import ipsen5.services.RoleValidator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +15,11 @@ import java.util.List;
 public class RoleController {
 
     private final RoleDAO roleDAO;
+    private RoleValidator roleValidator;
 
-    public RoleController(RoleDAO roleDAO) {
+    public RoleController(RoleDAO roleDAO, RoleValidator roleValidator) {
         this.roleDAO = roleDAO;
+        this.roleValidator = roleValidator;
     }
 
     @GetMapping
@@ -26,12 +29,14 @@ public class RoleController {
 
     @PostMapping
     public ResponseEntity<String> createRole(@RequestBody RoleDTO roleDTO){
+        roleValidator.roleValidations(roleDTO);
         this.roleDAO.createRole(roleDTO);
         return ResponseEntity.ok("Created a new Role named " + roleDTO.name);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> editRole(@PathVariable Long id, @RequestBody RoleDTO roleDTO){
+        roleValidator.roleValidations(roleDTO);
         this.roleDAO.editRole(id, roleDTO);
         return ResponseEntity.ok("Edited role with id: " + id);
     }
