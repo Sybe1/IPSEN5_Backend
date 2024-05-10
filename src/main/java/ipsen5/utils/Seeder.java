@@ -20,12 +20,14 @@ public class Seeder {
 
     private PostSeeder postSeeder;
     private RoleSeeder roleSeeder;
+    private UserSeeder userSeeder;
+
 
     public Seeder(UserRepository userRepository, PostRepository postRepository,
                   CategoryRepository categoryRepository, PostCategoryRepository postCategoryRepository,
                   RubricRepository rubricRepository, RoleRepository roleRepository,
 
-                  PostSeeder postSeeder, RoleSeeder roleSeeder
+                  PostSeeder postSeeder, RoleSeeder roleSeeder, UserSeeder userSeeder
     ) {
         this.userRepository = userRepository;
         this.postRepository = postRepository;
@@ -36,12 +38,13 @@ public class Seeder {
 
         this.postSeeder = postSeeder;
         this.roleSeeder = roleSeeder;
+        this.userSeeder = userSeeder;
     }
 
     @EventListener
     public void seed(ContextRefreshedEvent event){
         roleSeeder.seedRole();
-        this.seedUser();
+        userSeeder.seedUser();
         postSeeder.seedPost();
         this.seedCategory();
         this.seedPostCategory();
@@ -49,18 +52,6 @@ public class Seeder {
     }
 
 
-    private void seedUser(){
-        User user = new User();
-        user.setFirst_name("Mick");
-        user.setLast_name("van Amstel");
-        user.setEmail("test@mail.com");
-        user.setPassword(new BCryptPasswordEncoder().encode("Test123!"));
-        user.setDonation_link("https://www.paypal.com/nl/home");
-
-        List<Role> allRoles = roleRepository.findAll();
-        user.setRole(allRoles.get(0));
-        userRepository.save(user);
-    }
 
 
 
