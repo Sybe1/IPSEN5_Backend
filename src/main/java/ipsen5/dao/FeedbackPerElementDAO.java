@@ -24,6 +24,18 @@ public class FeedbackPerElementDAO {
         this.feedbackPerElementRepository.save(new FeedbackPerElement(feedbackPerElementId, feedbackPerElementDTO.grade, feedbackPerElementDTO.feedback));
     }
 
+    public void updateFeedbackPerElement(Feedback feedbackId, Criteria criteriaId, FeedbackPerElementDTO feedbackPerElementDTO) {
+        FeedbackPerElementId feedbackPerElementId = new FeedbackPerElementId(criteriaId, feedbackId);
+        FeedbackPerElement feedbackPerElement = this.feedbackPerElementRepository.findById(feedbackPerElementId)
+                .orElseThrow(() -> new RuntimeException("FeedbackPerElement not found"));
+
+        feedbackPerElement.setGrade(feedbackPerElementDTO.grade);
+        feedbackPerElement.setFeedback(feedbackPerElementDTO.feedback);
+
+        this.feedbackPerElementRepository.save(feedbackPerElement);
+    }
+
+
     public void deleteFeedbackPerElement(Feedback feedbackId, Criteria criteriaId) {
         FeedbackPerElementId feedbackPerElementId = new FeedbackPerElementId(criteriaId, feedbackId);
         this.feedbackPerElementRepository.findById(feedbackPerElementId).orElseThrow(() -> new RuntimeException("FeedbackPerElement not found"));
