@@ -60,7 +60,6 @@ public class Seeder {
         postCategorySeeder.seedPostCategory();
         rubricSeeder.seedRubric();
         reactionSeeder.seedReaction();
-        submissionSeeder.seedSubmission();
         statusSeeder.seedStatus();
         feedbackSeeder.seedFeedback();
         criteriaSeeder.seedCriteria();
@@ -68,5 +67,6 @@ public class Seeder {
         feedbackPerElementSeeder.seedRubricElements();
         rolePriviligesSeeder.seedRolePriviliges();
         ratingSeeder.seedRating();
+        submissionSeeder.seedSubmission();
     }
 }

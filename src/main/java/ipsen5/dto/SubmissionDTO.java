@@ -9,7 +9,7 @@ import jakarta.persistence.OneToOne;
 
 public class SubmissionDTO {
     public String text;
-    public String extra_feedback;
+    public boolean extra_feedback;
     public String story_Details;
 
     public Feedback feedbackID;

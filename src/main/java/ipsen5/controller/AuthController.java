@@ -1,9 +1,12 @@
 package ipsen5.controller;
 
 import ipsen5.config.JWTUtil;
+import ipsen5.dao.RoleRepository;
 import ipsen5.dao.UserRepository;
 import ipsen5.dto.AuthenticationDTO;
 import ipsen5.dto.LoginResponse;
+import ipsen5.models.Role;
+import ipsen5.models.Rubric;
 import ipsen5.models.User;
 import ipsen5.services.InputValidator;
 import org.springframework.http.HttpStatus;
@@ -15,24 +18,28 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/auth")
 public class AuthController {
 
     private final UserRepository userDAO;
+    private final RoleRepository roleRepository;
     private final JWTUtil jwtUtil;
     private final AuthenticationManager authManager;
     private final PasswordEncoder passwordEncoder;
     private InputValidator validator;
 
     public AuthController(UserRepository userDAO, JWTUtil jwtUtil, AuthenticationManager authManager,
-                          PasswordEncoder passwordEncoder, InputValidator validator) {
+                          PasswordEncoder passwordEncoder, InputValidator validator, RoleRepository roleRepository) {
         this.userDAO = userDAO;
         this.jwtUtil = jwtUtil;
         this.authManager = authManager;
         this.passwordEncoder = passwordEncoder;
         this.validator = validator;
+        this.roleRepository = roleRepository;
     }
 
     @PostMapping("/register")
@@ -76,6 +83,9 @@ public class AuthController {
             );
         }
         String encodedPassword = passwordEncoder.encode(authenticationDTO.password);
+
+        List<Role> allRoles = roleRepository.findAll();
+        authenticationDTO.role = allRoles.get(3);
 
         User registerdCustomUser = new User(authenticationDTO.first_name, authenticationDTO.last_name, authenticationDTO.email, encodedPassword, authenticationDTO.donation_link, authenticationDTO.role);
         userDAO.save(registerdCustomUser);

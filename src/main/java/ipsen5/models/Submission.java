@@ -14,19 +14,18 @@ public class Submission {
     @GeneratedValue
     private UUID id;
     private String text;
-    private String extra_feedback;
+    private Boolean extra_feedback;
     private String story_Details;
     @OneToOne
     private Feedback feedbackID;
 
-    @OneToOne
+    @ManyToOne
     private Status statusID;
 
     @ManyToOne
     private User user_id;
 
-    public Submission(UUID id, String text, String extra_feedback, String story_Details, Feedback feedbackID, Status statusID, User user_id) {
-        this.id = id;
+    public Submission(String text, Boolean extra_feedback, String story_Details, Feedback feedbackID, Status statusID, User user_id) {
         this.text = text;
         this.extra_feedback = extra_feedback;
         this.story_Details = story_Details;
@@ -35,7 +34,7 @@ public class Submission {
         this.user_id = user_id;
     }
 
-    public Submission(String text, User user_id, String story_Details, Status statusID, Feedback feedbackID) {
+    public Submission() {
 
     }
 }
