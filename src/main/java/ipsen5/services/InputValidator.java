@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
-public class UserInputValidator {
+public class InputValidator {
     public boolean isValidPassword(String password) {
         PasswordValidator validator = new PasswordValidator(Arrays.asList(
                 new LengthRule(8, 30),
@@ -28,22 +28,25 @@ public class UserInputValidator {
         return matcher.find();
     }
 
-    public boolean isValidFirstName(String first_name) {
-        final Pattern VALID_FIRST_NAME_REGEX = Pattern.compile("^(?=.*[a-zA-Z])[\\p{L}\\s-_]+$");
-        Matcher matcher = VALID_FIRST_NAME_REGEX.matcher(first_name);
+    public boolean isValidName(String name) {
+        final Pattern VALID_NAME_REGEX = Pattern.compile("^(?=.*[a-zA-Z])[\\p{L}\\s-_]+$");
+        Matcher matcher = VALID_NAME_REGEX.matcher(name);
         return matcher.find();
     }
 
-    public boolean isValidLastName(String last_name) {
-        final Pattern VALID_LAST_NAME_REGEX = Pattern.compile("^(?=.*[a-zA-Z])[\\p{L}\\s-_]+$");
-        Matcher matcher = VALID_LAST_NAME_REGEX.matcher(last_name);
+    public boolean isValidLink(String link) {
+        final Pattern VALID_LINK_REGEX = Pattern.compile("^(https?|ftp):\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$");
+        Matcher matcher = VALID_LINK_REGEX.matcher(link);
         return matcher.find();
     }
 
-
-    public boolean isValidDonationLink(String donation_link) {
-        final Pattern VALID_DONATION_LINK_REGEX = Pattern.compile("^(https?|ftp):\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)$");
-        Matcher matcher = VALID_DONATION_LINK_REGEX.matcher(donation_link);
+    public boolean isValidDescription(String description) {
+        final Pattern VALID_DESCRIPTION_REGEX = Pattern.compile("^[a-zA-Z0-9 .,!?-]{1,255}$");
+        Matcher matcher = VALID_DESCRIPTION_REGEX.matcher(description);
         return matcher.find();
+    }
+
+    public <T> boolean isNotNull(T input) {
+        return input != null;
     }
 }

@@ -19,3 +19,4 @@ jwt:
 server:
   error:
     include-stacktrace: never
+

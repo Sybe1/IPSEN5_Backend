@@ -1,33 +1,72 @@
 package ipsen5.utils;
 
-import ipsen5.dao.UserRepository;
-import ipsen5.models.User;
+import ipsen5.dao.*;
+import ipsen5.models.*;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class Seeder {
-    private UserRepository userRepository;
+    private PostSeeder postSeeder;
+    private RoleSeeder roleSeeder;
+    private UserSeeder userSeeder;
+    private CategorySeeder categorySeeder;
+    private PostCategorySeeder postCategorySeeder;
+    private RubricSeeder rubricSeeder;
+    private ReactionSeeder reactionSeeder;
+    private SubmissionSeeder submissionSeeder;
+    private StatusSeeder statusSeeder;
+    private FeedbackSeeder feedbackSeeder;
+    private CriteriaSeeder criteriaSeeder;
+    private RubricElementsSeeder rubricElementsSeeder;
+    private FeedbackPerElementSeeder feedbackPerElementSeeder;
+    private RolePriviligesSeeder rolePriviligesSeeder;
+    private RatingSeeder ratingSeeder;
 
-    public Seeder(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public Seeder(PostSeeder postSeeder, RoleSeeder roleSeeder, UserSeeder userSeeder, CategorySeeder categorySeeder,
+                  PostCategorySeeder postCategorySeeder, RubricSeeder rubricSeeder, ReactionSeeder reactionSeeder,
+                  SubmissionSeeder submissionSeeder, StatusSeeder statusSeeder, FeedbackSeeder feedbackSeeder,
+                  CriteriaSeeder criteriaSeeder, RubricElementsSeeder rubricElementsSeeder,
+                  FeedbackPerElementSeeder feedbackPerElementSeeder, RolePriviligesSeeder rolePriviligesSeeder,
+                  RatingSeeder ratingSeeder
+    ) {
+        this.postSeeder = postSeeder;
+        this.roleSeeder = roleSeeder;
+        this.userSeeder = userSeeder;
+        this.categorySeeder = categorySeeder;
+        this.postCategorySeeder = postCategorySeeder;
+        this.rubricSeeder = rubricSeeder;
+        this.reactionSeeder = reactionSeeder;
+        this.submissionSeeder = submissionSeeder;
+        this.statusSeeder = statusSeeder;
+        this.feedbackSeeder = feedbackSeeder;
+        this.criteriaSeeder = criteriaSeeder;
+        this.rubricElementsSeeder = rubricElementsSeeder;
+        this.feedbackPerElementSeeder = feedbackPerElementSeeder;
+        this.rolePriviligesSeeder = rolePriviligesSeeder;
+        this.ratingSeeder = ratingSeeder;
     }
 
     @EventListener
     public void seed(ContextRefreshedEvent event){
-        this.seedUser();
-    }
-
-
-    private void seedUser(){
-        User user = new User();
-        user.setFirst_name("Mick");
-        user.setLast_name("van Amstel");
-        user.setEmail("test@mail.com");
-        user.setPassword(new BCryptPasswordEncoder().encode("Test123!"));
-        user.setDonation_link("https://www.paypal.com/nl/home");
-        userRepository.save(user);
+        roleSeeder.seedRole();
+        userSeeder.seedUser();
+        postSeeder.seedPost();
+        categorySeeder.seedCategory();
+        postCategorySeeder.seedPostCategory();
+        rubricSeeder.seedRubric();
+        reactionSeeder.seedReaction();
+        statusSeeder.seedStatus();
+        feedbackSeeder.seedFeedback();
+        criteriaSeeder.seedCriteria();
+        rubricElementsSeeder.seedRubricElements();
+        feedbackPerElementSeeder.seedRubricElements();
+        rolePriviligesSeeder.seedRolePriviliges();
+        ratingSeeder.seedRating();
+        submissionSeeder.seedSubmission();
     }
 }
