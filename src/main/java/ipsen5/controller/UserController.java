@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/status")
+@RequestMapping("/users")
 public class UserController {
     private final UserDAO userDAO;
 //    private StatusValidator validator;
@@ -22,13 +22,13 @@ public class UserController {
 //        this.validator = validator;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers(){
         return ResponseEntity.ok(this.userDAO.getAllUsers());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<User>> getAllUsers(@PathVariable UUID id){
+    public ResponseEntity<Optional<User>> getUserById(@PathVariable UUID id){
         return ResponseEntity.ok(this.userDAO.getUserById(id));
     }
 
@@ -39,7 +39,7 @@ public class UserController {
 //        this.statusDAO.editStatus(id, statusDTO);
 //        return ResponseEntity.ok("Edited status with id: " + id);
 //    }
-    
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteStatus(@PathVariable UUID id){
