@@ -69,11 +69,6 @@ public class AuthController {
                     HttpStatus.BAD_REQUEST, "No valid donation link provided"
             );
         }
-        if (!validator.isNotNull(authenticationDTO.role)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No role provided"
-            );
-        }
 
         User user = userDAO.findByEmail(authenticationDTO.email);
 
