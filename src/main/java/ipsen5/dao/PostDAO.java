@@ -2,6 +2,7 @@ package ipsen5.dao;
 
 import ipsen5.dto.PostDTO;
 import ipsen5.models.Post;
+import ipsen5.models.PostCategoryId;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,11 +28,18 @@ public class PostDAO {
         Post post = this.postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         post.setText(postDTO.text);
         post.setUser(postDTO.user);
+        post.setImage(postDTO.image);
+        post.setTitle(postDTO.title);
+        post.setDescription(postDTO.description);
         this.postRepository.save(post);
     }
 
     public void deletePost(UUID id) {
         this.postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         this.postRepository.deleteById(id);
+    }
+
+    public Post getPostById(UUID id) {
+        return this.postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
     }
 }

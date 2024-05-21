@@ -3,6 +3,7 @@ package ipsen5.controller;
 import ipsen5.dao.PostDAO;
 import ipsen5.dto.PostDTO;
 import ipsen5.models.Post;
+import ipsen5.models.PostCategoryId;
 import ipsen5.services.InputValidator;
 import ipsen5.services.PostValidator;
 import org.springframework.http.HttpStatus;
@@ -27,6 +28,11 @@ public class PostController {
     @GetMapping
     public ResponseEntity<List<Post>> getAllPosts(){
         return ResponseEntity.ok(this.postDAO.getAllPosts());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Post> getPostById(@PathVariable UUID id){
+        return ResponseEntity.ok(this.postDAO.getPostById(id));
     }
 
     @PostMapping

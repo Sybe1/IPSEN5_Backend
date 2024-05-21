@@ -32,12 +32,12 @@ public class PostCategorySeeder {
         postCategory.setId(postCategoryId);
         postCategoryRepository.save(postCategory);
 
-        PostCategoryId postCategoryId2 = new PostCategoryId(allPosts.get(1), allCategories.get(0));
+        PostCategoryId postCategoryId2 = new PostCategoryId(allPosts.get(0), allCategories.get(1));
         PostCategory postCategory2 = new PostCategory();
         postCategory2.setId(postCategoryId2);
         postCategoryRepository.save(postCategory2);
 
-        PostCategoryId postCategoryId3 = new PostCategoryId(allPosts.get(1), allCategories.get(1));
+        PostCategoryId postCategoryId3 = new PostCategoryId(allPosts.get(2), allCategories.get(2));
         PostCategory postCategory3 = new PostCategory();
         postCategory3.setId(postCategoryId3);
         postCategoryRepository.save(postCategory3);
