@@ -21,20 +21,30 @@ public class PostSeeder {
     }
 
     public void seedPost(){
-        Post post = new Post();
         List<User> allUsers = userRepository.findAll();
+
+        Post post = new Post();
         post.setUser(allUsers.get(0));
         post.setText("Dit is de eerste post!");
+        post.setImage("../../../assets/images/Afbeelding2.png");
+        post.setTitle("Verdant Wonders");
+        post.setDescription("Explore the timeless allure of the legendary Gardens of Babylon.");
         postRepository.save(post);
 
         Post post2 = new Post();
-        post2.setUser(allUsers.get(0));
+        post2.setUser(allUsers.get(1));
         post2.setText("Dit is de tweede post!");
+        post2.setImage("../../../assets/images/Afbeelding3.png");
+        post2.setTitle("Lost in Time: Ancient Civilizations");
+        post2.setDescription("Transport yourself back to the enigmatic realms of ancient civilizations.");
         postRepository.save(post2);
 
         Post post3 = new Post();
-        post3.setUser(allUsers.get(0));
-        post2.setText("Dit is de derde post!");
+        post3.setUser(allUsers.get(2));
+        post3.setText("Dit is de derde post!");
+        post3.setImage("../../../assets/images/Afbeelding4.png");
+        post3.setTitle("Epic Adventures: Journey Across the World");
+        post3.setDescription("Embark on an exhilarating expedition spanning continents and cultures");
         postRepository.save(post3);
     }
 }

@@ -22,6 +22,10 @@ public class Post {
     @ManyToOne
     private User user;
 
+    private String image;
+    private String title;
+    private String description;
+
     public Post() {
     }
 
