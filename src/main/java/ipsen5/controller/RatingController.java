@@ -29,6 +29,12 @@ public class RatingController {
     public ResponseEntity<List<Rating>> getAllRatings(){
         return ResponseEntity.ok(this.ratingDAO.getAllRatings());
     }
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<List<Rating>> getRatingsByPostId(@PathVariable UUID postId) {
+        return ResponseEntity.ok(this.ratingDAO.getRatingsByPostId(postId));
+    }
+
     @PostMapping
     public ResponseEntity<String> createRating(@RequestBody RatingDTO ratingDTO){
         validator.ratingValidations(ratingDTO);

@@ -15,8 +15,13 @@ public class RatingDAO {
     public RatingDAO(RatingRepository ratingRepository) {
         this.ratingRepository = ratingRepository;
     }
+
     public List<Rating> getAllRatings() {
         return this.ratingRepository.findAll();
+    }
+
+    public List<Rating> getRatingsByPostId(UUID postId) {
+        return this.ratingRepository.findRatingsByPostId(postId);
     }
 
     public void createRating(RatingDTO ratingDTO) {
