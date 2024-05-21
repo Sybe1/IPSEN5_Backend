@@ -21,6 +21,10 @@ public class ReactionDAO {
         return this.reactionRepository.findAll();
     }
 
+    public List<Reaction> getReactionsByPostId(UUID postId) {
+        return this.reactionRepository.findByPost_id(postId);
+    }
+
     public void createReaction(ReactionDTO reactionDTO) {
         this.reactionRepository.save(new Reaction(reactionDTO.text, reactionDTO.post_id, reactionDTO.user_id));
     }
