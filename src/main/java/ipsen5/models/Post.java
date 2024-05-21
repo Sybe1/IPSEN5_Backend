@@ -17,7 +17,9 @@ public class Post {
     @GeneratedValue
     private UUID id;
 
+    private String title;
     private String text;
+    private String imageUrl;
 
     @ManyToOne
     private User user;
