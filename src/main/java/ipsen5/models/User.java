@@ -22,6 +22,7 @@ public class User {
     private String email;
     private String password;
     private String donation_link;
+    private String user_icon;
 
     @ManyToOne
     private Role role;
@@ -29,12 +30,13 @@ public class User {
     public User() {
     }
 
-    public User(String first_name, String last_name, String email, String password, String donation_link, Role role) {
+    public User(String first_name, String last_name, String email, String password, String donation_link, String user_icon, Role role) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
         this.password = password;
         this.donation_link = donation_link;
+        this.user_icon = user_icon;
         this.role = role;
     }
 }

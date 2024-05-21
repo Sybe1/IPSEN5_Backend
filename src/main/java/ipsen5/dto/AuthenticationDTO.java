@@ -11,14 +11,16 @@ public class AuthenticationDTO {
     public String password;
 
     public String donation_link;
+    public String user_icon;
     public Role role;
 
-    public AuthenticationDTO(String first_name, String last_name, String email, String password, String donation_link, Role role) {
+    public AuthenticationDTO(String first_name, String last_name, String email, String password, String donation_link, String user_icon, Role role) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
         this.password = password;
         this.donation_link = donation_link;
+        this.user_icon = user_icon;
         this.role = role;
     }
 }

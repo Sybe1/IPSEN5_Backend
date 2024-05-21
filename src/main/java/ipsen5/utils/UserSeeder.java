@@ -28,6 +28,7 @@ public class UserSeeder {
         user.setEmail("mvamstel@mail.com");
         user.setPassword(new BCryptPasswordEncoder().encode("Test123!"));
         user.setDonation_link("https://www.paypal.com/nl/home");
+        user.setUser_icon("https://randomuser.me/api/portraits/men/91.jpg");
         user.setRole(allRoles.get(0));
         userRepository.save(user);
 
@@ -37,6 +38,7 @@ public class UserSeeder {
         user2.setEmail("pvdijk@mail.com");
         user2.setPassword(new BCryptPasswordEncoder().encode("Test123!"));
         user2.setDonation_link("https://www.paypal.com/nl/home");
+        user2.setUser_icon("https://randomuser.me/api/portraits/men/97.jpg");
         user2.setRole(allRoles.get(1));
         userRepository.save(user2);
 
@@ -46,6 +48,7 @@ public class UserSeeder {
         user3.setEmail("j.kopers@mail.com");
         user3.setPassword(new BCryptPasswordEncoder().encode("Test123!"));
         user3.setDonation_link("https://www.paypal.com/nl/home");
+        user3.setUser_icon("https://randomuser.me/api/portraits/men/94.jpg");
         user3.setRole(allRoles.get(2));
         userRepository.save(user3);
     }
