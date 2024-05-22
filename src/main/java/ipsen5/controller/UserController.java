@@ -32,7 +32,7 @@ public class UserController {
         return ResponseEntity.ok(this.userDAO.getUserById(id));
     }
 
-    @PostMapping("/mail/{mail}")
+    @GetMapping("/mail/{mail}")
     public ResponseEntity<Optional<User>> getUserBymail(@PathVariable String mail){
         return ResponseEntity.ok(this.userDAO.getUserBymail(mail));
     }
