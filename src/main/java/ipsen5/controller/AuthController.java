@@ -95,8 +95,8 @@ public class AuthController {
         List<Role> allRoles = roleRepository.findAll();
         authenticationDTO.role = allRoles.get(3);
 
-        User registerdCustomUser = new User(authenticationDTO.first_name, authenticationDTO.last_name, authenticationDTO.email,
-                authenticationDTO.username, encodedPassword, authenticationDTO.donation_link, authenticationDTO.role);
+        User registerdCustomUser = new User(authenticationDTO.username, authenticationDTO.first_name, authenticationDTO.last_name,
+                authenticationDTO.email, encodedPassword, authenticationDTO.donation_link, authenticationDTO.role);
         userDAO.save(registerdCustomUser);
         String token = jwtUtil.generateToken(registerdCustomUser.getEmail());
         LoginResponse loginResponse = new LoginResponse(registerdCustomUser.getEmail(), token);
