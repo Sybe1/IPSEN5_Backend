@@ -20,7 +20,7 @@ public class PostDAO {
     }
 
     public void createPost(PostDTO postDTO) {
-        this.postRepository.save(new Post(postDTO.text, postDTO.title, postDTO.imageUrl, postDTO.user));
+        this.postRepository.save(new Post(postDTO.title, postDTO.text, postDTO.imageUrl, postDTO.user));
     }
 
     public void editPost(UUID id, PostDTO postDTO) {

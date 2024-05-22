@@ -69,6 +69,11 @@ public class AuthController {
                     HttpStatus.BAD_REQUEST, "No valid donation link provided"
             );
         }
+        if (!validator.isValidDescription(authenticationDTO.username)) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST, "No valid username provided"
+            );
+        }
 
         User user = userDAO.findByEmail(authenticationDTO.email);
 
@@ -77,12 +82,21 @@ public class AuthController {
                     HttpStatus.NOT_FOUND, "Can not register with this email"
             );
         }
+
+        User user1 = userDAO.findByUsername(authenticationDTO.username);
+        if (user1 != null){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Can not register with this username"
+            );
+        }
+
         String encodedPassword = passwordEncoder.encode(authenticationDTO.password);
 
         List<Role> allRoles = roleRepository.findAll();
         authenticationDTO.role = allRoles.get(3);
 
-        User registerdCustomUser = new User(authenticationDTO.first_name, authenticationDTO.last_name, authenticationDTO.email, encodedPassword, authenticationDTO.donation_link, authenticationDTO.role);
+        User registerdCustomUser = new User(authenticationDTO.first_name, authenticationDTO.last_name, authenticationDTO.email,
+                authenticationDTO.username, encodedPassword, authenticationDTO.donation_link, authenticationDTO.role);
         userDAO.save(registerdCustomUser);
         String token = jwtUtil.generateToken(registerdCustomUser.getEmail());
         LoginResponse loginResponse = new LoginResponse(registerdCustomUser.getEmail(), token);
