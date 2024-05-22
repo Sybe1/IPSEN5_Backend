@@ -23,6 +23,10 @@ public class UserDAO {
         return this.userRepository.findById(id);
     }
 
+    public Optional<User> getUserBymail(String mail) {
+        return Optional.ofNullable(this.userRepository.findByEmail(mail));
+    }
+
 //    public void editRole(Long id, RoleDTO roleDTO) {
 //        Role role = this.roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
 //        role.setName(roleDTO.name);

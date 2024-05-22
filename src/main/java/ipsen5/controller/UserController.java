@@ -32,6 +32,11 @@ public class UserController {
         return ResponseEntity.ok(this.userDAO.getUserById(id));
     }
 
+    @PostMapping("/mail/{mail}")
+    public ResponseEntity<Optional<User>> getUserBymail(@PathVariable String mail){
+        return ResponseEntity.ok(this.userDAO.getUserBymail(mail));
+    }
+
 
 //    @PutMapping("/{id}")
 //    public ResponseEntity<String> editUser(@PathVariable UUID id, @RequestBody StatusDTO statusDTO){
