@@ -25,16 +25,22 @@ public class PostSeeder {
         List<User> allUsers = userRepository.findAll();
         post.setUser(allUsers.get(0));
         post.setText("Dit is de eerste post!");
+        post.setTitle("First Post!");
+        post.setImageUrl("https://escapewelt.com/image/catalog/products/v.3/QuestTower/Landing/01.jpg");
         postRepository.save(post);
 
         Post post2 = new Post();
         post2.setUser(allUsers.get(0));
         post2.setText("Dit is de tweede post!");
+        post2.setTitle("Second Post!");
+        post2.setImageUrl("https://escapewelt.com/image/catalog/products/v.3/QuestTower/Landing/01.jpg");
         postRepository.save(post2);
 
         Post post3 = new Post();
         post3.setUser(allUsers.get(0));
-        post2.setText("Dit is de derde post!");
+        post3.setText("Dit is de derde post!");
+        post3.setTitle("Third Post!");
+        post3.setImageUrl("https://escapewelt.com/image/catalog/products/v.3/QuestTower/Landing/01.jpg");
         postRepository.save(post3);
     }
 }

@@ -17,7 +17,9 @@ public class Post {
     @GeneratedValue
     private UUID id;
 
+    private String title;
     private String text;
+    private String imageUrl;
 
     @ManyToOne
     private User user;
@@ -25,8 +27,10 @@ public class Post {
     public Post() {
     }
 
-    public Post(String text, User user) {
+    public Post(String title, String text, String imageUrl, User user) {
+        this.title = title;
         this.text = text;
+        this.imageUrl = imageUrl;
         this.user = user;
     }
 }

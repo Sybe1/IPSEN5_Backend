@@ -26,6 +26,7 @@ public class UserSeeder {
         user.setFirst_name("Mick");
         user.setLast_name("van Amstel");
         user.setEmail("mvamstel@mail.com");
+        user.setUsername("MickvAmstel");
         user.setPassword(new BCryptPasswordEncoder().encode("Test123!"));
         user.setDonation_link("https://www.paypal.com/nl/home");
         user.setRole(allRoles.get(0));
@@ -35,6 +36,7 @@ public class UserSeeder {
         user2.setFirst_name("Pim");
         user2.setLast_name("van Dijk");
         user2.setEmail("pvdijk@mail.com");
+        user2.setUsername("Pimmie");
         user2.setPassword(new BCryptPasswordEncoder().encode("Test123!"));
         user2.setDonation_link("https://www.paypal.com/nl/home");
         user2.setRole(allRoles.get(1));
@@ -44,6 +46,7 @@ public class UserSeeder {
         user3.setFirst_name("Johan");
         user3.setLast_name("Kopers");
         user3.setEmail("j.kopers@mail.com");
+        user3.setUsername("Koperaan");
         user3.setPassword(new BCryptPasswordEncoder().encode("Test123!"));
         user3.setDonation_link("https://www.paypal.com/nl/home");
         user3.setRole(allRoles.get(2));
