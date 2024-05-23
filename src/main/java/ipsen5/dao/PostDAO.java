@@ -20,13 +20,15 @@ public class PostDAO {
     }
 
     public void createPost(PostDTO postDTO) {
-        this.postRepository.save(new Post(postDTO.text, postDTO.user));
+        this.postRepository.save(new Post(postDTO.title, postDTO.text, postDTO.imageUrl, postDTO.user));
     }
 
     public void editPost(UUID id, PostDTO postDTO) {
         Post post = this.postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         post.setText(postDTO.text);
         post.setUser(postDTO.user);
+        post.setImageUrl(postDTO.imageUrl);
+        post.setTitle(postDTO.title);
         this.postRepository.save(post);
     }
 
