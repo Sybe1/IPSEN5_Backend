@@ -1,5 +1,8 @@
 package ipsen5.dao;
 
+import ipsen5.dto.StatusDTO;
+import ipsen5.dto.UserDTO;
+import ipsen5.models.Status;
 import ipsen5.models.User;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +35,16 @@ public class UserDAO {
 //        role.setName(roleDTO.name);
 //        this.roleRepository.save(role);
 //    }
+
+    public void editUser(UUID id, UserDTO userDTO) {
+        User user = this.userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        user.setFirst_name(userDTO.first_name);
+        user.setLast_name(userDTO.last_name);
+        user.setPassword(userDTO.password);
+        user.setEmail(userDTO.email);
+        user.setDonation_link(userDTO.donation_link);
+        this.userRepository.save(user);
+    }
 
     public void deleteUser(UUID id) {
         this.userRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
