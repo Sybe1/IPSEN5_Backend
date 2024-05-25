@@ -40,6 +40,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/post/**").permitAll()
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/reaction/**").permitAll()
                         .requestMatchers("/error").anonymous()
                         .anyRequest().authenticated()
                 )
