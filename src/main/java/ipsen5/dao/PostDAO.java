@@ -5,6 +5,7 @@ import ipsen5.models.Post;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -36,5 +37,9 @@ public class PostDAO {
     public void deletePost(UUID id) {
         this.postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         this.postRepository.deleteById(id);
+    }
+
+    public Optional<Post> getPostById(UUID id) {
+        return this.postRepository.findById(id);
     }
 }

@@ -38,7 +38,7 @@ public class PostSeeder {
         post2.setText("Dit is de tweede post!");
         post2.setTitle("Verdant Wonders: Exploring the Enigmatic");
         post2.setImageUrl("https://cdn.openart.ai/stable_diffusion/171ddbee400feccf4e534dc4a85bd4b4c633b9a7_2000x2000.webp");
-        post2.setLocalDate(LocalDate.now());
+        post2.setLocalDate(LocalDate.now().minusDays(9));
         postRepository.save(post2);
 
         Post post3 = new Post();
@@ -62,7 +62,7 @@ public class PostSeeder {
         post5.setText("Dit is de vijfde post!");
         post5.setTitle("A jump into Wonderland");
         post5.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
-        post5.setLocalDate(LocalDate.now());
+        post5.setLocalDate(LocalDate.now().minusDays(1));
         postRepository.save(post5);
 
         Post post6 = new Post();
@@ -70,7 +70,7 @@ public class PostSeeder {
         post6.setText("Dit is de zesde post!");
         post6.setTitle("Adventures!!");
         post6.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
-        post6.setLocalDate(LocalDate.now());
+        post6.setLocalDate(LocalDate.now().minusDays(5));
         postRepository.save(post6);
 
         Post post7 = new Post();
@@ -78,7 +78,7 @@ public class PostSeeder {
         post7.setText("Dit is de zevende post!");
         post7.setTitle("Mythical beast!");
         post7.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
-        post7.setLocalDate(LocalDate.now());
+        post7.setLocalDate(LocalDate.now().minusDays(8));
         postRepository.save(post7);
 
         Post post8 = new Post();
@@ -86,7 +86,7 @@ public class PostSeeder {
         post8.setText("Dit is de achste post!");
         post8.setTitle("Running animal");
         post8.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
-        post8.setLocalDate(LocalDate.now());
+        post8.setLocalDate(LocalDate.now().minusDays(3));
         postRepository.save(post8);
 
         Post post9 = new Post();
@@ -94,7 +94,7 @@ public class PostSeeder {
         post9.setText("Dit is de negende post!");
         post9.setTitle("Fast running");
         post9.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
-        post9.setLocalDate(LocalDate.now());
+        post9.setLocalDate(LocalDate.now().minusDays(2));
         postRepository.save(post9);
 
         Post post10 = new Post();
@@ -102,7 +102,7 @@ public class PostSeeder {
         post10.setText("Dit is de tiende post!");
         post10.setTitle(" The dying human");
         post10.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
-        post10.setLocalDate(LocalDate.now());
+        post10.setLocalDate(LocalDate.now().minusDays(3));
         postRepository.save(post10);
     }
 }
