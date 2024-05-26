@@ -51,4 +51,8 @@ public class UserDAO {
         this.userRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         this.userRepository.deleteById(id);
     }
+
+    public Optional<User> getUserByUsername(String username) {
+        return Optional.ofNullable(this.userRepository.findByUsername(username));
+    }
 }
