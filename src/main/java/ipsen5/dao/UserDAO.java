@@ -42,6 +42,7 @@ public class UserDAO {
         user.setLast_name(userDTO.last_name);
         user.setPassword(userDTO.password);
         user.setEmail(userDTO.email);
+        user.setImageUrl(userDTO.imageUrl);
         user.setDonation_link(userDTO.donation_link);
         this.userRepository.save(user);
     }
