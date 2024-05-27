@@ -96,7 +96,8 @@ public class AuthController {
         authenticationDTO.role = allRoles.get(3);
 
         User registerdCustomUser = new User(authenticationDTO.username, authenticationDTO.first_name, authenticationDTO.last_name,
-                authenticationDTO.email, encodedPassword, authenticationDTO.donation_link, authenticationDTO.role);
+                authenticationDTO.email, encodedPassword, authenticationDTO.donation_link, authenticationDTO.imageUrl,
+                authenticationDTO.role);
         userDAO.save(registerdCustomUser);
         String token = jwtUtil.generateToken(registerdCustomUser.getEmail());
         LoginResponse loginResponse = new LoginResponse(registerdCustomUser.getEmail(), token);

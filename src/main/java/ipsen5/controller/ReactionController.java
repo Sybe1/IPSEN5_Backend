@@ -2,10 +2,12 @@ package ipsen5.controller;
 
 import ipsen5.dao.ReactionDAO;
 import ipsen5.dto.ReactionDTO;
+import ipsen5.models.Reaction;
 import ipsen5.services.ReactionValidator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -19,6 +21,13 @@ public class ReactionController {
         this.reactionDAO = reactionDAO;
         this.validator = validator;
     }
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<List<Reaction>> getAllReactionsByPostId(@PathVariable UUID postId) {
+        List<Reaction> reactions = reactionDAO.getAllReactionsByPostId(postId);
+        return ResponseEntity.ok(reactions);
+    }
+
     @PostMapping
     public ResponseEntity<String> createReaction(@RequestBody ReactionDTO reactionDTO){
         validator.reactionValidations(reactionDTO);
