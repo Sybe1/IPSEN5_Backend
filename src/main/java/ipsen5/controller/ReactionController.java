@@ -32,7 +32,7 @@ public class ReactionController {
     public ResponseEntity<String> createReaction(@RequestBody ReactionDTO reactionDTO){
         validator.reactionValidations(reactionDTO);
         this.reactionDAO.createReaction(reactionDTO);
-        return ResponseEntity.ok("Created a new Rating");
+        return ResponseEntity.ok("Created a new Reaction");
     }
     @PutMapping("/{id}")
     public ResponseEntity<String> editReaction(@PathVariable UUID id, @RequestBody ReactionDTO reactionDTO){

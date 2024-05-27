@@ -40,4 +40,7 @@ public class RatingDAO {
         this.ratingRepository.deleteById(ratingId);
     }
 
+    public List<Rating> getAllRatingsByPostId(UUID postId) {
+        return this.ratingRepository.findRatingsByPostId(postId);
+    }
 }
