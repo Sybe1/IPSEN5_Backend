@@ -32,7 +32,7 @@ public class SubmissionController {
     public ResponseEntity<String> createSubmission(@RequestBody SubmissionDTO submissionDTO){
         validator.submissionValidations(submissionDTO);
         this.submissionDAO.createSubmission(submissionDTO);
-        return ResponseEntity.ok("Created a new Rating");
+        return ResponseEntity.ok("Created a new Submission");
     }
     @PutMapping("/{id}")
     public ResponseEntity<String> editSubmission(@PathVariable UUID id, @RequestBody SubmissionDTO submissionDTO){

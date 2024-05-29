@@ -7,12 +7,21 @@ import ipsen5.models.User;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 
-public class SubmissionDTO {
-    public String text;
-    public boolean extra_feedback;
-    public String story_Details;
+import java.util.UUID;
 
-    public Feedback feedbackID;
-    public Status statusID;
-    public User user_id;
+public class SubmissionDTO {
+        public String name;
+        public String email;
+        public String online_profiles;
+        public String story_title;
+        public String type;
+        public int wordCount;
+        public String genre;
+        public String additional_notes;
+        public String prefferd_destination;
+        public Boolean platform_presence;
+        public Boolean extra_feedback;
+        public Boolean express_experience;
+        public Status statusID;
+        public User user_id;
 }

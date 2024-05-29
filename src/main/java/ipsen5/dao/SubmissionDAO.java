@@ -1,7 +1,10 @@
 package ipsen5.dao;
 
 import ipsen5.dto.SubmissionDTO;
+import ipsen5.models.Status;
 import ipsen5.models.Submission;
+import ipsen5.models.User;
+import jakarta.persistence.ManyToOne;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,20 +22,42 @@ public class SubmissionDAO {
     }
     public void createSubmission(SubmissionDTO submissionDTO) {
         Submission submission = new Submission();
+        submission.setName(submissionDTO.name);
+        submission.setEmail(submissionDTO.email);
+        submission.setOnline_profiles(submissionDTO.online_profiles);
+        submission.setStory_title(submissionDTO.story_title);
+        submission.setType(submissionDTO.type);
+        submission.setWordCount(submissionDTO.wordCount);
+        submission.setGenre(submissionDTO.genre);
+        submission.setAdditional_notes(submissionDTO.additional_notes);
+        submission.setPrefferd_destination(submissionDTO.prefferd_destination);
+        submission.setPlatform_presence(submissionDTO.platform_presence);
+        submission.setExpress_experience(submissionDTO.express_experience);
         submission.setExtra_feedback(submissionDTO.extra_feedback);
-        submission.setStory_Details(submissionDTO.story_Details);
-        submission.setText(submissionDTO.text);
-        submission.setFeedbackID(submissionDTO.feedbackID);
         submission.setStatusID(submissionDTO.statusID);
         submission.setUser_id(submissionDTO.user_id);
         this.submissionRespository.save(submission);
     }
+
+    @ManyToOne
+    private Status statusID;
+
+    @ManyToOne
+    private User user_id;
     public void editSubmission(UUID id, SubmissionDTO submissionDTO) {
         Submission submission = this.submissionRespository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));;
+        submission.setName(submissionDTO.name);
+        submission.setEmail(submissionDTO.email);
+        submission.setOnline_profiles(submissionDTO.online_profiles);
+        submission.setStory_title(submissionDTO.story_title);
+        submission.setType(submissionDTO.type);
+        submission.setWordCount(submissionDTO.wordCount);
+        submission.setGenre(submissionDTO.genre);
+        submission.setAdditional_notes(submissionDTO.additional_notes);
+        submission.setPrefferd_destination(submissionDTO.prefferd_destination);
+        submission.setPlatform_presence(submissionDTO.platform_presence);
+        submission.setExpress_experience(submissionDTO.express_experience);
         submission.setExtra_feedback(submissionDTO.extra_feedback);
-        submission.setStory_Details(submissionDTO.story_Details);
-        submission.setText(submissionDTO.text);
-        submission.setFeedbackID(submissionDTO.feedbackID);
         submission.setStatusID(submissionDTO.statusID);
         submission.setUser_id(submissionDTO.user_id);
         this.submissionRespository.save(submission);
