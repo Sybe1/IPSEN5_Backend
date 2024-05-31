@@ -25,13 +25,17 @@ public class Submission {
     @ManyToOne
     private User user_id;
 
-    public Submission(String text, Boolean extra_feedback, String story_Details, Feedback feedbackID, Status statusID, User user_id) {
+    @ManyToOne
+    private Rubric rubric;
+
+    public Submission(String text, Boolean extra_feedback, String story_Details, Feedback feedbackID, Status statusID, User user_id, Rubric rubric) {
         this.text = text;
         this.extra_feedback = extra_feedback;
         this.story_Details = story_Details;
         this.feedbackID = feedbackID;
         this.statusID = statusID;
         this.user_id = user_id;
+        this.rubric = rubric;
     }
 
     public Submission() {
