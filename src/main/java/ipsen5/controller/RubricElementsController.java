@@ -18,8 +18,8 @@ public class RubricElementsController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RubricElements>> getPostCategories() {
-        return ResponseEntity.ok(this.rubricElementsDAO.getPostCategories());
+    public ResponseEntity<List<RubricElements>> getRubricElements() {
+        return ResponseEntity.ok(this.rubricElementsDAO.getRubricElements());
     }
 
     @PostMapping

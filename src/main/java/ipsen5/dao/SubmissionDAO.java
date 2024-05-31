@@ -1,10 +1,12 @@
 package ipsen5.dao;
 
 import ipsen5.dto.SubmissionDTO;
+import ipsen5.models.Post;
 import ipsen5.models.Submission;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -16,6 +18,9 @@ public class SubmissionDAO {
     }
     public List<Submission> getAllSubmissions() {
         return this.submissionRespository.findAll();
+    }
+    public Optional<Submission> getSubmissionById(UUID id) {
+        return this.submissionRespository.findById(id);
     }
     public void createSubmission(SubmissionDTO submissionDTO) {
         Submission submission = new Submission();

@@ -15,7 +15,7 @@ public class RubricElementsDAO {
         this.rubricElementsRepository = rubricElementsRepository;
     }
 
-    public List<RubricElements> getPostCategories() {
+    public List<RubricElements> getRubricElements() {
         return this.rubricElementsRepository.findAll();
     }
 
