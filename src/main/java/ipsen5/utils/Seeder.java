@@ -22,7 +22,6 @@ public class Seeder {
     private StatusSeeder statusSeeder;
     private FeedbackSeeder feedbackSeeder;
     private CriteriaSeeder criteriaSeeder;
-    private RubricElementsSeeder rubricElementsSeeder;
     private FeedbackPerElementSeeder feedbackPerElementSeeder;
     private RolePriviligesSeeder rolePriviligesSeeder;
     private RatingSeeder ratingSeeder;
@@ -30,7 +29,7 @@ public class Seeder {
     public Seeder(PostSeeder postSeeder, RoleSeeder roleSeeder, UserSeeder userSeeder, CategorySeeder categorySeeder,
                   PostCategorySeeder postCategorySeeder, RubricSeeder rubricSeeder, ReactionSeeder reactionSeeder,
                   SubmissionSeeder submissionSeeder, StatusSeeder statusSeeder, FeedbackSeeder feedbackSeeder,
-                  CriteriaSeeder criteriaSeeder, RubricElementsSeeder rubricElementsSeeder,
+                  CriteriaSeeder criteriaSeeder,
                   FeedbackPerElementSeeder feedbackPerElementSeeder, RolePriviligesSeeder rolePriviligesSeeder,
                   RatingSeeder ratingSeeder
     ) {
@@ -45,7 +44,6 @@ public class Seeder {
         this.statusSeeder = statusSeeder;
         this.feedbackSeeder = feedbackSeeder;
         this.criteriaSeeder = criteriaSeeder;
-        this.rubricElementsSeeder = rubricElementsSeeder;
         this.feedbackPerElementSeeder = feedbackPerElementSeeder;
         this.rolePriviligesSeeder = rolePriviligesSeeder;
         this.ratingSeeder = ratingSeeder;
@@ -63,7 +61,6 @@ public class Seeder {
         statusSeeder.seedStatus();
         feedbackSeeder.seedFeedback();
         criteriaSeeder.seedCriteria();
-        rubricElementsSeeder.seedRubricElements();
         feedbackPerElementSeeder.seedRubricElements();
         rolePriviligesSeeder.seedRolePriviliges();
         ratingSeeder.seedRating();
