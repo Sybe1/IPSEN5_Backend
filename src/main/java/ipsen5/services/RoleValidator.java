@@ -1,6 +1,5 @@
 package ipsen5.services;
 
-import ipsen5.dto.FeedbackDTO;
 import ipsen5.dto.RoleDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

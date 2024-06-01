@@ -1,6 +1,5 @@
 package ipsen5.services;
 
-import ipsen5.dto.FeedbackDTO;
 import ipsen5.dto.SubmissionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -18,11 +17,6 @@ public class SubmissionValidator {
         if (!inputValidator.isValidDescription(submissionDTO.text)) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "No valid Submission provided"
-            );
-        }
-        if (!inputValidator.isNotNull(submissionDTO.feedbackID)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid feedback provided"
             );
         }
         if (!inputValidator.isNotNull(submissionDTO.user_id)) {

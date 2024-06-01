@@ -20,17 +20,15 @@ public class Seeder {
     private ReactionSeeder reactionSeeder;
     private SubmissionSeeder submissionSeeder;
     private StatusSeeder statusSeeder;
-    private FeedbackSeeder feedbackSeeder;
     private CriteriaSeeder criteriaSeeder;
-    private RubricElementsSeeder rubricElementsSeeder;
     private FeedbackPerElementSeeder feedbackPerElementSeeder;
     private RolePriviligesSeeder rolePriviligesSeeder;
     private RatingSeeder ratingSeeder;
 
     public Seeder(PostSeeder postSeeder, RoleSeeder roleSeeder, UserSeeder userSeeder, CategorySeeder categorySeeder,
                   PostCategorySeeder postCategorySeeder, RubricSeeder rubricSeeder, ReactionSeeder reactionSeeder,
-                  SubmissionSeeder submissionSeeder, StatusSeeder statusSeeder, FeedbackSeeder feedbackSeeder,
-                  CriteriaSeeder criteriaSeeder, RubricElementsSeeder rubricElementsSeeder,
+                  SubmissionSeeder submissionSeeder, StatusSeeder statusSeeder,
+                  CriteriaSeeder criteriaSeeder,
                   FeedbackPerElementSeeder feedbackPerElementSeeder, RolePriviligesSeeder rolePriviligesSeeder,
                   RatingSeeder ratingSeeder
     ) {
@@ -43,9 +41,7 @@ public class Seeder {
         this.reactionSeeder = reactionSeeder;
         this.submissionSeeder = submissionSeeder;
         this.statusSeeder = statusSeeder;
-        this.feedbackSeeder = feedbackSeeder;
         this.criteriaSeeder = criteriaSeeder;
-        this.rubricElementsSeeder = rubricElementsSeeder;
         this.feedbackPerElementSeeder = feedbackPerElementSeeder;
         this.rolePriviligesSeeder = rolePriviligesSeeder;
         this.ratingSeeder = ratingSeeder;
@@ -61,12 +57,10 @@ public class Seeder {
         rubricSeeder.seedRubric();
         reactionSeeder.seedReaction();
         statusSeeder.seedStatus();
-        feedbackSeeder.seedFeedback();
         criteriaSeeder.seedCriteria();
-        rubricElementsSeeder.seedRubricElements();
+        submissionSeeder.seedSubmission();
         feedbackPerElementSeeder.seedRubricElements();
         rolePriviligesSeeder.seedRolePriviliges();
         ratingSeeder.seedRating();
-        submissionSeeder.seedSubmission();
     }
 }

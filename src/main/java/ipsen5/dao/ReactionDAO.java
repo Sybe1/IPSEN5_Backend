@@ -28,12 +28,8 @@ public class ReactionDAO {
 
     public List<Reaction> getAllReactionsByPostId(UUID post_id) {
         Optional<Post> optionalPost = this.postRepository.findById(post_id);
-        if (optionalPost.isPresent()) {
-            Post post = optionalPost.get();
-            return this.reactionRepository.findByPostId(post);
-        } else {
-            return Collections.emptyList();
-        }
+        Post post = optionalPost.get();
+        return this.reactionRepository.findByPostId(post);
     }
 
 

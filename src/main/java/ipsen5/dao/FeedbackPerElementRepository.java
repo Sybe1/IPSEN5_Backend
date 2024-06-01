@@ -1,15 +1,14 @@
 package ipsen5.dao;
 
-
-import ipsen5.models.FeedbackPerElement;
-import ipsen5.models.FeedbackPerElementId;
+import ipsen5.models.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface FeedbackPerElementRepository extends JpaRepository<FeedbackPerElement, FeedbackPerElementId>{
+public interface FeedbackPerElementRepository extends JpaRepository<FeedbackPerElement, FeedbackPerElementId> {
+    List<FeedbackPerElement> findByIdSubmissionId(Submission submission);
+    FeedbackPerElement findByIdSubmissionIdAndIdCriteriaId(Submission submission, Criteria criteria);
+
 }
-
-
-
-
