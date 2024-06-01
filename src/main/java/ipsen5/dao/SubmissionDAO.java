@@ -27,7 +27,6 @@ public class SubmissionDAO {
         submission.setExtra_feedback(submissionDTO.extra_feedback);
         submission.setStory_Details(submissionDTO.story_Details);
         submission.setText(submissionDTO.text);
-        submission.setFeedbackID(submissionDTO.feedbackID);
         submission.setStatusID(submissionDTO.statusID);
         submission.setUser_id(submissionDTO.user_id);
         this.submissionRespository.save(submission);
@@ -37,7 +36,6 @@ public class SubmissionDAO {
         submission.setExtra_feedback(submissionDTO.extra_feedback);
         submission.setStory_Details(submissionDTO.story_Details);
         submission.setText(submissionDTO.text);
-        submission.setFeedbackID(submissionDTO.feedbackID);
         submission.setStatusID(submissionDTO.statusID);
         submission.setUser_id(submissionDTO.user_id);
         this.submissionRespository.save(submission);
