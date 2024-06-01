@@ -33,6 +33,15 @@ public class FeedbackPerElementDAO {
         return this.feedbackPerElementRepository.findByIdSubmissionId(submission);
     }
 
+    public FeedbackPerElement getAllFeedbackPerElementBySubmissionIdAndCriteriaId(UUID submissionId, UUID criteriaId) {
+        Submission submission = submissionRepository.findById(submissionId)
+                .orElseThrow(() -> new RuntimeException("Submission not found"));
+        Criteria criteria = criteriaRepository.findById(criteriaId)
+                .orElseThrow(() -> new RuntimeException("Criteria not found"));
+
+        return this.feedbackPerElementRepository.findByIdSubmissionIdAndIdCriteriaId(submission, criteria);
+    }
+
     public void saveFeedback(FeedbackPerElementDTO feedbackDTO) {
         Criteria criteria = criteriaRepository.findById(feedbackDTO.criteriaId)
                 .orElseThrow(() -> new RuntimeException("Criteria not found"));

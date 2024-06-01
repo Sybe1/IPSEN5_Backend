@@ -24,20 +24,18 @@ public class FeedbackPerElementSeeder {
         List<Criteria> allCriteria = criteriaRepository.findAll();
 
         FeedbackPerElement feedbackPerElement = new FeedbackPerElement();
-        System.out.println("hup" + allCriteria.size());
-        System.out.println("hup" + allSubmissions.size());
 
         FeedbackPerElementId feedbackPerElementId = new FeedbackPerElementId(allCriteria.get(0), allSubmissions.get(0));
         feedbackPerElement.setId(feedbackPerElementId);
         feedbackPerElement.setFeedback("Erg goed gedaan!");
-        feedbackPerElement.setGrade(9);
+        feedbackPerElement.setGrade(8);
         feedbackPerElementRepository.save(feedbackPerElement);
 
         FeedbackPerElement feedbackPerElement2 = new FeedbackPerElement();
         FeedbackPerElementId feedbackPerElementId2 = new FeedbackPerElementId(allCriteria.get(1), allSubmissions.get(0));
         feedbackPerElement2.setId(feedbackPerElementId2);
         feedbackPerElement2.setFeedback("Dat kon beter!");
-        feedbackPerElement2.setGrade(5);
+        feedbackPerElement2.setGrade(4);
         feedbackPerElementRepository.save(feedbackPerElement2);
 
         FeedbackPerElement feedbackPerElement3 = new FeedbackPerElement();

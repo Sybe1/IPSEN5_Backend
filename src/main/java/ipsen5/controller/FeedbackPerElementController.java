@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/feedbackperelement")
 public class FeedbackPerElementController {
 
@@ -31,6 +32,14 @@ public class FeedbackPerElementController {
     @GetMapping("/{submissionId}")
     public ResponseEntity<List<FeedbackPerElement>> getAllFeedbackPerElementBySubmissionId(@PathVariable UUID submissionId) {
         List<FeedbackPerElement> feedbackPerElements = feedbackPerElementDAO.getAllFeedbackPerElementBySubmissionId(submissionId);
+        return ResponseEntity.ok(feedbackPerElements);
+    }
+
+    @GetMapping("/{submissionId}/{criteriaId}")
+    public ResponseEntity<FeedbackPerElement> getAllFeedbackPerElementBySubmissionIdAndCriteriaId(
+            @PathVariable UUID submissionId, @PathVariable UUID criteriaId) {
+        FeedbackPerElement feedbackPerElements = feedbackPerElementDAO
+                .getAllFeedbackPerElementBySubmissionIdAndCriteriaId(submissionId, criteriaId);
         return ResponseEntity.ok(feedbackPerElements);
     }
 
