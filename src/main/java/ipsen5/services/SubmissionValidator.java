@@ -24,16 +24,12 @@ public class SubmissionValidator {
                     HttpStatus.BAD_REQUEST, "No valid name provided"
             );
         }
-        if (!inputValidator.isValidDescription(submissionDTO.email)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid email provided"
-            );
-        }
-        if (!inputValidator.isValidDescription(submissionDTO.online_profiles)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid online profiles provided"
-            );
-        }
+//        if (!inputValidator.isValidDescription(submissionDTO.email)) {
+//            throw new ResponseStatusException(
+//                    HttpStatus.BAD_REQUEST, "No valid email provided"
+//            );
+//        }
+
         if (!inputValidator.isValidDescription(submissionDTO.story_title)) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "No valid story title provided"

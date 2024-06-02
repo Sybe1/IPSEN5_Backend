@@ -25,6 +25,7 @@ public class Submission {
     private Boolean platform_presence;
     private Boolean extra_feedback;
     private Boolean express_experience;
+    private byte[] file;
 
 
     @ManyToOne

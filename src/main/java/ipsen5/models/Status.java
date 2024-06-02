@@ -13,7 +13,6 @@ import java.util.UUID;
 @Setter
 public class Status {
     @Id
-    @GeneratedValue
     private UUID id;
 
     private String status;
@@ -25,5 +24,8 @@ public class Status {
 
     public Status() {
 
+    }
+
+    public Status(UUID id, String status) {
     }
 }
