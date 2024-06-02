@@ -42,4 +42,8 @@ public class PostDAO {
     public Optional<Post> getPostById(UUID id) {
         return this.postRepository.findById(id);
     }
+
+    public List<Post> searchPostsByTitle(String title) {
+        return this.postRepository.findByTitleContaining(title);
+    }
 }
