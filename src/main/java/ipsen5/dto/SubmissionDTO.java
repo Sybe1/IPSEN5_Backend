@@ -1,11 +1,7 @@
 package ipsen5.dto;
 
-import ipsen5.models.Feedback;
-import ipsen5.models.Post;
 import ipsen5.models.Status;
 import ipsen5.models.User;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 
 import java.util.UUID;
 
@@ -24,4 +20,5 @@ public class SubmissionDTO {
         public Boolean express_experience;
         public Status statusID;
         public User user_id;
+
 }

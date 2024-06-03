@@ -1,5 +1,6 @@
 package ipsen5.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import lombok.Setter;
 @Setter
 public class FeedbackPerElement {
     @EmbeddedId
+    @JsonProperty("id")
     private FeedbackPerElementId id;
 
     private int grade;

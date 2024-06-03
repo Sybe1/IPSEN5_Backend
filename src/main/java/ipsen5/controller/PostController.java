@@ -51,4 +51,10 @@ public class PostController {
         this.postDAO.deletePost(id);
         return ResponseEntity.ok("deleted post with id: " + id);
     }
+
+    @GetMapping("/search/{title}")
+    public ResponseEntity<List<Post>> searchPostsByTitle(@PathVariable String title) {
+        List<Post> posts = postDAO.searchPostsByTitle(title);
+        return ResponseEntity.ok(posts);
+    }
 }

@@ -1,6 +1,5 @@
 package ipsen5.services;
 
-import ipsen5.dto.FeedbackDTO;
 import ipsen5.dto.SubmissionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -65,6 +64,7 @@ public class SubmissionValidator {
                     HttpStatus.BAD_REQUEST, "No valid awnser provided"
             );
         }
+
         if (!inputValidator.isNotNull(submissionDTO.user_id)) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "No valid user provided"

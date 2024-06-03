@@ -5,6 +5,7 @@ import ipsen5.models.Criteria;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class CriteriaDAO {
@@ -22,7 +23,7 @@ public class CriteriaDAO {
         this.criteriaRepository.save(new Criteria(criteriaDTO.name, criteriaDTO.zeroPoints, criteriaDTO.twoPoints, criteriaDTO.fourPoints, criteriaDTO.sixPoints, criteriaDTO.eightPoints, criteriaDTO.tenPoints));
     }
 
-    public void editCriteria(Long id, CriteriaDTO criteriaDTO) {
+    public void editCriteria(UUID id, CriteriaDTO criteriaDTO) {
         Criteria criteria = this.criteriaRepository.findById(id).orElseThrow(() -> new RuntimeException("Criteria not found"));
         criteria.setName(criteriaDTO.name);
         criteria.setZeroPoints(criteriaDTO.zeroPoints);
@@ -34,7 +35,7 @@ public class CriteriaDAO {
         this.criteriaRepository.save(criteria);
     }
 
-    public void deleteCriteria(Long id) {
+    public void deleteCriteria(UUID id) {
         this.criteriaRepository.findById(id).orElseThrow(() -> new RuntimeException("Criteria not found"));
         this.criteriaRepository.deleteById(id);
     }

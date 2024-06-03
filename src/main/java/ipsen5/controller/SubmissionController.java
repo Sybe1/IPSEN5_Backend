@@ -3,13 +3,13 @@ package ipsen5.controller;
 import ipsen5.dao.SubmissionDAO;
 import ipsen5.dto.SubmissionDTO;
 import ipsen5.models.Submission;
-import ipsen5.services.InputValidator;
 import ipsen5.services.SubmissionValidator;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -23,6 +23,12 @@ public class SubmissionController {
         this.submissionDAO = submissionDAO;
         this.validator = validator;
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Submission>> getSubmissionById(@PathVariable UUID id){
+        return ResponseEntity.ok(this.submissionDAO.getSubmissionById(id));
+    }
+
     @GetMapping
     public ResponseEntity<List<Submission>> getAllSubmissions(){
         return ResponseEntity.ok(this.submissionDAO.getAllSubmissions());

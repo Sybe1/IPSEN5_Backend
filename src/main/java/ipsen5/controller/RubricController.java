@@ -2,6 +2,7 @@ package ipsen5.controller;
 
 import ipsen5.dao.RubricDAO;
 import ipsen5.dto.RubricDTO;
+import ipsen5.models.Criteria;
 import ipsen5.models.Rubric;
 import ipsen5.services.InputValidator;
 import ipsen5.services.RatingValidator;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -20,9 +22,15 @@ import java.util.UUID;
 public class RubricController {
     private final RubricDAO rubricDAO;
     private RubricValidator validator;
+
     public RubricController(RubricDAO rubricDAO, RubricValidator validator) {
         this.rubricDAO = rubricDAO;
         this.validator = validator;
+    }
+
+    @GetMapping("/{id}/criteria")
+    public Set<Criteria> getCriteriaByRubricId(@PathVariable UUID id) {
+        return rubricDAO.getCriteriaByRubricId(id);
     }
 
     @GetMapping

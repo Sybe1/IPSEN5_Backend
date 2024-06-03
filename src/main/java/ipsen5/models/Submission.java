@@ -25,16 +25,18 @@ public class Submission {
     private Boolean platform_presence;
     private Boolean extra_feedback;
     private Boolean express_experience;
-    private byte[] file;
-
 
     @ManyToOne
     private Status statusID;
 
     @ManyToOne
     private User user_id;
+  
+    @ManyToOne
+    private Rubric rubric;
 
-    public Submission(UUID id, String name, String email, String online_profiles, String story_title, String type, int wordCount, String genre, String additional_notes, String prefferd_destination, Boolean platform_presence, Boolean extra_feedback, Boolean express_experience, Status statusID, User user_id) {
+
+    public Submission(UUID id, String name, String email, String online_profiles, String story_title, String type, int wordCount, String genre, String additional_notes, String prefferd_destination, Boolean platform_presence, Boolean extra_feedback, Boolean express_experience, Status statusID, User user_id, Rubric rubric) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -48,9 +50,11 @@ public class Submission {
         this.platform_presence = platform_presence;
         this.extra_feedback = extra_feedback;
         this.express_experience = express_experience;
-        this.statusID = statusID;
-        this.user_id = user_id;
-    }
+        this.rubric = rubric;
+        }
+ 
+
+ 
 
     public Submission() {
 
