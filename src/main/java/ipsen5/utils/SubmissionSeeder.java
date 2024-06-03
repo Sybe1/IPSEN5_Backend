@@ -4,6 +4,7 @@ import ipsen5.dao.*;
 import ipsen5.models.*;
 import org.springframework.stereotype.Component;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 @Component
@@ -25,18 +26,26 @@ public class SubmissionSeeder {
     }
 
     public void seedSubmission(){
-//         List<User> allUsers = userRepository.findAll();
-//         List<Status> allStatus = statusRepository.findAll();
-//         List<Rubric> allRubrics = rubricRepository.findAll();
+         List<User> allUsers = userRepository.findAll();
+         List<Status> allStatus = statusRepository.findAll();
+         List<Rubric> allRubrics = rubricRepository.findAll();
 
-//         Submission submission = new Submission();
-//         submission.setUser_id(allUsers.get(0));
-//         submission.setStatusID(allStatus.get(0));
-//         submission.setText("Eerste ingestuurde tekst!");
-//         submission.setStory_Details("Dit is mijn eerste ingestuurde verhaal");
-//         submission.setExtra_feedback(true);
-//         submission.setRubric(allRubrics.get(0));
-//         submissionRespository.save(submission);
+         Submission submission = new Submission();
+         submission.setUser_id(allUsers.get(0));
+         submission.setStatusID(allStatus.get(0));
+         submission.setName("name");
+         submission.setEmail("mvamstel@mail.com");
+         submission.setOnline_profiles("dont have");
+         submission.setType("text");
+         submission.setWordCount(100);
+         submission.setGenre("romace");
+         submission.setAdditional_notes("additional_notes");
+         submission.setPrefferd_destination("Babels CHOICE");
+         submission.setPlatform_presence(true);
+         submission.setExtra_feedback(true);
+         submission.setExpress_experience(true);
+         submission.setRubric(allRubrics.get(0));
+         submissionRespository.save(submission);
 
 //         Submission submission2 = new Submission();
 //         submission2.setUser_id(allUsers.get(1));
@@ -46,7 +55,7 @@ public class SubmissionSeeder {
 //         submission2.setExtra_feedback(true);
 //         submission2.setRubric(allRubrics.get(0));
 //         submissionRespository.save(submission2);
-
+//
 //         Submission submission3 = new Submission();
 //         submission3.setUser_id(allUsers.get(1));
 //         submission3.setStatusID(allStatus.get(1));
