@@ -13,27 +13,48 @@ public class Submission {
     @Id
     @GeneratedValue
     private UUID id;
-    private String text;
+    private String name;
+    private String email;
+    private String online_profiles;
+    private String story_title;
+    private String type;
+    private int wordCount;
+    private String genre;
+    private String additional_notes;
+    private String prefferd_destination;
+    private Boolean platform_presence;
     private Boolean extra_feedback;
-    private String story_Details;
+    private Boolean express_experience;
 
     @ManyToOne
     private Status statusID;
 
     @ManyToOne
     private User user_id;
-
+  
     @ManyToOne
     private Rubric rubric;
 
-    public Submission(String text, Boolean extra_feedback, String story_Details, Status statusID, User user_id, Rubric rubric) {
-        this.text = text;
+
+    public Submission(UUID id, String name, String email, String online_profiles, String story_title, String type, int wordCount, String genre, String additional_notes, String prefferd_destination, Boolean platform_presence, Boolean extra_feedback, Boolean express_experience, Status statusID, User user_id, Rubric rubric) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.online_profiles = online_profiles;
+        this.story_title = story_title;
+        this.type = type;
+        this.wordCount = wordCount;
+        this.genre = genre;
+        this.additional_notes = additional_notes;
+        this.prefferd_destination = prefferd_destination;
+        this.platform_presence = platform_presence;
         this.extra_feedback = extra_feedback;
-        this.story_Details = story_Details;
-        this.statusID = statusID;
-        this.user_id = user_id;
+        this.express_experience = express_experience;
         this.rubric = rubric;
-    }
+        }
+ 
+
+ 
 
     public Submission() {
 
