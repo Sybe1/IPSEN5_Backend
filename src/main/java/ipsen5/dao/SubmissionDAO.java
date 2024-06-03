@@ -39,11 +39,6 @@ public class SubmissionDAO {
         this.submissionRespository.save(submission);
     }
 
-    @ManyToOne
-    private Status statusID;
-
-    @ManyToOne
-    private User user_id;
     public void editSubmission(UUID id, SubmissionDTO submissionDTO) {
         Submission submission = this.submissionRespository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));;
         submission.setName(submissionDTO.name);
