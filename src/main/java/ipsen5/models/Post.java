@@ -1,14 +1,13 @@
 package ipsen5.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -23,17 +22,20 @@ public class Post {
     private String text;
     private String imageUrl;
     private LocalDate localDate;
+    @ElementCollection
+    private List<String> genres;
     @ManyToOne
     private User user;
 
     public Post() {
     }
 
-    public Post(String title, String text, String imageUrl, LocalDate localDate, User user) {
+    public Post(String title, String text, String imageUrl, LocalDate localDate, List<String> genres, User user) {
         this.title = title;
         this.text = text;
         this.imageUrl = imageUrl;
         this.localDate = localDate;
+        this.genres = genres;
         this.user = user;
     }
 }
