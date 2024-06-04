@@ -10,6 +10,7 @@ import ipsen5.models.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Random;
 
 @Component
 public class RatingSeeder {
@@ -26,23 +27,17 @@ public class RatingSeeder {
     public void seedRating(){
         List<Post> allPosts = postRepository.findAll();
         List<User> allUsers = userRepository.findAll();
+        Random random = new Random();
 
-        RatingId ratingId = new RatingId(allUsers.get(0), allPosts.get(0));
-        Rating rating = new Rating();
-        rating.setId(ratingId);
-        rating.setGrade(4);
-        ratingRepository.save(rating);
-
-        RatingId ratingId2 = new RatingId(allUsers.get(1), allPosts.get(0));
-        Rating rating2 = new Rating();
-        rating2.setId(ratingId2);
-        rating2.setGrade(2);
-        ratingRepository.save(rating2);
-
-        RatingId ratingId3 = new RatingId(allUsers.get(2), allPosts.get(0));
-        Rating rating3 = new Rating();
-        rating3.setId(ratingId3);
-        rating3.setGrade(3);
-        ratingRepository.save(rating3);
+        for (int i = 0; i < allPosts.size(); i++) {
+            for (int j = 0; j < 3; j++) {
+                RatingId ratingId = new RatingId(allUsers.get(j), allPosts.get(i));
+                Rating rating = new Rating();
+                rating.setId(ratingId);
+                int grade = random.nextInt(5) + 1;
+                rating.setGrade(grade);
+                ratingRepository.save(rating);
+            }
+        }
     }
 }
