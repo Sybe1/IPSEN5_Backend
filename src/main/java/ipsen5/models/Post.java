@@ -26,6 +26,9 @@ public class Post {
     private List<String> genres;
     @ManyToOne
     private User user;
+    @OneToMany(mappedBy = "post")
+    @JsonManagedReference
+    private List<Rating> ratings;
 
     public Post() {
     }
@@ -37,5 +40,13 @@ public class Post {
         this.localDate = localDate;
         this.genres = genres;
         this.user = user;
+    }
+
+    public double getAverageRating() {
+        return ratings.stream()
+                .filter(rating -> rating.getPost().getId().equals(this.id))
+                .mapToInt(Rating::getGrade)
+                .average()
+                .orElse(0.0);
     }
 }
