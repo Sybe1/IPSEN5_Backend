@@ -18,6 +18,7 @@ public class Submission {
     private String online_profiles;
     private String story_title;
     private String type;
+    private String text;
     private int wordCount;
     private String genre;
     private String additional_notes;
@@ -36,13 +37,13 @@ public class Submission {
     private Rubric rubric;
 
 
-    public Submission(UUID id, String name, String email, String online_profiles, String story_title, String type, int wordCount, String genre, String additional_notes, String prefferd_destination, Boolean platform_presence, Boolean extra_feedback, Boolean express_experience, Status statusID, User user_id, Rubric rubric) {
-        this.id = id;
+    public Submission(String name, String email, String online_profiles, String story_title, String type, String text, int wordCount, String genre, String additional_notes, String prefferd_destination, Boolean platform_presence, Boolean extra_feedback, Boolean express_experience, Status statusID, User user_id, Rubric rubric) {
         this.name = name;
         this.email = email;
         this.online_profiles = online_profiles;
         this.story_title = story_title;
         this.type = type;
+        this.text = text;
         this.wordCount = wordCount;
         this.genre = genre;
         this.additional_notes = additional_notes;
@@ -50,11 +51,10 @@ public class Submission {
         this.platform_presence = platform_presence;
         this.extra_feedback = extra_feedback;
         this.express_experience = express_experience;
+        this.statusID = statusID;
+        this.user_id = user_id;
         this.rubric = rubric;
-        }
- 
-
- 
+    }
 
     public Submission() {
 
