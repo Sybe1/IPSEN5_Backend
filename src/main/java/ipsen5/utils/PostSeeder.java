@@ -31,6 +31,7 @@ public class PostSeeder {
         post.setTitle("Rediscovering Babylon: The Truth Behind the Hanging Gardens");
         post.setImageUrl("https://escapewelt.com/image/catalog/products/v.3/QuestTower/Landing/01.jpg");
         post.setLocalDate(LocalDate.now());
+        post.setGenres(List.of("Fantasy", "Adventure"));
         postRepository.save(post);
 
         Post post2 = new Post();
@@ -39,6 +40,7 @@ public class PostSeeder {
         post2.setTitle("Verdant Wonders: Exploring the Enigmatic");
         post2.setImageUrl("https://cdn.openart.ai/stable_diffusion/171ddbee400feccf4e534dc4a85bd4b4c633b9a7_2000x2000.webp");
         post2.setLocalDate(LocalDate.now().minusDays(9));
+        post2.setGenres(List.of("Science", "Fiction"));
         postRepository.save(post2);
 
         Post post3 = new Post();
@@ -47,6 +49,7 @@ public class PostSeeder {
         post3.setTitle("the Ancient World’s Lost Paradise");
         post3.setImageUrl("https://img.freepik.com/premium-photo/mythical-creatures-fairytale-landscapes-magical-symbols-together-generative-ai_830962-3645.jpg");
         post3.setLocalDate(LocalDate.now());
+        post3.setGenres(List.of("Horror", "Mystery"));
         postRepository.save(post3);
 
         Post post4 = new Post();
@@ -55,6 +58,7 @@ public class PostSeeder {
         post4.setTitle("101 stories");
         post4.setImageUrl("https://i.pinimg.com/736x/42/04/c6/4204c696523e94019d819ae8f6455011.jpg");
         post4.setLocalDate(LocalDate.now());
+        post4.setGenres(List.of("Thriller", "Romance"));
         postRepository.save(post4);
 
         Post post5 = new Post();
@@ -63,6 +67,7 @@ public class PostSeeder {
         post5.setTitle("A jump into Wonderland");
         post5.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
         post5.setLocalDate(LocalDate.now().minusDays(1));
+        post5.setGenres(List.of("Drama", "Satire"));
         postRepository.save(post5);
 
         Post post6 = new Post();
@@ -71,6 +76,7 @@ public class PostSeeder {
         post6.setTitle("Adventures!!");
         post6.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
         post6.setLocalDate(LocalDate.now().minusDays(5));
+        post6.setGenres(List.of("Western", "Poetry"));
         postRepository.save(post6);
 
         Post post7 = new Post();
@@ -79,6 +85,7 @@ public class PostSeeder {
         post7.setTitle("Mythical beast!");
         post7.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
         post7.setLocalDate(LocalDate.now().minusDays(8));
+        post7.setGenres(List.of("Historical", "Non-fiction"));
         postRepository.save(post7);
 
         Post post8 = new Post();
@@ -87,6 +94,7 @@ public class PostSeeder {
         post8.setTitle("Running animal");
         post8.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
         post8.setLocalDate(LocalDate.now().minusDays(3));
+        post8.setGenres(List.of("Erotica", "Adventure"));
         postRepository.save(post8);
 
         Post post9 = new Post();
@@ -95,6 +103,7 @@ public class PostSeeder {
         post9.setTitle("Fast running");
         post9.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
         post9.setLocalDate(LocalDate.now().minusDays(2));
+        post9.setGenres(List.of("Satire", "Adventure"));
         postRepository.save(post9);
 
         Post post10 = new Post();
@@ -103,6 +112,7 @@ public class PostSeeder {
         post10.setTitle(" The dying human");
         post10.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
         post10.setLocalDate(LocalDate.now().minusDays(3));
+        post10.setGenres(List.of("Fantasy", "Fiction"));
         postRepository.save(post10);
     }
 }
