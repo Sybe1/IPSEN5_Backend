@@ -21,7 +21,7 @@ public class StatusDAO {
         return this.statusRepository.findAll();
     }
     public void createStatus(StatusDTO statusDTO) {
-        this.statusRepository.save(new Status(statusDTO.status));
+        this.statusRepository.save(new Status(statusDTO.id, statusDTO.status));
     }
     public void editStatus(UUID id, StatusDTO statusDTO) {
         Status status = this.statusRepository.findById(id).orElseThrow(() -> new RuntimeException("Status not found"));

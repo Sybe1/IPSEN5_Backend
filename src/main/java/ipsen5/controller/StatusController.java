@@ -32,7 +32,7 @@ public class StatusController {
     public ResponseEntity<String> createStatus(@RequestBody StatusDTO statusDTO){
         validator.statusValidations(statusDTO);
         this.statusDAO.createStatus(statusDTO);
-        return ResponseEntity.ok("Created a new Rating");
+        return ResponseEntity.ok("Created a new Status");
     }
     @PutMapping("/{id}")
     public ResponseEntity<String> editStatus(@PathVariable UUID id, @RequestBody StatusDTO statusDTO){

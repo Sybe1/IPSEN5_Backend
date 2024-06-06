@@ -42,6 +42,7 @@ public class UserDAO {
         user.setLast_name(userDTO.last_name);
         user.setPassword(userDTO.password);
         user.setEmail(userDTO.email);
+        user.setImageUrl(userDTO.imageUrl);
         user.setDonation_link(userDTO.donation_link);
         this.userRepository.save(user);
     }
@@ -49,5 +50,9 @@ public class UserDAO {
     public void deleteUser(UUID id) {
         this.userRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         this.userRepository.deleteById(id);
+    }
+
+    public Optional<User> getUserByUsername(String username) {
+        return Optional.ofNullable(this.userRepository.findByUsername(username));
     }
 }

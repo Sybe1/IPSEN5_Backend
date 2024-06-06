@@ -1,5 +1,6 @@
 package ipsen5.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +15,11 @@ public class Rating {
     private RatingId id;
 
     private int grade;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id_id" , insertable = false, updatable = false)
+    @JsonBackReference
+    private Post post;
 
     public Rating(RatingId id, int grade) {
         this.id = id;

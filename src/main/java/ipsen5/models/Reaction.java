@@ -19,7 +19,7 @@ public class Reaction {
     private String text;
 
     @ManyToOne
-    private Post post_id;
+    private Post postId;
 
     @ManyToOne
     private User user_id;
@@ -27,7 +27,7 @@ public class Reaction {
     public Reaction(String text, Post post_id, User user_id) {
         this.id = id;
         this.text = text;
-        this.post_id = post_id;
+        this.postId = post_id;
         this.user_id = user_id;
     }
 

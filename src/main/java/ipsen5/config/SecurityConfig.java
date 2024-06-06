@@ -38,8 +38,11 @@ public class SecurityConfig {
                 .userDetailsService(userService)
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/post").permitAll()
+                        .requestMatchers("/post/**").permitAll()
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/reaction/**").permitAll()
+                        .requestMatchers("/users/username/**").permitAll()
+                        .requestMatchers("/rating/**").permitAll()
                         .requestMatchers("/error").anonymous()
                         .anyRequest().authenticated()
                 )

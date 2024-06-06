@@ -29,12 +29,20 @@ public class RatingController {
     public ResponseEntity<List<Rating>> getAllRatings(){
         return ResponseEntity.ok(this.ratingDAO.getAllRatings());
     }
+
     @PostMapping
     public ResponseEntity<String> createRating(@RequestBody RatingDTO ratingDTO){
         validator.ratingValidations(ratingDTO);
         this.ratingDAO.createRating(ratingDTO);
         return ResponseEntity.ok("Created a new Rating");
     }
+
+    @GetMapping("/{postId}")
+    public ResponseEntity<List<Rating>> getAllRatingsByPostId(@PathVariable UUID postId) {
+        List<Rating> ratings = ratingDAO.getAllRatingsByPostId(postId);
+        return ResponseEntity.ok(ratings);
+    }
+
     @PutMapping("/{userId}/{postId}")
     public ResponseEntity<String> editRating(@PathVariable User userId, @PathVariable Post postId, @RequestBody RatingDTO ratingDTO){
         validator.ratingValidations(ratingDTO);

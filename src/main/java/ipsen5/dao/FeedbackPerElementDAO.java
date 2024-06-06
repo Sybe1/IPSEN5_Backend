@@ -5,27 +5,64 @@ import ipsen5.models.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class FeedbackPerElementDAO {
 
     private final FeedbackPerElementRepository feedbackPerElementRepository;
+    private final CriteriaRepository criteriaRepository;
+    private final SubmissionRespository submissionRepository;
 
-    public FeedbackPerElementDAO(FeedbackPerElementRepository feedbackPerElementRepository) {
+    public FeedbackPerElementDAO(FeedbackPerElementRepository feedbackPerElementRepository,
+                                 CriteriaRepository criteriaRepository,
+                                 SubmissionRespository submissionRepository) {
         this.feedbackPerElementRepository = feedbackPerElementRepository;
+        this.criteriaRepository = criteriaRepository;
+        this.submissionRepository = submissionRepository;
     }
 
-    public List<FeedbackPerElement> getPostCategories() {
+    public List<FeedbackPerElement> getFeedbackPerElement() {
         return this.feedbackPerElementRepository.findAll();
     }
 
-    public void createFeedbackPerElement(FeedbackPerElementDTO feedbackPerElementDTO) {
-        FeedbackPerElementId feedbackPerElementId = new FeedbackPerElementId(feedbackPerElementDTO.criteriaId, feedbackPerElementDTO.feedbackId);
-        this.feedbackPerElementRepository.save(new FeedbackPerElement(feedbackPerElementId, feedbackPerElementDTO.grade, feedbackPerElementDTO.feedback));
+    public List<FeedbackPerElement> getAllFeedbackPerElementBySubmissionId(UUID submissionId) {
+        Optional<Submission> optionalSubmission = this.submissionRepository.findById(submissionId);
+        Submission submission = optionalSubmission.get();
+        return this.feedbackPerElementRepository.findByIdSubmissionId(submission);
     }
 
-    public void updateFeedbackPerElement(Feedback feedbackId, Criteria criteriaId, FeedbackPerElementDTO feedbackPerElementDTO) {
-        FeedbackPerElementId feedbackPerElementId = new FeedbackPerElementId(criteriaId, feedbackId);
+    public FeedbackPerElement getAllFeedbackPerElementBySubmissionIdAndCriteriaId(UUID submissionId, UUID criteriaId) {
+        Submission submission = submissionRepository.findById(submissionId)
+                .orElseThrow(() -> new RuntimeException("Submission not found"));
+        Criteria criteria = criteriaRepository.findById(criteriaId)
+                .orElseThrow(() -> new RuntimeException("Criteria not found"));
+
+        return this.feedbackPerElementRepository.findByIdSubmissionIdAndIdCriteriaId(submission, criteria);
+    }
+
+    public void saveFeedback(FeedbackPerElementDTO feedbackDTO) {
+        Criteria criteria = criteriaRepository.findById(feedbackDTO.criteriaId)
+                .orElseThrow(() -> new RuntimeException("Criteria not found"));
+        Submission submission = submissionRepository.findById(feedbackDTO.submissionId)
+                .orElseThrow(() -> new RuntimeException("Submission not found"));
+
+        FeedbackPerElement feedback = new FeedbackPerElement();
+        feedback.setId(new FeedbackPerElementId(criteria, submission));
+        feedback.setGrade(feedbackDTO.grade);
+        feedback.setFeedback(feedbackDTO.feedback);
+
+        this.feedbackPerElementRepository.save(feedback);
+    }
+
+    public void updateFeedbackPerElement(UUID submissionId, UUID criteriaId, FeedbackPerElementDTO feedbackPerElementDTO) {
+        Criteria criteria = criteriaRepository.findById(criteriaId)
+                .orElseThrow(() -> new RuntimeException("Criteria not found"));
+        Submission submission = submissionRepository.findById(submissionId)
+                .orElseThrow(() -> new RuntimeException("Submission not found"));
+
+        FeedbackPerElementId feedbackPerElementId = new FeedbackPerElementId(criteria, submission);
         FeedbackPerElement feedbackPerElement = this.feedbackPerElementRepository.findById(feedbackPerElementId)
                 .orElseThrow(() -> new RuntimeException("FeedbackPerElement not found"));
 
@@ -35,10 +72,18 @@ public class FeedbackPerElementDAO {
         this.feedbackPerElementRepository.save(feedbackPerElement);
     }
 
+    public void deleteFeedbackPerElement(UUID submissionId, UUID criteriaId) {
+        Criteria criteria = criteriaRepository.findById(criteriaId)
+                .orElseThrow(() -> new RuntimeException("Criteria not found"));
+        Submission submission = submissionRepository.findById(submissionId)
+                .orElseThrow(() -> new RuntimeException("Submission not found"));
 
-    public void deleteFeedbackPerElement(Feedback feedbackId, Criteria criteriaId) {
-        FeedbackPerElementId feedbackPerElementId = new FeedbackPerElementId(criteriaId, feedbackId);
-        this.feedbackPerElementRepository.findById(feedbackPerElementId).orElseThrow(() -> new RuntimeException("FeedbackPerElement not found"));
-        this.feedbackPerElementRepository.deleteById(feedbackPerElementId);
+        FeedbackPerElementId feedbackPerElementId = new FeedbackPerElementId(criteria, submission);
+        FeedbackPerElement feedbackPerElement = this.feedbackPerElementRepository.findById(feedbackPerElementId)
+                .orElseThrow(() -> new RuntimeException("FeedbackPerElement not found"));
+
+        this.feedbackPerElementRepository.delete(feedbackPerElement);
     }
+
+
 }
