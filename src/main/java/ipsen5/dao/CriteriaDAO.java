@@ -5,6 +5,7 @@ import ipsen5.models.Criteria;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -17,6 +18,10 @@ public class CriteriaDAO {
 
     public List<Criteria> getAllCriteria() {
         return this.criteriaRepository.findAll();
+    }
+
+    public Optional<Criteria> getCriteriaById(UUID criteriaId) {
+        return this.criteriaRepository.findById(criteriaId);
     }
 
     public void createCriteria(CriteriaDTO criteriaDTO) {

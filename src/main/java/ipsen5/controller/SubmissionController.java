@@ -33,6 +33,11 @@ public class SubmissionController {
         return ResponseEntity.ok(this.submissionDAO.getSubmissionById(id));
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<Submission>> getSubmissionByUserId(@PathVariable UUID id){
+        return ResponseEntity.ok(this.submissionDAO.getSubmissionByUserId(id));
+    }
+
     @GetMapping
     public ResponseEntity<List<Submission>> getAllSubmissions(){
         return ResponseEntity.ok(this.submissionDAO.getAllSubmissions());

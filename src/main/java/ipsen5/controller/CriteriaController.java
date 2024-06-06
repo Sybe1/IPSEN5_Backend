@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -25,6 +26,11 @@ public class CriteriaController {
     @GetMapping
     public ResponseEntity<List<Criteria>> getAllCriteria(){
         return ResponseEntity.ok(this.criteriaDAO.getAllCriteria());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Criteria>> getCriteriaById(@PathVariable UUID id){
+        return ResponseEntity.ok(this.criteriaDAO.getCriteriaById(id));
     }
 
     @PostMapping
