@@ -2,16 +2,13 @@ package ipsen5.dao;
 
 import ipsen5.dto.SubmissionDTO;
 
-import ipsen5.models.Status;
-import ipsen5.models.Post;
 import ipsen5.models.Submission;
-import ipsen5.models.User;
-import jakarta.persistence.ManyToOne;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,7 +26,26 @@ public class SubmissionDAO {
     public Optional<Submission> getSubmissionById(UUID id) {
         return this.submissionRespository.findById(id);
     }
-    public Submission createSubmission(SubmissionDTO submissionDTO) {
+
+
+    public List<Submission> getSubmissionByUserId(UUID id) {
+        List<Submission> submissions = this.submissionRespository.findAll();
+        List<Submission> submissionsByUserId = new ArrayList<>();
+        for (Submission submission : submissions) {
+            System.out.println(submission.getUser_id().getId());
+            System.out.println(id);
+            if (submission.getUser_id().getId() == id) {
+                System.out.println("test");
+                submissionsByUserId.add(submission);
+            }
+        }
+
+        System.out.println(submissionsByUserId);
+        return submissionsByUserId;
+    }
+
+
+    public void createSubmission(SubmissionDTO submissionDTO) {
         Submission submission = new Submission();
         submission.setName(submissionDTO.name);
         submission.setText(submissionDTO.text);
