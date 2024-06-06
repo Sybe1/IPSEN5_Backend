@@ -38,32 +38,38 @@ public class SubmissionSeeder {
          submission.setOnline_profiles("dont have");
          submission.setType("text");
          submission.setWordCount(100);
-         submission.setGenre("romace");
+         submission.setGenre("romance");
          submission.setAdditional_notes("additional_notes");
          submission.setPrefferd_destination("Babels CHOICE");
-         submission.setPlatform_presence(true);
+        submission.setStory_title("First story");
+        submission.setText("Dit is het eerste verhaal.");
+        submission.setPlatform_presence(true);
          submission.setExtra_feedback(true);
          submission.setExpress_experience(true);
          submission.setRubric(allRubrics.get(0));
          submissionRespository.save(submission);
 
-//         Submission submission2 = new Submission();
-//         submission2.setUser_id(allUsers.get(1));
-//         submission2.setStatusID(allStatus.get(0));
-//         submission2.setText("Tweede ingestuurde tekst!");
-//         submission2.setStory_Details("Het is een mythisch verhaal over draken");
-//         submission2.setExtra_feedback(true);
-//         submission2.setRubric(allRubrics.get(0));
-//         submissionRespository.save(submission2);
-//
-//         Submission submission3 = new Submission();
-//         submission3.setUser_id(allUsers.get(1));
-//         submission3.setStatusID(allStatus.get(1));
-//         submission3.setText("Er was eens..");
-//         submission3.setStory_Details("Dit is een sprookje");
-//         submission3.setExtra_feedback(false);
-//         submission3.setRubric(allRubrics.get(0));
-//         submissionRespository.save(submission3);
+         Submission submission2 = new Submission();
+         submission2.setUser_id(allUsers.get(1));
+         submission2.setStatusID(allStatus.get(0));
+         submission2.setName("Johan");
+         submission2.setStory_title("New story");
+         submission2.setEmail("johan@mail.com");
+        submission2.setOnline_profiles("dont have");
+        submission2.setText("Dit is het tweede verhaal.");
+        submission2.setType("text");
+         submission2.setWordCount(200);
+        submission2.setGenre("Horror");
+        submission2.setAdditional_notes("Thank you!");
+        submission2.setPrefferd_destination("Official Selection");
+        submission2.setPlatform_presence(true);
+        submission2.setExtra_feedback(true);
+        submission2.setExpress_experience(true);
+        submission2.setRubric(allRubrics.get(0));
+         submission2.setExtra_feedback(true);
+         submission2.setRubric(allRubrics.get(0));
+         submissionRespository.save(submission2);
+
 
     }
 }

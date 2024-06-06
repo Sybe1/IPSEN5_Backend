@@ -29,6 +29,7 @@ public class SubmissionDAO {
     public void createSubmission(SubmissionDTO submissionDTO) {
         Submission submission = new Submission();
         submission.setName(submissionDTO.name);
+        submission.setText(submissionDTO.text);
         submission.setEmail(submissionDTO.email);
         submission.setOnline_profiles(submissionDTO.online_profiles);
         submission.setStory_title(submissionDTO.story_title);
@@ -48,6 +49,7 @@ public class SubmissionDAO {
     public void editSubmission(UUID id, SubmissionDTO submissionDTO) {
         Submission submission = this.submissionRespository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));;
         submission.setName(submissionDTO.name);
+        submission.setText(submissionDTO.text);
         submission.setEmail(submissionDTO.email);
         submission.setOnline_profiles(submissionDTO.online_profiles);
         submission.setStory_title(submissionDTO.story_title);
