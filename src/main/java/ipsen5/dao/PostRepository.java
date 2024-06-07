@@ -1,6 +1,8 @@
 package ipsen5.dao;
 
 import ipsen5.models.Post;
+import ipsen5.models.Reaction;
+import ipsen5.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,6 +19,8 @@ public interface PostRepository extends JpaRepository<Post, UUID>{
 
     @Query("SELECT p FROM Post p WHERE LOWER(p.title) LIKE LOWER(CONCAT('%', :title, '%'))")
     List<Post> findByTitleContaining(@Param("title") String title);
+
+    List<Post> findByUser(User user);
 }
 
 

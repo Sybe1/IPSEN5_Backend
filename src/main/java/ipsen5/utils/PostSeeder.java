@@ -14,7 +14,6 @@ import java.util.List;
 
 @Component
 public class PostSeeder {
-
     private UserRepository userRepository;
     private PostRepository postRepository;
 
@@ -115,4 +114,5 @@ public class PostSeeder {
         post10.setGenres(List.of("Fantasy", "Fiction"));
         postRepository.save(post10);
     }
+
 }

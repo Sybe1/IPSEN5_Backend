@@ -2,6 +2,7 @@ package ipsen5.dao;
 
 import ipsen5.dto.PostDTO;
 import ipsen5.models.Post;
+import ipsen5.models.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -11,9 +12,12 @@ import java.util.UUID;
 @Component
 public class PostDAO {
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
 
-    public PostDAO(PostRepository postRepository) {
+    public PostDAO(PostRepository postRepository,
+                   UserRepository userRepository) {
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Post> getAllPosts() {
@@ -45,5 +49,10 @@ public class PostDAO {
 
     public List<Post> searchPostsByTitle(String title) {
         return this.postRepository.findByTitleContaining(title);
+    }
+
+    public List<Post> getPostsByUserId(String username) {
+        User user = this.userRepository.findByUsername(username);
+        return this.postRepository.findByUser(user);
     }
 }

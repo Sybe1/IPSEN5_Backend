@@ -32,6 +32,11 @@ public class PostController {
         return ResponseEntity.ok(this.postDAO.getPostById(id));
     }
 
+    @GetMapping("/user/{user}")
+    public ResponseEntity<List<Post>> getPostsByUserId(@PathVariable String user){
+        return ResponseEntity.ok(this.postDAO.getPostsByUserId(user));
+    }
+
     @PostMapping
     public ResponseEntity<String> createPost(@RequestBody PostDTO postDTO){
         validator.postValidations(postDTO);
