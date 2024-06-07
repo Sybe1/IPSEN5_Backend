@@ -16,6 +16,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/social-media")
+@CrossOrigin(origins = "http://localhost:4200")
 public class SocialMediaController {
 
     @Autowired

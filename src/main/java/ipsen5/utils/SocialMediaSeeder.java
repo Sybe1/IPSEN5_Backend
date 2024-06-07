@@ -27,19 +27,25 @@ public class SocialMediaSeeder {
         List<User> allUsers = userRepository.findAll();
         socialMedia.setUser(allUsers.get(0));
         socialMedia.setSocialMediaCategory(SocialMediaCategories.INSTAGRAM);
-        socialMedia.setSocialMediaLink("www.instagram.com");
+        socialMedia.setSocialMediaLink("https://www.instagram.com/babelcompany/");
         socialMediaRepository.save(socialMedia);
 
         SocialMedia socialMedia2 = new SocialMedia();
         socialMedia2.setUser(allUsers.get(0));
         socialMedia2.setSocialMediaCategory(SocialMediaCategories.YOUTUBE);
-        socialMedia2.setSocialMediaLink("www.youtube.com");
+        socialMedia2.setSocialMediaLink("https://www.youtube.com/@BabelShops");
         socialMediaRepository.save(socialMedia2);
 
         SocialMedia socialMedia3 = new SocialMedia();
         socialMedia3.setUser(allUsers.get(0));
         socialMedia3.setSocialMediaCategory(SocialMediaCategories.TWITTER);
-        socialMedia3.setSocialMediaLink("www.x.com");
+        socialMedia3.setSocialMediaLink("https://twitter.com/babelcompany");
         socialMediaRepository.save(socialMedia3);
+
+        SocialMedia socialMedia4 = new SocialMedia();
+        socialMedia4.setUser(allUsers.get(0));
+        socialMedia4.setSocialMediaCategory(SocialMediaCategories.FACEBOOK);
+        socialMedia4.setSocialMediaLink("https://www.facebook.com/p/Babel-Company-100008296754297/?locale=nl_BE");
+        socialMediaRepository.save(socialMedia4);
     }
 }
