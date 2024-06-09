@@ -5,9 +5,13 @@ import ipsen5.dto.SubmissionDTO;
 import ipsen5.models.Submission;
 import ipsen5.services.SubmissionValidator;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -35,10 +39,21 @@ public class SubmissionController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createSubmission(@RequestBody SubmissionDTO submissionDTO){
+    public ResponseEntity<Submission> createSubmission(@RequestBody SubmissionDTO submissionDTO){
         validator.submissionValidations(submissionDTO);
-        this.submissionDAO.createSubmission(submissionDTO);
-        return ResponseEntity.ok("Created a new Submission");
+        Submission submission = this.submissionDAO.createSubmission(submissionDTO);
+        return ResponseEntity.ok(submission);
+    }
+    @GetMapping("/{id}/pdf")
+    public ResponseEntity<byte[]> getUserPdf(@PathVariable UUID id) {
+        byte[] pdf = submissionDAO.getUserPdf(id);
+        if (pdf != null) {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdf);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
     @PutMapping("/{id}")
     public ResponseEntity<String> editSubmission(@PathVariable UUID id, @RequestBody SubmissionDTO submissionDTO){
@@ -50,6 +65,19 @@ public class SubmissionController {
     public ResponseEntity<?> deleteSubmission(@PathVariable("id") UUID id){
         this.submissionDAO.deleteSubmission(id);
         return ResponseEntity.ok("deleted Submission with id: " + id);
+    }
+
+
+    @PostMapping("/{submissionId}/pdf" )
+    public ResponseEntity<Void> uploadUserPdf(@RequestParam("file") MultipartFile file, @PathVariable("submissionId") UUID id) {
+        try {
+            System.out.println("hup");
+            submissionDAO.saveSubmissionPdf(file, id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
 

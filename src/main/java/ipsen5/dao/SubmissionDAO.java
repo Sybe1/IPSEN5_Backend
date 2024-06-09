@@ -8,7 +8,10 @@ import ipsen5.models.Submission;
 import ipsen5.models.User;
 import jakarta.persistence.ManyToOne;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,7 +29,7 @@ public class SubmissionDAO {
     public Optional<Submission> getSubmissionById(UUID id) {
         return this.submissionRespository.findById(id);
     }
-    public void createSubmission(SubmissionDTO submissionDTO) {
+    public Submission createSubmission(SubmissionDTO submissionDTO) {
         Submission submission = new Submission();
         submission.setName(submissionDTO.name);
         submission.setText(submissionDTO.text);
@@ -43,7 +46,17 @@ public class SubmissionDAO {
         submission.setExtra_feedback(submissionDTO.extra_feedback);
         submission.setStatusID(submissionDTO.statusID);
         submission.setUser_id(submissionDTO.user_id);
-        this.submissionRespository.save(submission);
+        return this.submissionRespository.save(submission);
+    }
+    public void saveSubmissionPdf(MultipartFile file, UUID submissionId) throws IOException {
+      Submission foundSubmission = getSubmissionById(submissionId).orElseThrow(() -> new RuntimeException("Post not found"));
+        foundSubmission.setPdf(file.getBytes());
+        submissionRespository.save(foundSubmission);
+    }
+    public byte[] getUserPdf(UUID id) {
+        Submission submission = submissionRespository.findById(id).orElse(null);
+        byte[] submissionPDF = submission.getPdf();
+        return submissionPDF;
     }
 
     public void editSubmission(UUID id, SubmissionDTO submissionDTO) {
