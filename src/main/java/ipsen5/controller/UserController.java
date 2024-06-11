@@ -16,11 +16,9 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserController {
     private final UserDAO userDAO;
-//    private StatusValidator validator;
 
     public UserController(UserDAO userDAO) {
         this.userDAO = userDAO;
-//        this.validator = validator;
     }
 
     @GetMapping("/all")
