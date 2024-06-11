@@ -52,7 +52,7 @@ public class PostSeeder {
         postRepository.save(post3);
 
         Post post4 = new Post();
-        post4.setUser(allUsers.get(0));
+        post4.setUser(allUsers.get(1));
         post4.setText("Dit is de vierde post!");
         post4.setTitle("101 stories");
         post4.setImageUrl("https://i.pinimg.com/736x/42/04/c6/4204c696523e94019d819ae8f6455011.jpg");
@@ -61,7 +61,7 @@ public class PostSeeder {
         postRepository.save(post4);
 
         Post post5 = new Post();
-        post5.setUser(allUsers.get(0));
+        post5.setUser(allUsers.get(1));
         post5.setText("Dit is de vijfde post!");
         post5.setTitle("A jump into Wonderland");
         post5.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
@@ -70,7 +70,7 @@ public class PostSeeder {
         postRepository.save(post5);
 
         Post post6 = new Post();
-        post6.setUser(allUsers.get(0));
+        post6.setUser(allUsers.get(1));
         post6.setText("Dit is de zesde post!");
         post6.setTitle("Adventures!!");
         post6.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
@@ -88,7 +88,7 @@ public class PostSeeder {
         postRepository.save(post7);
 
         Post post8 = new Post();
-        post8.setUser(allUsers.get(0));
+        post8.setUser(allUsers.get(2));
         post8.setText("Dit is de achste post!");
         post8.setTitle("Running animal");
         post8.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
@@ -97,7 +97,7 @@ public class PostSeeder {
         postRepository.save(post8);
 
         Post post9 = new Post();
-        post9.setUser(allUsers.get(0));
+        post9.setUser(allUsers.get(2));
         post9.setText("Dit is de negende post!");
         post9.setTitle("Fast running");
         post9.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
@@ -106,7 +106,7 @@ public class PostSeeder {
         postRepository.save(post9);
 
         Post post10 = new Post();
-        post10.setUser(allUsers.get(0));
+        post10.setUser(allUsers.get(2));
         post10.setText("Dit is de tiende post!");
         post10.setTitle(" The dying human");
         post10.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
