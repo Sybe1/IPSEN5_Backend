@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -45,7 +44,7 @@ public class SubmissionDAO {
     }
 
 
-    public void createSubmission(SubmissionDTO submissionDTO) {
+    public Submission createSubmission(SubmissionDTO submissionDTO) {
         Submission submission = new Submission();
         submission.setName(submissionDTO.name);
         submission.setText(submissionDTO.text);
