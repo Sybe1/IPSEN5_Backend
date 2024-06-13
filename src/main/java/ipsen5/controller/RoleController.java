@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -30,10 +31,8 @@ public class RoleController {
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<String> getRoleByName(@PathVariable String name) {
-        return roleDAO.findRoleByName(name)
-                .map(role -> ResponseEntity.ok("Role name: " + role.getName()))
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Role not found"));
+    public ResponseEntity<Optional<Role>> getRoleByName(@PathVariable String name) {
+        return ResponseEntity.ok(roleDAO.findRoleByName(name));
     }
 
     @PostMapping
