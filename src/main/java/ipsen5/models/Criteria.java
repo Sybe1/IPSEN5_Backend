@@ -19,13 +19,14 @@ public class Criteria {
     @Id
     @GeneratedValue
     private UUID id;
-    private String name;
+    private String mainName;
+    private String subName;
     private String zeroPoints;
+    private String onePoints;
     private String twoPoints;
+    private String threePoints;
     private String fourPoints;
-    private String sixPoints;
-    private String eightPoints;
-    private String tenPoints;
+    private String fivePoints;
 
     @ManyToMany(mappedBy = "criteria")
     @JsonBackReference
@@ -34,13 +35,19 @@ public class Criteria {
     public Criteria() {
     }
 
-    public Criteria(String name, String zeroPoints, String twoPoints, String fourPoints, String sixPoints, String eightPoints, String tenPoints) {
-        this.name = name;
+    public Criteria(UUID id, String mainName, String subName, String zeroPoints, String onePoints, String twoPoints, String threePoints, String fourPoints, String fivePoints, Set<Rubric> rubrics) {
+        this.id = id;
+        this.mainName = mainName;
+        this.subName = subName;
         this.zeroPoints = zeroPoints;
+        this.onePoints = onePoints;
         this.twoPoints = twoPoints;
+        this.threePoints = threePoints;
         this.fourPoints = fourPoints;
-        this.sixPoints = sixPoints;
-        this.eightPoints = eightPoints;
-        this.tenPoints = tenPoints;
+        this.fivePoints = fivePoints;
+        this.rubrics = rubrics;
+    }
+
+    public Criteria(String mainName, String subName, String zeroPoints, String twoPoints, String fourPoints, String threePoints, String onePoints, String fivePoints) {
     }
 }

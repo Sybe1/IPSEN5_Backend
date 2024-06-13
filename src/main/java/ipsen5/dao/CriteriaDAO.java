@@ -20,18 +20,19 @@ public class CriteriaDAO {
     }
 
     public void createCriteria(CriteriaDTO criteriaDTO) {
-        this.criteriaRepository.save(new Criteria(criteriaDTO.name, criteriaDTO.zeroPoints, criteriaDTO.twoPoints, criteriaDTO.fourPoints, criteriaDTO.sixPoints, criteriaDTO.eightPoints, criteriaDTO.tenPoints));
+        this.criteriaRepository.save(new Criteria(criteriaDTO.mainName, criteriaDTO.subName, criteriaDTO.zeroPoints, criteriaDTO.twoPoints, criteriaDTO.fourPoints, criteriaDTO.threePoints, criteriaDTO.onePoints, criteriaDTO.fivePoints));
     }
 
     public void editCriteria(UUID id, CriteriaDTO criteriaDTO) {
         Criteria criteria = this.criteriaRepository.findById(id).orElseThrow(() -> new RuntimeException("Criteria not found"));
-        criteria.setName(criteriaDTO.name);
+        criteria.setMainName(criteriaDTO.mainName);
+        criteria.setSubName(criteriaDTO.subName);
         criteria.setZeroPoints(criteriaDTO.zeroPoints);
         criteria.setTwoPoints(criteriaDTO.twoPoints);
         criteria.setFourPoints(criteriaDTO.fourPoints);
-        criteria.setSixPoints(criteriaDTO.sixPoints);
-        criteria.setEightPoints(criteriaDTO.eightPoints);
-        criteria.setTenPoints(criteriaDTO.tenPoints);
+        criteria.setThreePoints(criteriaDTO.threePoints);
+        criteria.setOnePoints(criteriaDTO.onePoints);
+        criteria.setFivePoints(criteriaDTO.fivePoints);
         this.criteriaRepository.save(criteria);
     }
 

@@ -1,11 +1,13 @@
 package ipsen5.dto;
 
 public class CriteriaDTO {
-    public String name;
+    public String mainName;
+    public String subName;
     public String zeroPoints;
+    public String onePoints;
     public String twoPoints;
+    public String threePoints;
     public String fourPoints;
-    public String sixPoints;
-    public String eightPoints;
-    public String tenPoints;
+    public String fivePoints;
+
 }
