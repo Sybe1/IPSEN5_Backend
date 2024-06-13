@@ -3,31 +3,55 @@ package ipsen5.dao;
 import ipsen5.dto.RolePriviligesDTO;
 import ipsen5.models.*;
 import ipsen5.models.enums.Rights;
+import ipsen5.dao.RolePriviligesRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class RolePriviligesDAO {
 
     private final RolePriviligesRepository rolePriviligesRepository;
+    private final RoleRepository roleRepository;
 
-    public RolePriviligesDAO(RolePriviligesRepository rolePriviligesRepository) {
+
+    public RolePriviligesDAO(RolePriviligesRepository rolePriviligesRepository, RoleRepository roleRepository) {
         this.rolePriviligesRepository = rolePriviligesRepository;
+        this.roleRepository = roleRepository;
     }
 
-    public List<RolePriviliges> getPostCategories() {
+    public List<RolePriviliges> getAllRolePriviliges() {
         return this.rolePriviligesRepository.findAll();
     }
 
-    public void createRolePriviliges(RolePriviligesDTO rolePriviligesDTO) {
-        RolePriviligesId rolePriviligesId = new RolePriviligesId(rolePriviligesDTO.role, rolePriviligesDTO.rights);
-        this.rolePriviligesRepository.save(new RolePriviliges(rolePriviligesId));
+    public List<RolePriviliges> getRolePriviligesByRoleId(UUID roleId) {
+        Optional<Role> optionalRole = roleRepository.findById(roleId);
+        System.out.println("we zijn hier " + optionalRole);
+        Role role = optionalRole.get();
+        System.out.println("we zijn hier " + role);
+        return this.rolePriviligesRepository.findByIdRoleId(role);
     }
 
-    public void deleteRolePriviliges(Role roleId, Rights rightsId) {
-        RolePriviligesId rolePriviligesId = new RolePriviligesId(roleId, rightsId);
-        this.rolePriviligesRepository.findById(rolePriviligesId).orElseThrow(() -> new RuntimeException("RolePriviliges not found"));
-        this.rolePriviligesRepository.deleteById(rolePriviligesId);
+    public void saveRolePriviliges(RolePriviligesDTO rolePriviligesDTO) {
+        Role role = roleRepository.findById(rolePriviligesDTO.role)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+
+        RolePriviliges rolePriviliges = new RolePriviliges();
+        rolePriviliges.setId(new RolePriviligesId(role, rolePriviligesDTO.rights));
+
+        this.rolePriviligesRepository.save(rolePriviliges);
+    }
+
+    public void deleteRolePriviliges(UUID roleId, Rights rights) {
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+
+        RolePriviligesId id = new RolePriviligesId(role, rights);
+
+        RolePriviliges rolePriviliges = this.rolePriviligesRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("RolePriviliges not found"));
+        this.rolePriviligesRepository.delete(rolePriviliges);
     }
 }

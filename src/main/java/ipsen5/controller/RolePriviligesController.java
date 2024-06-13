@@ -2,14 +2,17 @@ package ipsen5.controller;
 
 import ipsen5.dao.RolePriviligesDAO;
 import ipsen5.dto.RolePriviligesDTO;
-import ipsen5.models.*;
+import ipsen5.models.RolePriviliges;
+import ipsen5.models.RolePriviligesId;
 import ipsen5.models.enums.Rights;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/rolepriviliges")
 public class RolePriviligesController {
 
@@ -20,21 +23,25 @@ public class RolePriviligesController {
     }
 
     @GetMapping
-    public ResponseEntity<List<RolePriviliges>> getPostCategories() {
-        return ResponseEntity.ok(this.rolePriviligesDAO.getPostCategories());
+    public ResponseEntity<List<RolePriviliges>> getAllRolePriviliges() {
+        return ResponseEntity.ok(this.rolePriviligesDAO.getAllRolePriviliges());
+    }
+
+    @GetMapping("/{roleId}")
+    public ResponseEntity<List<RolePriviliges>> getRolePriviligesByRoleId(@PathVariable UUID roleId) {
+        List<RolePriviliges> rolePriviliges = this.rolePriviligesDAO.getRolePriviligesByRoleId(roleId);
+        return ResponseEntity.ok(rolePriviliges);
     }
 
     @PostMapping
-    public  ResponseEntity<String> createRolePriviliges(@RequestBody RolePriviligesDTO rolePriviligesDTO) {
-        this.rolePriviligesDAO.createRolePriviliges(rolePriviligesDTO);
-        return ResponseEntity.ok("Created a new RolePriviliges with RoleID " + rolePriviligesDTO.role + "and RightsID " + rolePriviligesDTO.rights);
+    public ResponseEntity<String> createRolePriviliges(@RequestBody RolePriviligesDTO rolePriviligesDTO) {
+        this.rolePriviligesDAO.saveRolePriviliges(rolePriviligesDTO);
+        return ResponseEntity.ok("Created a new RolePriviliges with roleId " + rolePriviligesDTO.role + " and rightsId " + rolePriviligesDTO.rights);
     }
 
-    @DeleteMapping("/{roleId}/{rightsId}")
-    public ResponseEntity<?> deleteRolePriviliges(@PathVariable Role roleId, @PathVariable Rights rightsId) {
-        this.rolePriviligesDAO.deleteRolePriviliges(roleId, rightsId);
-        return ResponseEntity.ok("Deleted RolePriviliges with RoleID " + roleId + "and RightsID " + rightsId);
+    @DeleteMapping("/{roleId}/{rights}")
+    public ResponseEntity<String> deleteRolePriviliges(@PathVariable UUID roleId, @PathVariable Rights rights) {
+        this.rolePriviligesDAO.deleteRolePriviliges(roleId, rights);
+        return ResponseEntity.ok("Deleted RolePriviliges with roleId " + roleId + " and privilegeId " + rights);
     }
 }
-
-

@@ -23,24 +23,38 @@ public class RolePriviligesSeeder {
     public void seedRolePriviliges(){
         List<Role> allRoles = roleRepository.findAll();
 
-        RolePriviliges rolePriviliges = new RolePriviliges();
-        RolePriviligesId rolePriviligesId = new RolePriviligesId(allRoles.get(0), Rights.POSTEN);
-        rolePriviliges.setId(rolePriviligesId);
-        rolePriviligesRepository.save(rolePriviliges);
+        Rights[] rightsArrayForRole1 = {
+                Rights.SUBMISSION, Rights.USER, Rights.STATUS,
+                Rights.SOCIALMEDIA, Rights.RUBRIC, Rights.ROLEPRIVILIGES, Rights.ROLE,
+                Rights.REACTION, Rights.RATING, Rights.POSTCATEGORY, Rights.POST,
+                Rights.FEEDBACKPERELEMENT, Rights.CRITERIA, Rights.CATEGORY
+        };
+
+        Rights[] rightsArrayForRole2 = {
+                Rights.SUBMISSION, Rights.USER, Rights.STATUS,
+                Rights.SOCIALMEDIA, Rights.RUBRIC,
+                Rights.REACTION, Rights.RATING, Rights.POSTCATEGORY, Rights.POST_GET,
+                Rights.FEEDBACKPERELEMENT_GET
+        };
 
         RolePriviliges rolePriviliges2 = new RolePriviliges();
-        RolePriviligesId rolePriviligesId2 = new RolePriviligesId(allRoles.get(0), Rights.GETTEN);
+        RolePriviligesId rolePriviligesId2 = new RolePriviligesId(allRoles.get(0), Rights.ALL);
         rolePriviliges2.setId(rolePriviligesId2);
         rolePriviligesRepository.save(rolePriviliges2);
 
-        RolePriviliges rolePriviliges3 = new RolePriviliges();
-        RolePriviligesId rolePriviligesId3 = new RolePriviligesId(allRoles.get(0), Rights.UPDATEN);
-        rolePriviliges3.setId(rolePriviligesId3);
-        rolePriviligesRepository.save(rolePriviliges3);
+        for (Rights rights : rightsArrayForRole1) {
+            RolePriviliges rolePriviliges = new RolePriviliges();
+            RolePriviligesId rolePriviligesId = new RolePriviligesId(allRoles.get(1), rights);
+            rolePriviliges.setId(rolePriviligesId);
+            rolePriviligesRepository.save(rolePriviliges);
+        }
 
-        RolePriviliges rolePriviliges4 = new RolePriviliges();
-        RolePriviligesId rolePriviligesId4 = new RolePriviligesId(allRoles.get(0), Rights.DELETEN);
-        rolePriviliges4.setId(rolePriviligesId4);
-        rolePriviligesRepository.save(rolePriviliges4);
+        for (Rights rights : rightsArrayForRole2) {
+            RolePriviliges rolePriviliges = new RolePriviliges();
+            RolePriviligesId rolePriviligesId = new RolePriviligesId(allRoles.get(2), rights);
+            rolePriviliges.setId(rolePriviligesId);
+            rolePriviligesRepository.save(rolePriviliges);
+        }
     }
+
 }

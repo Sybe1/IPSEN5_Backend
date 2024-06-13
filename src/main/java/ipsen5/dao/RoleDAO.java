@@ -27,13 +27,13 @@ public class RoleDAO {
         this.roleRepository.save(new Role(roleDTO.name));
     }
 
-    public void editRole(Long id, RoleDTO roleDTO) {
+    public void editRole(UUID id, RoleDTO roleDTO) {
         Role role = this.roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         role.setName(roleDTO.name);
         this.roleRepository.save(role);
     }
 
-    public void deleteRole(Long id) {
+    public void deleteRole(UUID id) {
         this.roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
         this.roleRepository.deleteById(id);
     }

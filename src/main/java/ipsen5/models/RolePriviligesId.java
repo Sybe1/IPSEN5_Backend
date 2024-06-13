@@ -8,9 +8,13 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToOne;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @Embeddable
 @EqualsAndHashCode
+@Getter
+@Setter
 public class RolePriviligesId implements Serializable {
     @ManyToOne
     private Role roleId;
