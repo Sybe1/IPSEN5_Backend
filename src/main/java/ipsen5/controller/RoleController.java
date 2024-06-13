@@ -4,6 +4,7 @@ import ipsen5.dao.RoleDAO;
 import ipsen5.dto.RoleDTO;
 import ipsen5.models.Role;
 import ipsen5.services.RoleValidator;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,12 +29,19 @@ public class RoleController {
         return ResponseEntity.ok(this.roleDAO.getAllRoles());
     }
 
+    @GetMapping("/{name}")
+    public ResponseEntity<String> getRoleByName(@PathVariable String name) {
+        return roleDAO.findRoleByName(name)
+                .map(role -> ResponseEntity.ok("Role name: " + role.getName()))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Role not found"));
+    }
+
     @PostMapping
-    public ResponseEntity<String> createRole(@RequestBody RoleDTO roleDTO){
+    public ResponseEntity<?> createRole(@RequestBody RoleDTO roleDTO){
         roleValidator.roleValidations(roleDTO);
         this.roleDAO.createRole(roleDTO);
-        return ResponseEntity.ok("Created a new Role named " + roleDTO.name);
-    }
+        String message = "deleted role with id: " + roleDTO.name;
+        return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"" + message + "\"}");    }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> editRole(@PathVariable UUID id, @RequestBody RoleDTO roleDTO){
@@ -45,6 +53,7 @@ public class RoleController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteRole(@PathVariable("id") UUID id){
         this.roleDAO.deleteRole(id);
-        return ResponseEntity.ok("deleted role with id: " + id);
+        String message = "deleted role with id: " + id;
+        return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"" + message + "\"}");
     }
 }

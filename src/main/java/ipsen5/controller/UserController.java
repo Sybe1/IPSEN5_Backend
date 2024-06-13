@@ -4,6 +4,7 @@ import ipsen5.dao.UserDAO;
 import ipsen5.dto.StatusDTO;
 import ipsen5.dto.UserDTO;
 import ipsen5.models.User;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class UserController {
         this.userDAO = userDAO;
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<User>> getAllUsers(){
         return ResponseEntity.ok(this.userDAO.getAllUsers());
     }
@@ -43,9 +44,15 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<String> editUser(@PathVariable UUID id, @RequestBody UserDTO userDTO){
-//        validator.statusValidations(statusDTO);
         this.userDAO.editUser(id, userDTO);
         return ResponseEntity.ok("Edited user with id: " + id);
+    }
+
+    @PutMapping("{userId}/role/{roleId}")
+    public ResponseEntity<?> editUser(@PathVariable UUID roleId, @RequestBody User user){
+        userDAO.editUserRole(user, roleId);
+        String message = "Edited user with id: " + user;
+        return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"" + message + "\"}");
     }
 
 
