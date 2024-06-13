@@ -9,6 +9,7 @@ import ipsen5.models.Role;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Component
@@ -21,6 +22,10 @@ public class RoleDAO {
 
     public List<Role> getAllRoles() {
         return this.roleRepository.findAll();
+    }
+
+    public Optional<Role> findRoleByName(String name) {
+        return roleRepository.findByName(name);
     }
 
     public void createRole(RoleDTO roleDTO) {

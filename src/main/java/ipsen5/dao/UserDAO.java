@@ -2,6 +2,7 @@ package ipsen5.dao;
 
 import ipsen5.dto.StatusDTO;
 import ipsen5.dto.UserDTO;
+import ipsen5.models.Role;
 import ipsen5.models.Status;
 import ipsen5.models.User;
 import org.springframework.stereotype.Component;
@@ -13,9 +14,12 @@ import java.util.UUID;
 @Component
 public class UserDAO {
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserDAO(UserRepository userRepository) {
+    public UserDAO(UserRepository userRepository,
+                   RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public List<User> getAllUsers() {
@@ -30,12 +34,6 @@ public class UserDAO {
         return Optional.ofNullable(this.userRepository.findByEmail(mail));
     }
 
-//    public void editRole(Long id, RoleDTO roleDTO) {
-//        Role role = this.roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
-//        role.setName(roleDTO.name);
-//        this.roleRepository.save(role);
-//    }
-
     public void editUser(UUID id, UserDTO userDTO) {
         User user = this.userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         user.setFirst_name(userDTO.first_name);
@@ -48,11 +46,17 @@ public class UserDAO {
     }
 
     public void deleteUser(UUID id) {
-        this.userRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
+        this.userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         this.userRepository.deleteById(id);
     }
 
     public Optional<User> getUserByUsername(String username) {
         return Optional.ofNullable(this.userRepository.findByUsername(username));
+    }
+
+    public void editUserRole(User user, UUID roleId) {
+        Role role = this.roleRepository.findById(roleId).orElseThrow(() -> new RuntimeException("Role not found"));
+        user.setRole(role);
+        this.userRepository.save(user);
     }
 }
