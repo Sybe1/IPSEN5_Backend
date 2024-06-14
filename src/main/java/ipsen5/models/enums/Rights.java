@@ -1,12 +1,16 @@
 package ipsen5.models.enums;
 
 public enum Rights {
-    // Algemeen
     GETTEN,
     POSTEN,
     UPDATEN,
     DELETEN,
     ALL,
+
+    GUARD_ROLES,
+    GUARD_USER_ROLES,
+    GUARD_SUBMISSIONS,
+
 
     SUBMISSION,
     SUBMISSION_GET,

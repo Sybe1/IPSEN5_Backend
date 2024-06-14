@@ -23,11 +23,17 @@ public class RolePriviligesSeeder {
     public void seedRolePriviliges(){
         List<Role> allRoles = roleRepository.findAll();
 
-        Rights[] rightsArrayForRole1 = {
+        Rights[] rightsArrayForAdmin = {
+                Rights.ALL, Rights.GUARD_USER_ROLES, Rights.GUARD_SUBMISSIONS, Rights.GUARD_ROLES
+        };
+
+
+        Rights[] rightsArrayForModerator = {
                 Rights.SUBMISSION, Rights.USER, Rights.STATUS,
                 Rights.SOCIALMEDIA, Rights.RUBRIC, Rights.ROLEPRIVILIGES, Rights.ROLE,
                 Rights.REACTION, Rights.RATING, Rights.POSTCATEGORY, Rights.POST,
-                Rights.FEEDBACKPERELEMENT, Rights.CRITERIA, Rights.CATEGORY
+                Rights.FEEDBACKPERELEMENT, Rights.CRITERIA, Rights.CATEGORY,
+                Rights.GUARD_SUBMISSIONS
         };
 
         Rights[] rightsArrayForRole2 = {
@@ -37,12 +43,15 @@ public class RolePriviligesSeeder {
                 Rights.FEEDBACKPERELEMENT_GET
         };
 
-        RolePriviliges rolePriviliges2 = new RolePriviliges();
-        RolePriviligesId rolePriviligesId2 = new RolePriviligesId(allRoles.get(0), Rights.ALL);
-        rolePriviliges2.setId(rolePriviligesId2);
-        rolePriviligesRepository.save(rolePriviliges2);
+        for (Rights rights : rightsArrayForAdmin) {
+            RolePriviliges rolePriviliges = new RolePriviliges();
+            RolePriviligesId rolePriviligesId = new RolePriviligesId(allRoles.get(0), rights);
+            rolePriviliges.setId(rolePriviligesId);
+            rolePriviligesRepository.save(rolePriviliges);
+        }
 
-        for (Rights rights : rightsArrayForRole1) {
+
+        for (Rights rights : rightsArrayForModerator) {
             RolePriviliges rolePriviliges = new RolePriviliges();
             RolePriviligesId rolePriviligesId = new RolePriviligesId(allRoles.get(1), rights);
             rolePriviliges.setId(rolePriviligesId);
