@@ -5,10 +5,12 @@ import ipsen5.dto.RolePriviligesDTO;
 import ipsen5.models.RolePriviliges;
 import ipsen5.models.RolePriviligesId;
 import ipsen5.models.enums.Rights;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -32,6 +34,19 @@ public class RolePriviligesController {
         List<RolePriviliges> rolePriviliges = this.rolePriviligesDAO.getRolePriviligesByRoleId(roleId);
         return ResponseEntity.ok(rolePriviliges);
     }
+
+    @GetMapping("/{roleId}/{rights}")
+    public ResponseEntity<?> getRolePriviligesByRoleId(@PathVariable UUID roleId, @PathVariable Rights rights) {
+        Optional<RolePriviliges> optionalRolePrivilige = this.rolePriviligesDAO.getRolePriviligesByRoleIdAndRights(roleId, rights);
+
+        if (optionalRolePrivilige.isPresent()) {
+            return ResponseEntity.ok(optionalRolePrivilige.get());
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("RolePriviliges with roleId " + roleId + " and rights " + rights + " not found");
+        }
+    }
+
 
     @PostMapping
     public ResponseEntity<String> createRolePriviliges(@RequestBody RolePriviligesDTO rolePriviligesDTO) {
