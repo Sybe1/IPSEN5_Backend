@@ -39,7 +39,6 @@ public class RolePriviligesController {
     }
 
     @GetMapping("/{roleId}/{rights}")
-    @PreAuthorize("hasAuthority('ROLEPRIVILIGES_GET') || hasAuthority('ROLEPRIVILIGES') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public ResponseEntity<?> getRolePriviligesByRoleId(@PathVariable UUID roleId, @PathVariable Rights rights) {
         Optional<RolePriviliges> optionalRolePrivilige = this.rolePriviligesDAO.getRolePriviligesByRoleIdAndRights(roleId, rights);
 

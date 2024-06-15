@@ -6,9 +6,7 @@ import ipsen5.dao.UserRepository;
 import ipsen5.dto.AuthenticationDTO;
 import ipsen5.dto.LoginResponse;
 import ipsen5.models.Role;
-import ipsen5.models.Rubric;
 import ipsen5.models.User;
-import ipsen5.services.InputValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,50 +28,18 @@ public class AuthController {
     private final JWTUtil jwtUtil;
     private final AuthenticationManager authManager;
     private final PasswordEncoder passwordEncoder;
-    private InputValidator validator;
 
     public AuthController(UserRepository userDAO, JWTUtil jwtUtil, AuthenticationManager authManager,
-                          PasswordEncoder passwordEncoder, InputValidator validator, RoleRepository roleRepository) {
+                          PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
         this.userDAO = userDAO;
         this.jwtUtil = jwtUtil;
         this.authManager = authManager;
         this.passwordEncoder = passwordEncoder;
-        this.validator = validator;
         this.roleRepository = roleRepository;
     }
 
     @PostMapping("/register")
     public ResponseEntity<LoginResponse> register(@RequestBody AuthenticationDTO authenticationDTO) {
-        if (!validator.isValidEmail(authenticationDTO.email)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid email provided"
-            );
-        }
-        if (!validator.isValidPassword(authenticationDTO.password)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid password provided"
-            );
-        }
-        if (!validator.isValidName(authenticationDTO.first_name)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid first name provided"
-            );
-        }
-        if (!validator.isValidName(authenticationDTO.last_name)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid last name provided"
-            );
-        }
-        if (!validator.isValidLink(authenticationDTO.donation_link)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid donation link provided"
-            );
-        }
-        if (!validator.isValidDescription(authenticationDTO.username)) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST, "No valid username provided"
-            );
-        }
 
         User user = userDAO.findByEmail(authenticationDTO.email);
 

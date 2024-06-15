@@ -1,6 +1,7 @@
 package ipsen5.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,27 +14,66 @@ public class Submission {
     @Id
     @GeneratedValue
     private UUID id;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
     private String name;
+
+    @NotBlank
+    @Email
     private String email;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
     private String online_profiles;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
     private String story_title;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
     private String type;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
     private String text;
+
+    @NotNull
+    @Min(0)
     private int wordCount;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
     private String genre;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
     private String additional_notes;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
     private String prefferd_destination;
+
+    @NotNull
     private Boolean platform_presence;
+
+    @NotNull
     private Boolean extra_feedback;
+
+    @NotNull
     private Boolean express_experience;
 
     @ManyToOne
+    @NotNull
     private Status statusID;
 
     @ManyToOne
+    @NotNull
     private User user_id;
   
     @ManyToOne
+    @NotNull
     private Rubric rubric;
 
     @Lob

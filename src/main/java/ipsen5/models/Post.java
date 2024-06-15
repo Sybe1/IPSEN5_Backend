@@ -2,8 +2,12 @@ package ipsen5.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
@@ -18,14 +22,29 @@ public class Post {
     @GeneratedValue
     private UUID id;
 
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:`'-]+$", message = "Title not right format")
     private String title;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'-]+$", message = "Text not right format")
     private String text;
+
+    @NotBlank
+    @URL
     private String imageUrl;
+
+    @NotNull
     private LocalDate localDate;
+
     @ElementCollection
+    @NotNull
     private List<String> genres;
+
     @ManyToOne
+    @NotNull
     private User user;
+
     @OneToMany(mappedBy = "post")
     @JsonManagedReference
     private List<Rating> ratings;
