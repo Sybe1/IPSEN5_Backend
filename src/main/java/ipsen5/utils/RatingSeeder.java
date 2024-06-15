@@ -14,9 +14,9 @@ import java.util.Random;
 
 @Component
 public class RatingSeeder {
-    private UserRepository userRepository;
-    private PostRepository postRepository;
-    private RatingRepository ratingRepository;
+    private final UserRepository userRepository;
+    private final PostRepository postRepository;
+    private final RatingRepository ratingRepository;
 
     public RatingSeeder(UserRepository userRepository, PostRepository postRepository, RatingRepository ratingRepository) {
         this.userRepository = userRepository;

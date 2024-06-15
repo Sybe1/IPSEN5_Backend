@@ -13,9 +13,9 @@ import java.util.List;
 
 @Component
 public class PostCategorySeeder {
-    private PostRepository postRepository;
-    private CategoryRepository categoryRepository;
-    private PostCategoryRepository postCategoryRepository;
+    private final PostRepository postRepository;
+    private final CategoryRepository categoryRepository;
+    private final PostCategoryRepository postCategoryRepository;
 
     public PostCategorySeeder(PostRepository postRepository, CategoryRepository categoryRepository, PostCategoryRepository postCategoryRepository) {
         this.postRepository = postRepository;

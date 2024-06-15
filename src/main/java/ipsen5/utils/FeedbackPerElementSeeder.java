@@ -9,9 +9,9 @@ import java.util.List;
 @Component
 public class FeedbackPerElementSeeder {
 
-    private SubmissionRespository submissionRespository;
-    private CriteriaRepository criteriaRepository;
-    private FeedbackPerElementRepository feedbackPerElementRepository;
+    private final SubmissionRespository submissionRespository;
+    private final CriteriaRepository criteriaRepository;
+    private final FeedbackPerElementRepository feedbackPerElementRepository;
 
     public FeedbackPerElementSeeder(SubmissionRespository submissionRespository, CriteriaRepository criteriaRepository, FeedbackPerElementRepository feedbackPerElementRepository) {
         this.submissionRespository = submissionRespository;

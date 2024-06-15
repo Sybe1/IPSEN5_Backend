@@ -9,10 +9,10 @@ import java.util.List;
 
 @Component
 public class SubmissionSeeder {
-    private SubmissionRespository submissionRespository;
-    private UserRepository userRepository;
-    private StatusRepository statusRepository;
-    private RubricRepository rubricRepository;
+    private final SubmissionRespository submissionRespository;
+    private final UserRepository userRepository;
+    private final StatusRepository statusRepository;
+    private final RubricRepository rubricRepository;
 
 
     public SubmissionSeeder(SubmissionRespository submissionRespository,
