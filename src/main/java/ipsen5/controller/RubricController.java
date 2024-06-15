@@ -4,14 +4,9 @@ import ipsen5.dao.RubricDAO;
 import ipsen5.dto.RubricDTO;
 import ipsen5.models.Criteria;
 import ipsen5.models.Rubric;
-import ipsen5.services.InputValidator;
-import ipsen5.services.RatingValidator;
-import ipsen5.services.RubricValidator;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Set;
@@ -22,11 +17,9 @@ import java.util.UUID;
 @RequestMapping("/rubric")
 public class RubricController {
     private final RubricDAO rubricDAO;
-    private RubricValidator validator;
 
-    public RubricController(RubricDAO rubricDAO, RubricValidator validator) {
+    public RubricController(RubricDAO rubricDAO) {
         this.rubricDAO = rubricDAO;
-        this.validator = validator;
     }
 
     @GetMapping("/{id}/criteria")
@@ -44,7 +37,6 @@ public class RubricController {
     @PostMapping
     @PreAuthorize("hasAuthority('RUBRIC_POST') || hasAuthority('RUBRIC') || hasAuthority('ALL') || hasAuthority('POSTEN')")
     public ResponseEntity<String> createRubric(@RequestBody RubricDTO rubricDTO){
-        validator.rubricValidations(rubricDTO);
         this.rubricDAO.createRubric(rubricDTO);
         return ResponseEntity.ok("Created a new Rubric");
     }
@@ -52,7 +44,6 @@ public class RubricController {
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('RUBRIC_PUT') || hasAuthority('RUBRIC') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<String> editRubric(@PathVariable UUID id, @RequestBody RubricDTO rubricDTO){
-        validator.rubricValidations(rubricDTO);
         this.rubricDAO.editRubric(id, rubricDTO);
         return ResponseEntity.ok("Edited rubric with id: " + id);
     }

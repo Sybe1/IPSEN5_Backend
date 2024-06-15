@@ -3,7 +3,6 @@ package ipsen5.controller;
 import ipsen5.dao.ReactionDAO;
 import ipsen5.dto.ReactionDTO;
 import ipsen5.models.Reaction;
-import ipsen5.services.ReactionValidator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +15,9 @@ import java.util.UUID;
 @RequestMapping("/reaction")
 public class ReactionController {
     private final ReactionDAO reactionDAO;
-    private ReactionValidator validator;
 
-    public ReactionController(ReactionDAO reactionDAO, ReactionValidator validator) {
+    public ReactionController(ReactionDAO reactionDAO) {
         this.reactionDAO = reactionDAO;
-        this.validator = validator;
     }
 
     @GetMapping("/{postId}")
@@ -32,14 +29,12 @@ public class ReactionController {
     @PostMapping
     @PreAuthorize("hasAuthority('REACTION_POST') || hasAuthority('REACTION') || hasAuthority('ALL') || hasAuthority('POSTEN')")
     public ResponseEntity<String> createReaction(@RequestBody ReactionDTO reactionDTO){
-        validator.reactionValidations(reactionDTO);
         this.reactionDAO.createReaction(reactionDTO);
         return ResponseEntity.ok("Created a new Reaction");
     }
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('REACTION_PUT') || hasAuthority('REACTION') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<String> editReaction(@PathVariable UUID id, @RequestBody ReactionDTO reactionDTO){
-        validator.reactionValidations(reactionDTO);
         this.reactionDAO.editReaction(id, reactionDTO);
         return ResponseEntity.ok("Edited reaction with id: " + id);
     }

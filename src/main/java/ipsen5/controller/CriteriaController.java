@@ -3,7 +3,6 @@ package ipsen5.controller;
 import ipsen5.dao.CriteriaDAO;
 import ipsen5.dto.CriteriaDTO;
 import ipsen5.models.Criteria;
-import ipsen5.services.CriteriaValidator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,11 +16,9 @@ import java.util.UUID;
 @RequestMapping("/criteria")
 public class CriteriaController {
     private final CriteriaDAO criteriaDAO;
-    private CriteriaValidator criteriaValidator;
 
-    public CriteriaController(CriteriaDAO criteriaDAO, CriteriaValidator criteriaValidator) {
+    public CriteriaController(CriteriaDAO criteriaDAO) {
         this.criteriaDAO = criteriaDAO;
-        this.criteriaValidator = criteriaValidator;
     }
 
     @GetMapping
@@ -39,7 +36,6 @@ public class CriteriaController {
     @PostMapping
     @PreAuthorize("hasAuthority('CRITERIA_POST') || hasAuthority('CRITERIA') || hasAuthority('ALL') || hasAuthority('POSTEN')")
     public ResponseEntity<String> createCriteria(@RequestBody CriteriaDTO criteriaDTO){
-        criteriaValidator.criteriaValidations(criteriaDTO);
         this.criteriaDAO.createCriteria(criteriaDTO);
         return ResponseEntity.ok("Created a new Criteria named");
     }
@@ -47,7 +43,6 @@ public class CriteriaController {
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('CRITERIA_PUT') || hasAuthority('CRITERIA') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<String> editCriteria(@PathVariable UUID id, @RequestBody CriteriaDTO criteriaDTO){
-        criteriaValidator.criteriaValidations(criteriaDTO);
         this.criteriaDAO.editCriteria(id, criteriaDTO);
         return ResponseEntity.ok("Edited criteria with id: " + id);
     }
