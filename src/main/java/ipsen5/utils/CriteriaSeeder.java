@@ -12,8 +12,8 @@ import java.util.UUID;
 @Component
 public class CriteriaSeeder {
 
-    private CriteriaRepository criteriaRepository;
-    private RubricRepository rubricRepository;
+    private final CriteriaRepository criteriaRepository;
+    private final RubricRepository rubricRepository;
 
     public CriteriaSeeder(CriteriaRepository criteriaRepository,
                           RubricRepository rubricRepository) {

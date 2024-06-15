@@ -28,10 +28,14 @@ public class RolePriviligesDAO {
 
     public List<RolePriviliges> getRolePriviligesByRoleId(UUID roleId) {
         Optional<Role> optionalRole = roleRepository.findById(roleId);
-        System.out.println("we zijn hier " + optionalRole);
         Role role = optionalRole.get();
-        System.out.println("we zijn hier " + role);
         return this.rolePriviligesRepository.findByIdRoleId(role);
+    }
+
+    public Optional<RolePriviliges> getRolePriviligesByRoleIdAndRights(UUID roleId, Rights rights) {
+        Role role = roleRepository.findById(roleId)
+                .orElseThrow(() -> new RuntimeException("Role not found"));
+        return Optional.ofNullable(rolePriviligesRepository.findByIdRoleIdAndIdRightsId(role, rights));
     }
 
     public void saveRolePriviliges(RolePriviligesDTO rolePriviligesDTO) {

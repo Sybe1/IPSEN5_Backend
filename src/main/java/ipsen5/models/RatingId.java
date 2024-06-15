@@ -2,6 +2,7 @@ package ipsen5.models;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
@@ -10,9 +11,11 @@ import java.io.Serializable;
 @EqualsAndHashCode
 public class RatingId implements Serializable {
     @ManyToOne
+    @NotNull
     private User user_id;
 
     @ManyToOne
+    @NotNull
     private Post post_id;
 
     public RatingId() {

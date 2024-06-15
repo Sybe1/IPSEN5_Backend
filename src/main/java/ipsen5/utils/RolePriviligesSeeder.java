@@ -12,8 +12,8 @@ import java.util.List;
 
 @Component
 public class RolePriviligesSeeder {
-    private RoleRepository roleRepository;
-    private RolePriviligesRepository rolePriviligesRepository;
+    private final RoleRepository roleRepository;
+    private final RolePriviligesRepository rolePriviligesRepository;
 
     public RolePriviligesSeeder(RoleRepository roleRepository, RolePriviligesRepository rolePriviligesRepository) {
         this.roleRepository = roleRepository;
@@ -23,26 +23,36 @@ public class RolePriviligesSeeder {
     public void seedRolePriviliges(){
         List<Role> allRoles = roleRepository.findAll();
 
-        Rights[] rightsArrayForRole1 = {
+        Rights[] rightsArrayForAdmin = {
+                Rights.ALL, Rights.GUARD_USER_ROLES, Rights.GUARD_SUBMISSIONS,
+                Rights.GUARD_ROLES, Rights.REVIEW_SUBMISSIONS
+        };
+
+
+        Rights[] rightsArrayForModerator = {
                 Rights.SUBMISSION, Rights.USER, Rights.STATUS,
                 Rights.SOCIALMEDIA, Rights.RUBRIC, Rights.ROLEPRIVILIGES, Rights.ROLE,
                 Rights.REACTION, Rights.RATING, Rights.POSTCATEGORY, Rights.POST,
-                Rights.FEEDBACKPERELEMENT, Rights.CRITERIA, Rights.CATEGORY
+                Rights.FEEDBACKPERELEMENT, Rights.CRITERIA, Rights.CATEGORY,
+                Rights.GUARD_SUBMISSIONS, Rights.CATEGORY_GET, Rights.REVIEW_SUBMISSIONS
         };
 
         Rights[] rightsArrayForRole2 = {
                 Rights.SUBMISSION, Rights.USER, Rights.STATUS,
                 Rights.SOCIALMEDIA, Rights.RUBRIC,
                 Rights.REACTION, Rights.RATING, Rights.POSTCATEGORY, Rights.POST_GET,
-                Rights.FEEDBACKPERELEMENT_GET
+                Rights.FEEDBACKPERELEMENT_GET, Rights.GUARD_SUBMISSIONS
         };
 
-        RolePriviliges rolePriviliges2 = new RolePriviliges();
-        RolePriviligesId rolePriviligesId2 = new RolePriviligesId(allRoles.get(0), Rights.ALL);
-        rolePriviliges2.setId(rolePriviligesId2);
-        rolePriviligesRepository.save(rolePriviliges2);
+        for (Rights rights : rightsArrayForAdmin) {
+            RolePriviliges rolePriviliges = new RolePriviliges();
+            RolePriviligesId rolePriviligesId = new RolePriviligesId(allRoles.get(0), rights);
+            rolePriviliges.setId(rolePriviligesId);
+            rolePriviligesRepository.save(rolePriviliges);
+        }
 
-        for (Rights rights : rightsArrayForRole1) {
+
+        for (Rights rights : rightsArrayForModerator) {
             RolePriviliges rolePriviliges = new RolePriviliges();
             RolePriviligesId rolePriviligesId = new RolePriviligesId(allRoles.get(1), rights);
             rolePriviliges.setId(rolePriviligesId);

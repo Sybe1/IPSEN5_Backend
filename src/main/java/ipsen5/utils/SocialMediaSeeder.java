@@ -14,8 +14,8 @@ import java.util.List;
 
 @Component
 public class SocialMediaSeeder {
-    private UserRepository userRepository;
-    private SocialMediaRepository socialMediaRepository;
+    private final UserRepository userRepository;
+    private final SocialMediaRepository socialMediaRepository;
 
     public SocialMediaSeeder(UserRepository userRepository, SocialMediaRepository socialMediaRepository) {
         this.userRepository = userRepository;

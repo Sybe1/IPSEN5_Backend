@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CategorySeeder {
 
-    private CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     public CategorySeeder(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;

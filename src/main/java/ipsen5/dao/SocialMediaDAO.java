@@ -14,10 +14,13 @@ import java.util.UUID;
 @Component
 public class SocialMediaDAO {
 
-    @Autowired
-    private SocialMediaRepository repository;
-    @Autowired
-    private UserRepository userRepository;
+    private final SocialMediaRepository repository;
+    private final UserRepository userRepository;
+
+    public SocialMediaDAO(SocialMediaRepository repository, UserRepository userRepository) {
+        this.repository = repository;
+        this.userRepository = userRepository;
+    }
 
     public List<SocialMedia> getAllSocialMedia() {
         return repository.findAll();
