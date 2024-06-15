@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RubricSeeder {
 
-    private RubricRepository rubricRepository;
+    private final RubricRepository rubricRepository;
 
     public RubricSeeder(RubricRepository rubricRepository) {
         this.rubricRepository = rubricRepository;

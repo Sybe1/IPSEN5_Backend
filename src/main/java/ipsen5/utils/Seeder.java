@@ -11,27 +11,34 @@ import java.util.List;
 
 @Component
 public class Seeder {
-    private PostSeeder postSeeder;
-    private RoleSeeder roleSeeder;
-    private UserSeeder userSeeder;
-    private CategorySeeder categorySeeder;
-    private PostCategorySeeder postCategorySeeder;
-    private RubricSeeder rubricSeeder;
-    private ReactionSeeder reactionSeeder;
-    private SubmissionSeeder submissionSeeder;
-    private StatusSeeder statusSeeder;
-    private CriteriaSeeder criteriaSeeder;
-    private FeedbackPerElementSeeder feedbackPerElementSeeder;
-    private RolePriviligesSeeder rolePriviligesSeeder;
-    private RatingSeeder ratingSeeder;
-    private SocialMediaSeeder socialMediaSeeder;
+    private final PostSeeder postSeeder;
+    private final RoleSeeder roleSeeder;
+    private final UserSeeder userSeeder;
+    private final CategorySeeder categorySeeder;
+    private final PostCategorySeeder postCategorySeeder;
+    private final RubricSeeder rubricSeeder;
+    private final ReactionSeeder reactionSeeder;
+    private final SubmissionSeeder submissionSeeder;
+    private final StatusSeeder statusSeeder;
+    private final CriteriaSeeder criteriaSeeder;
+    private final FeedbackPerElementSeeder feedbackPerElementSeeder;
+    private final RolePriviligesSeeder rolePriviligesSeeder;
+    private final RatingSeeder ratingSeeder;
+    private final SocialMediaSeeder socialMediaSeeder;
 
 
-    public Seeder(PostSeeder postSeeder, RoleSeeder roleSeeder, UserSeeder userSeeder, CategorySeeder categorySeeder,
-                  PostCategorySeeder postCategorySeeder, RubricSeeder rubricSeeder, ReactionSeeder reactionSeeder,
-                  SubmissionSeeder submissionSeeder, StatusSeeder statusSeeder,
+    public Seeder(PostSeeder postSeeder,
+                  RoleSeeder roleSeeder,
+                  UserSeeder userSeeder,
+                  CategorySeeder categorySeeder,
+                  PostCategorySeeder postCategorySeeder,
+                  RubricSeeder rubricSeeder,
+                  ReactionSeeder reactionSeeder,
+                  SubmissionSeeder submissionSeeder,
+                  StatusSeeder statusSeeder,
                   CriteriaSeeder criteriaSeeder,
-                  FeedbackPerElementSeeder feedbackPerElementSeeder, RolePriviligesSeeder rolePriviligesSeeder,
+                  FeedbackPerElementSeeder feedbackPerElementSeeder,
+                  RolePriviligesSeeder rolePriviligesSeeder,
                   RatingSeeder ratingSeeder,
                   SocialMediaSeeder socialMediaSeeder
     ) {

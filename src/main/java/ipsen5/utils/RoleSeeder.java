@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RoleSeeder {
 
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     public RoleSeeder(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;

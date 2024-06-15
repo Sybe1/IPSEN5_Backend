@@ -12,8 +12,7 @@ import java.util.UUID;
 @Component
 public class StatusSeeder {
 
-    private StatusRepository statusRepository;
-
+    private final StatusRepository statusRepository;
 
     public StatusSeeder(StatusRepository statusRepository) {
         this.statusRepository = statusRepository;

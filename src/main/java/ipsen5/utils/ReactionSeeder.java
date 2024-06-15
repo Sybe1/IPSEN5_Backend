@@ -12,9 +12,9 @@ import java.util.List;
 
 @Component
 public class ReactionSeeder {
-    private PostRepository postRepository;
-    private UserRepository userRepository;
-    private ReactionRepository reactionRepository;
+    private final PostRepository postRepository;
+    private final UserRepository userRepository;
+    private final ReactionRepository reactionRepository;
 
     public ReactionSeeder(PostRepository postRepository, UserRepository userRepository, ReactionRepository reactionRepository) {
         this.postRepository = postRepository;

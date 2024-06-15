@@ -20,8 +20,11 @@ import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:4200")
 public class SocialMediaController {
 
-    @Autowired
-    private SocialMediaDAO socialMediaDAO;
+    private final SocialMediaDAO socialMediaDAO;
+
+    public SocialMediaController(SocialMediaDAO socialMediaDAO) {
+        this.socialMediaDAO = socialMediaDAO;
+    }
 
     @GetMapping
     @PreAuthorize("hasAuthority('SOCIALMEDIA_GET') || hasAuthority('SOCIALMEDIA') || hasAuthority('ALL') || hasAuthority('GETTEN')")

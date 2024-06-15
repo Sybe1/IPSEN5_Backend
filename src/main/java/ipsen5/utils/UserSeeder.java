@@ -11,8 +11,8 @@ import java.util.List;
 
 @Component
 public class UserSeeder {
-    private RoleRepository roleRepository;
-    private UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
 
     public UserSeeder(RoleRepository roleRepository, UserRepository userRepository) {
         this.roleRepository = roleRepository;
