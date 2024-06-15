@@ -45,7 +45,7 @@ public class PostSeeder {
         Post post3 = new Post();
         post3.setUser(allUsers.get(0));
         post3.setText("Dit is de derde post!");
-        post3.setTitle("the Ancient World’s Lost Paradise");
+        post3.setTitle("the Ancient Worlds Lost Paradise");
         post3.setImageUrl("https://img.freepik.com/premium-photo/mythical-creatures-fairytale-landscapes-magical-symbols-together-generative-ai_830962-3645.jpg");
         post3.setLocalDate(LocalDate.now());
         post3.setGenres(List.of("Horror", "Mystery"));

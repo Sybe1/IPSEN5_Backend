@@ -22,6 +22,7 @@ public class UserSeeder {
     public void seedUser(){
         List<Role> allRoles = roleRepository.findAll();
 
+
         User user = new User();
         user.setFirst_name("Mick");
         user.setLast_name("van Amstel");
@@ -32,6 +33,8 @@ public class UserSeeder {
         user.setDonation_link("https://www.paypal.com/nl/home");
         user.setRole(allRoles.get(0));
         userRepository.save(user);
+
+
 
         User user2 = new User();
         user2.setFirst_name("Pim");
