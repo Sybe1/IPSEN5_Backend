@@ -8,6 +8,7 @@ import ipsen5.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,18 +24,19 @@ public class SocialMediaController {
     private SocialMediaDAO socialMediaDAO;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('SOCIALMEDIA_GET') || hasAuthority('SOCIALMEDIA') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public List<SocialMedia> getAllSocialMedia() {
         return socialMediaDAO.getAllSocialMedia();
     }
 
-
-
     @GetMapping("/user/{username}")
+    @PreAuthorize("hasAuthority('SOCIALMEDIA_GET') || hasAuthority('SOCIALMEDIA') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public ResponseEntity<List<SocialMedia>> getSocialMediaByUsername(@PathVariable String username){
         return ResponseEntity.ok(this.socialMediaDAO.getSocialMediaByUsername(username));
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('SOCIALMEDIA_POST') || hasAuthority('SOCIALMEDIA') || hasAuthority('ALL') || hasAuthority('POSTEN')")
     public ResponseEntity<SocialMedia> createSocialMedia(@RequestBody SocialMediaDTO socialMediaDTO) {
         User user = socialMediaDTO.user;
         SocialMediaCategories socialMediaCategory = socialMediaDTO.socialMediaCategories;
@@ -45,6 +47,7 @@ public class SocialMediaController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('SOCIALMEDIA_PUT') || hasAuthority('SOCIALMEDIA') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<SocialMedia> updateSocialMedia(@PathVariable UUID id, @RequestBody SocialMediaDTO socialMediaDTO) {
         Optional<SocialMedia> existingSocialMedia = socialMediaDAO.getSocialMediaById(id);
         if (existingSocialMedia.isPresent()) {
@@ -61,6 +64,7 @@ public class SocialMediaController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('SOCIALMEDIA_DELETE') || hasAuthority('SOCIALMEDIA') || hasAuthority('ALL') || hasAuthority('DELETEN')")
     public ResponseEntity<Void> deleteSocialMedia(@PathVariable UUID id) {
         Optional<SocialMedia> existingSocialMedia = socialMediaDAO.getSocialMediaById(id);
         if (existingSocialMedia.isPresent()) {

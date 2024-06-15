@@ -33,7 +33,7 @@ public class RolePriviligesSeeder {
                 Rights.SOCIALMEDIA, Rights.RUBRIC, Rights.ROLEPRIVILIGES, Rights.ROLE,
                 Rights.REACTION, Rights.RATING, Rights.POSTCATEGORY, Rights.POST,
                 Rights.FEEDBACKPERELEMENT, Rights.CRITERIA, Rights.CATEGORY,
-                Rights.GUARD_SUBMISSIONS
+                Rights.GUARD_SUBMISSIONS, Rights.CATEGORY_GET
         };
 
         Rights[] rightsArrayForRole2 = {
