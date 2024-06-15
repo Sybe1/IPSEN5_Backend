@@ -3,7 +3,6 @@ package ipsen5.controller;
 import ipsen5.dao.SubmissionDAO;
 import ipsen5.dto.SubmissionDTO;
 import ipsen5.models.Submission;
-import ipsen5.services.SubmissionValidator;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,11 +20,9 @@ import java.util.UUID;
 @RequestMapping("/submission")
 public class SubmissionController {
     private final SubmissionDAO submissionDAO;
-    private SubmissionValidator validator;
 
-    public SubmissionController(SubmissionDAO submissionDAO, SubmissionValidator validator) {
+    public SubmissionController(SubmissionDAO submissionDAO) {
         this.submissionDAO = submissionDAO;
-        this.validator = validator;
     }
 
     @GetMapping("/{id}")
@@ -49,7 +46,6 @@ public class SubmissionController {
     @PostMapping
     @PreAuthorize("hasAuthority('SUBMISSION_POST') || hasAuthority('SUBMISSION') || hasAuthority('ALL') || hasAuthority('POSTEN')")
     public ResponseEntity<Submission> createSubmission(@RequestBody SubmissionDTO submissionDTO){
-        validator.submissionValidations(submissionDTO);
         Submission submission = this.submissionDAO.createSubmission(submissionDTO);
         return ResponseEntity.ok(submission);
     }
@@ -68,7 +64,6 @@ public class SubmissionController {
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('SUBMISSION_PUT') || hasAuthority('SUBMISSION') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<String> editSubmission(@PathVariable UUID id, @RequestBody SubmissionDTO submissionDTO){
-        validator.submissionValidations(submissionDTO);
         this.submissionDAO.editSubmission(id, submissionDTO);
         return ResponseEntity.ok("Edited Submission with id: " + id);
     }
