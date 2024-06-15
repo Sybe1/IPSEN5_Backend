@@ -1,7 +1,7 @@
 package ipsen5.controller;
 
 import ipsen5.dao.UserDAO;
-import ipsen5.dto.StatusDTO;
+import org.springframework.security.access.prepost.PreAuthorize;
 import ipsen5.dto.UserDTO;
 import ipsen5.models.User;
 import org.springframework.http.HttpStatus;
@@ -23,6 +23,7 @@ public class UserController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('USER_GET') || hasAuthority('USER') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public ResponseEntity<List<User>> getAllUsers(){
         return ResponseEntity.ok(this.userDAO.getAllUsers());
     }
@@ -43,13 +44,15 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER_PUT') || hasAuthority('USER') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<String> editUser(@PathVariable UUID id, @RequestBody UserDTO userDTO){
         this.userDAO.editUser(id, userDTO);
         return ResponseEntity.ok("Edited user with id: " + id);
     }
 
-    @PutMapping("{userId}/role/{roleId}")
-    public ResponseEntity<?> editUser(@PathVariable UUID roleId, @RequestBody User user){
+    @PutMapping("/role/{roleId}")
+    @PreAuthorize("hasAuthority('USER_PUT') || hasAuthority('USER') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
+    public ResponseEntity<?> editUserRole(@PathVariable UUID roleId, @RequestBody User user){
         userDAO.editUserRole(user, roleId);
         String message = "Edited user with id: " + user;
         return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"" + message + "\"}");
@@ -57,7 +60,8 @@ public class UserController {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteStatus(@PathVariable UUID id){
+    @PreAuthorize("hasAuthority('USER_DELETE') || hasAuthority('USER') || hasAuthority('ALL') || hasAuthority('DELETEN')")
+    public ResponseEntity<?> deleteUser(@PathVariable UUID id){
         this.userDAO.deleteUser(id);
         return ResponseEntity.ok("deleted user with id: " + id);
     }

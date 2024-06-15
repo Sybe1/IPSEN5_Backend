@@ -7,6 +7,7 @@ import ipsen5.services.InputValidator;
 import ipsen5.services.StatusValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -25,22 +26,26 @@ public class StatusController {
         this.validator = validator;
     }
     @GetMapping
+    @PreAuthorize("hasAuthority('STATUS_GET') || hasAuthority('STATUS') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public ResponseEntity<List<Status>> getAllRatings(){
         return ResponseEntity.ok(this.statusDAO.getAllStatus());
     }
     @PostMapping
+    @PreAuthorize("hasAuthority('STATUS_POST') || hasAuthority('STATUS') || hasAuthority('ALL') || hasAuthority('POSTEN')")
     public ResponseEntity<String> createStatus(@RequestBody StatusDTO statusDTO){
         validator.statusValidations(statusDTO);
         this.statusDAO.createStatus(statusDTO);
         return ResponseEntity.ok("Created a new Status");
     }
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('STATUS_PUT') || hasAuthority('STATUS') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<String> editStatus(@PathVariable UUID id, @RequestBody StatusDTO statusDTO){
         validator.statusValidations(statusDTO);
         this.statusDAO.editStatus(id, statusDTO);
         return ResponseEntity.ok("Edited status with id: " + id);
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('STATUS_DELETE') || hasAuthority('STATUS') || hasAuthority('ALL') || hasAuthority('DELETEN')")
     public ResponseEntity<?> deleteStatus(@PathVariable("id") UUID id){
         this.statusDAO.deleteStatus(id);
         return ResponseEntity.ok("deleted status with id: " + id);

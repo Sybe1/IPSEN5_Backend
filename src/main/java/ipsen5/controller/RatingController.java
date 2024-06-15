@@ -8,6 +8,7 @@ import ipsen5.services.InputValidator;
 import ipsen5.services.RatingValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -31,6 +32,7 @@ public class RatingController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('RATING_POST') || hasAuthority('RATING') || hasAuthority('ALL') || hasAuthority('POSTEN')")
     public ResponseEntity<String> createRating(@RequestBody RatingDTO ratingDTO){
         validator.ratingValidations(ratingDTO);
         this.ratingDAO.createRating(ratingDTO);
@@ -44,6 +46,7 @@ public class RatingController {
     }
 
     @PutMapping("/{userId}/{postId}")
+    @PreAuthorize("hasAuthority('RATING_PUT') || hasAuthority('RATING') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<String> editRating(@PathVariable User userId, @PathVariable Post postId, @RequestBody RatingDTO ratingDTO){
         validator.ratingValidations(ratingDTO);
         this.ratingDAO.editRating(userId, postId, ratingDTO);
@@ -51,6 +54,7 @@ public class RatingController {
     }
 
     @DeleteMapping("/{userId}/{postId}")
+    @PreAuthorize("hasAuthority('RATING_DELETE') || hasAuthority('RATING') || hasAuthority('ALL') || hasAuthority('DELETEN')")
     public ResponseEntity<?> deleteRating(@PathVariable User userId, @PathVariable Post postId){
         this.ratingDAO.deleteRating(userId, postId);
         return ResponseEntity.ok("deleted rating with userId: " + userId + " and postId: " + postId);

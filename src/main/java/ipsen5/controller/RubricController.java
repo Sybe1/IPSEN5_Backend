@@ -9,6 +9,7 @@ import ipsen5.services.RatingValidator;
 import ipsen5.services.RubricValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -29,16 +30,19 @@ public class RubricController {
     }
 
     @GetMapping("/{id}/criteria")
+    @PreAuthorize("hasAuthority('RUBRIC_GET') || hasAuthority('RUBRIC') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public Set<Criteria> getCriteriaByRubricId(@PathVariable UUID id) {
         return rubricDAO.getCriteriaByRubricId(id);
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('RUBRIC_GET') || hasAuthority('RUBRIC') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public ResponseEntity<List<Rubric>> getAllRubrics(){
         return ResponseEntity.ok(this.rubricDAO.getAllRubrics());
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('RUBRIC_POST') || hasAuthority('RUBRIC') || hasAuthority('ALL') || hasAuthority('POSTEN')")
     public ResponseEntity<String> createRubric(@RequestBody RubricDTO rubricDTO){
         validator.rubricValidations(rubricDTO);
         this.rubricDAO.createRubric(rubricDTO);
@@ -46,6 +50,7 @@ public class RubricController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('RUBRIC_PUT') || hasAuthority('RUBRIC') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<String> editRubric(@PathVariable UUID id, @RequestBody RubricDTO rubricDTO){
         validator.rubricValidations(rubricDTO);
         this.rubricDAO.editRubric(id, rubricDTO);
@@ -53,6 +58,7 @@ public class RubricController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('RUBRIC_DELETE') || hasAuthority('RUBRIC') || hasAuthority('ALL') || hasAuthority('DELETEN')")
     public ResponseEntity<?> deleteRubric(@PathVariable("id") UUID id){
         this.rubricDAO.deleteRubric(id);
         return ResponseEntity.ok("deleted rubric with id: " + id);
