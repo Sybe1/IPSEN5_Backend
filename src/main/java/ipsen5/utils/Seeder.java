@@ -25,6 +25,7 @@ public class Seeder {
     private final RolePriviligesSeeder rolePriviligesSeeder;
     private final RatingSeeder ratingSeeder;
     private final SocialMediaSeeder socialMediaSeeder;
+    private final NotificationSeeder notificationSeeder;
 
 
     public Seeder(PostSeeder postSeeder,
@@ -40,7 +41,8 @@ public class Seeder {
                   FeedbackPerElementSeeder feedbackPerElementSeeder,
                   RolePriviligesSeeder rolePriviligesSeeder,
                   RatingSeeder ratingSeeder,
-                  SocialMediaSeeder socialMediaSeeder
+                  SocialMediaSeeder socialMediaSeeder,
+                  NotificationSeeder notificationSeeder
     ) {
         this.postSeeder = postSeeder;
         this.roleSeeder = roleSeeder;
@@ -56,6 +58,7 @@ public class Seeder {
         this.rolePriviligesSeeder = rolePriviligesSeeder;
         this.ratingSeeder = ratingSeeder;
         this.socialMediaSeeder = socialMediaSeeder;
+        this.notificationSeeder = notificationSeeder;
     }
 
     @EventListener
@@ -74,5 +77,6 @@ public class Seeder {
         rolePriviligesSeeder.seedRolePriviliges();
         ratingSeeder.seedRating();
         socialMediaSeeder.seedSocialMedia();
+        notificationSeeder.seedNotification();
     }
 }
