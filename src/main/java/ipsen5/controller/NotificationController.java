@@ -13,8 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -23,7 +22,7 @@ public class NotificationController {
 
     private final NotificationDAO notificationDAO;
 
-    public NotificationController(NotificationDAO notificationDAO) {
+    public NotificationController(NotificationDAO notificationDAO, UserRepository userRepository) {
         this.notificationDAO = notificationDAO;
     }
 
@@ -32,6 +31,15 @@ public class NotificationController {
     public ResponseEntity<String> createNotification(@RequestBody NotificationDTO notificationDTO) {
         notificationDAO.createNotification(notificationDTO);
         return ResponseEntity.ok("Created a new Notification");
+    }
+
+    @PostMapping("/createForRole/{role}")
+    @PreAuthorize("hasAuthority('NOTIFICATION_POST') || hasAuthority('NOTIFICATION') || hasAuthority('ALL') || hasAuthority('POSTEN')")
+    public ResponseEntity<Map<String, String>> createNotificationForRole(@RequestBody NotificationDTO notificationDTO, @PathVariable String role) {
+        this.notificationDAO.createNotificationForRole(notificationDTO, role);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Created new notifications for admins and mods");
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
@@ -54,11 +62,13 @@ public class NotificationController {
         return ResponseEntity.ok("TEST");
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/markAsRead/{id}")
     @PreAuthorize("hasAuthority('NOTIFICATION_PUT') || hasAuthority('NOTIFICATION') || hasAuthority('ALL') || hasAuthority('PUTTEN')")
-    public ResponseEntity<String> markNotificationAsRead(@PathVariable UUID id) {
+    public ResponseEntity<Map<String, String>> markNotificationAsRead(@PathVariable UUID id) {
         notificationDAO.markAsRead(id);
-        return ResponseEntity.ok("Marked Notification with id " + id + " as read");
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Marked Notification with id " + id + " as read");
+        return ResponseEntity.ok(response);
     }
 
 }
