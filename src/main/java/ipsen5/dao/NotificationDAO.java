@@ -2,11 +2,14 @@ package ipsen5.dao;
 
 import ipsen5.dto.NotificationDTO;
 import ipsen5.models.Notification;
+import ipsen5.models.Role;
 import ipsen5.models.User;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 
@@ -14,10 +17,12 @@ import java.util.UUID;
 public class NotificationDAO {
     private final NotificationRepository notificationRepository;
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public NotificationDAO(NotificationRepository notificationRepository, UserRepository userRepository) {
+    public NotificationDAO(NotificationRepository notificationRepository, UserRepository userRepository, RoleRepository roleRepository) {
         this.notificationRepository = notificationRepository;
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public List<Notification> getAllNotifications() {
@@ -47,5 +52,17 @@ public class NotificationDAO {
         Notification notification = this.notificationRepository.findById(notificationId).orElseThrow(() -> new RuntimeException("Notification not found"));
         notification.setRead(true);
         this.notificationRepository.save(notification);
+    }
+
+    public void createNotificationForRole(NotificationDTO notificationDTO, String role) {
+        Role tempRole = this.roleRepository.findByName(role).orElse(null);
+        if (tempRole == null) {
+            throw new RuntimeException("Role not found");
+        }
+        List<User> usersWithRole = this.userRepository.findByRole(tempRole);
+        for (User user : usersWithRole) {
+            Notification notification = new Notification(notificationDTO.message, LocalDateTime.now(), user);
+            this.notificationRepository.save(notification);
+        }
     }
 }
