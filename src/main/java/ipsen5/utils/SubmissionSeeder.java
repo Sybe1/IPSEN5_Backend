@@ -1,6 +1,5 @@
 package ipsen5.utils;
 
-import ipsen5.dao.*;
 import ipsen5.models.*;
 import ipsen5.repository.RubricRepository;
 import ipsen5.repository.StatusRepository;
@@ -12,7 +11,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.PreparedStatement;
 import java.util.List;
 
 @Component

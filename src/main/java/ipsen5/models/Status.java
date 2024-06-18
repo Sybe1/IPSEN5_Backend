@@ -15,7 +15,6 @@ import java.util.UUID;
 @Setter
 public class Status {
     @Id
-    @GeneratedValue
     private UUID id;
 
     @NotBlank
