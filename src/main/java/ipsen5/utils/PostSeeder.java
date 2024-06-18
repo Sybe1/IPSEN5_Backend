@@ -1,15 +1,12 @@
 package ipsen5.utils;
 
-import ipsen5.dao.PostRepository;
-import ipsen5.dao.UserRepository;
+import ipsen5.repository.PostRepository;
+import ipsen5.repository.UserRepository;
 import ipsen5.models.Post;
 import ipsen5.models.User;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Component

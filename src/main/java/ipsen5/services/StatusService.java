@@ -1,20 +1,18 @@
-package ipsen5.dao;
+package ipsen5.services;
 
-import ipsen5.dto.RatingDTO;
 import ipsen5.dto.StatusDTO;
-import ipsen5.models.Rating;
 import ipsen5.models.Status;
-import ipsen5.models.Submission;
+import ipsen5.repository.StatusRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 
 @Component
-public class StatusDAO {
+public class StatusService {
     private final StatusRepository statusRepository;
 
-    public StatusDAO(StatusRepository statusRepository) {
+    public StatusService(StatusRepository statusRepository) {
         this.statusRepository = statusRepository;
     }
     public List<Status> getAllStatus() {

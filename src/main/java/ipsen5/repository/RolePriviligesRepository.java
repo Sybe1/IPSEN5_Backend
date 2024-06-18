@@ -1,4 +1,4 @@
-package ipsen5.dao;
+package ipsen5.repository;
 
 import ipsen5.models.Role;
 import ipsen5.models.RolePriviliges;

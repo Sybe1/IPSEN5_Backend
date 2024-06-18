@@ -1,15 +1,12 @@
 package ipsen5.utils;
 
-import ipsen5.dao.PostRepository;
-import ipsen5.dao.SocialMediaRepository;
-import ipsen5.dao.UserRepository;
-import ipsen5.models.Post;
+import ipsen5.repository.SocialMediaRepository;
+import ipsen5.repository.UserRepository;
 import ipsen5.models.SocialMedia;
 import ipsen5.models.User;
 import ipsen5.models.enums.SocialMediaCategories;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Component

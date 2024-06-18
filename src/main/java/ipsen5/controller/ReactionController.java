@@ -1,6 +1,6 @@
 package ipsen5.controller;
 
-import ipsen5.dao.ReactionDAO;
+import ipsen5.services.ReactionService;
 import ipsen5.dto.ReactionDTO;
 import ipsen5.models.Reaction;
 import org.springframework.http.ResponseEntity;
@@ -14,35 +14,35 @@ import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/reaction")
 public class ReactionController {
-    private final ReactionDAO reactionDAO;
+    private final ReactionService reactionService;
 
-    public ReactionController(ReactionDAO reactionDAO) {
-        this.reactionDAO = reactionDAO;
+    public ReactionController(ReactionService reactionService) {
+        this.reactionService = reactionService;
     }
 
     @GetMapping("/{postId}")
     public ResponseEntity<List<Reaction>> getAllReactionsByPostId(@PathVariable UUID postId) {
-        List<Reaction> reactions = reactionDAO.getAllReactionsByPostId(postId);
+        List<Reaction> reactions = reactionService.getAllReactionsByPostId(postId);
         return ResponseEntity.ok(reactions);
     }
 
     @PostMapping
     @PreAuthorize("hasAuthority('REACTION_POST') || hasAuthority('REACTION') || hasAuthority('ALL') || hasAuthority('POSTEN')")
     public ResponseEntity<String> createReaction(@RequestBody ReactionDTO reactionDTO){
-        this.reactionDAO.createReaction(reactionDTO);
+        this.reactionService.createReaction(reactionDTO);
         return ResponseEntity.ok("Created a new Reaction");
     }
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('REACTION_PUT') || hasAuthority('REACTION') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<String> editReaction(@PathVariable UUID id, @RequestBody ReactionDTO reactionDTO){
-        this.reactionDAO.editReaction(id, reactionDTO);
+        this.reactionService.editReaction(id, reactionDTO);
         return ResponseEntity.ok("Edited reaction with id: " + id);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('REACTION_DELETE') || hasAuthority('REACTION') || hasAuthority('ALL') || hasAuthority('DELETEN')")
     public ResponseEntity<?> deleteReaction(@PathVariable("id") UUID id){
-        this.reactionDAO.deleteReaction(id);
+        this.reactionService.deleteReaction(id);
         return ResponseEntity.ok("deleted reaction with id: " + id);
     }
 }

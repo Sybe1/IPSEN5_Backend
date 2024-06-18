@@ -1,7 +1,7 @@
 package ipsen5.utils;
 
-import ipsen5.dao.RolePriviligesRepository;
-import ipsen5.dao.RoleRepository;
+import ipsen5.repository.RolePriviligesRepository;
+import ipsen5.repository.RoleRepository;
 import ipsen5.models.Role;
 import ipsen5.models.RolePriviliges;
 import ipsen5.models.RolePriviligesId;

@@ -1,8 +1,8 @@
 package ipsen5.controller;
 
 import ipsen5.config.JWTUtil;
-import ipsen5.dao.RoleRepository;
-import ipsen5.dao.UserRepository;
+import ipsen5.repository.RoleRepository;
+import ipsen5.repository.UserRepository;
 import ipsen5.dto.AuthenticationDTO;
 import ipsen5.dto.LoginResponse;
 import ipsen5.models.Role;

@@ -1,9 +1,11 @@
-package ipsen5.dao;
+package ipsen5.services;
 
 import ipsen5.dto.SubmissionDTO;
 
 import ipsen5.models.Rubric;
 import ipsen5.models.Submission;
+import ipsen5.repository.RubricRepository;
+import ipsen5.repository.SubmissionRespository;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,12 +16,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
-public class SubmissionDAO {
+public class SubmissionService {
     private final SubmissionRespository submissionRespository;
     private final RubricRepository rubricRepository;
 
-    public SubmissionDAO(SubmissionRespository submissionRespository,
-                         RubricRepository rubricRepository) {
+    public SubmissionService(SubmissionRespository submissionRespository,
+                             RubricRepository rubricRepository) {
         this.submissionRespository = submissionRespository;
         this.rubricRepository = rubricRepository;
     }

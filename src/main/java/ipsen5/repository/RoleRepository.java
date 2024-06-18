@@ -1,4 +1,4 @@
-package ipsen5.dao;
+package ipsen5.repository;
 import java.util.Optional;
 
 import ipsen5.models.Role;

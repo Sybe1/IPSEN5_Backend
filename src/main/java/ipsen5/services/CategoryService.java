@@ -1,18 +1,19 @@
-package ipsen5.dao;
+package ipsen5.services;
 
 import ipsen5.dto.CategoryDTO;
 import ipsen5.models.Category;
+import ipsen5.repository.CategoryRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 
 @Component
-public class CategoryDAO {
+public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public CategoryDAO(CategoryRepository categoryRepository) {
+    public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
