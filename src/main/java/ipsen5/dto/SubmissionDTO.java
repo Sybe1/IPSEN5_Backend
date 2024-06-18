@@ -10,7 +10,6 @@ public class SubmissionDTO {
         public String name;
         public String email;
         public String online_profiles;
-        public String text;
         public String story_title;
         public String type;
         public int wordCount;
