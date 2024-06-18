@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserCredentialsService implements UserDetailsService {
 
     private final UserRepository userDAO;
     private final RolePriviligesRepository rolePriviligesRepository;
 
-    public UserService(UserRepository userDAO, RolePriviligesRepository rolePriviligesRepository) {
+    public UserCredentialsService(UserRepository userDAO, RolePriviligesRepository rolePriviligesRepository) {
         this.userDAO = userDAO;
         this.rolePriviligesRepository = rolePriviligesRepository;
     }
