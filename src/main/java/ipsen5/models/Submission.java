@@ -75,6 +75,8 @@ public class Submission {
     @Lob
     private byte[] pdf;
 
+    @Lob
+    private byte[] picture;
 
 
     public Submission(String name, String email, String online_profiles, String story_title, String type, int wordCount, String genre, String additional_notes, String prefferd_destination, Boolean platform_presence, Boolean extra_feedback, Boolean express_experience, Status statusID, User user_id, Rubric rubric) {
