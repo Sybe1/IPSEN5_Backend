@@ -1,6 +1,6 @@
 package ipsen5.controller;
 
-import ipsen5.dao.UserDAO;
+import ipsen5.services.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import ipsen5.dto.UserDTO;
 import ipsen5.models.User;
@@ -16,44 +16,44 @@ import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/users")
 public class UserController {
-    private final UserDAO userDAO;
+    private final UserService userService;
 
-    public UserController(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping
     @PreAuthorize("hasAuthority('USER_GET') || hasAuthority('USER') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public ResponseEntity<List<User>> getAllUsers(){
-        return ResponseEntity.ok(this.userDAO.getAllUsers());
+        return ResponseEntity.ok(this.userService.getAllUsers());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<User>> getUserById(@PathVariable UUID id){
-        return ResponseEntity.ok(this.userDAO.getUserById(id));
+        return ResponseEntity.ok(this.userService.getUserById(id));
     }
 
     @GetMapping("/mail/{mail}")
     public ResponseEntity<Optional<User>> getUserBymail(@PathVariable String mail){
-        return ResponseEntity.ok(this.userDAO.getUserBymail(mail));
+        return ResponseEntity.ok(this.userService.getUserBymail(mail));
     }
 
     @GetMapping("/username/{username}")
     public ResponseEntity<Optional<User>> getUserByUsername(@PathVariable String username){
-        return ResponseEntity.ok(this.userDAO.getUserByUsername(username));
+        return ResponseEntity.ok(this.userService.getUserByUsername(username));
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('USER_PUT') || hasAuthority('USER') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<String> editUser(@PathVariable UUID id, @RequestBody UserDTO userDTO){
-        this.userDAO.editUser(id, userDTO);
+        this.userService.editUser(id, userDTO);
         return ResponseEntity.ok("Edited user with id: " + id);
     }
 
     @PutMapping("/role/{roleId}")
     @PreAuthorize("hasAuthority('USER_PUT') || hasAuthority('USER') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<?> editUserRole(@PathVariable UUID roleId, @RequestBody User user){
-        userDAO.editUserRole(user, roleId);
+        userService.editUserRole(user, roleId);
         String message = "Edited user with id: " + user;
         return ResponseEntity.status(HttpStatus.OK).body("{\"message\": \"" + message + "\"}");
     }
@@ -62,7 +62,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('USER_DELETE') || hasAuthority('USER') || hasAuthority('ALL') || hasAuthority('DELETEN')")
     public ResponseEntity<?> deleteUser(@PathVariable UUID id){
-        this.userDAO.deleteUser(id);
+        this.userService.deleteUser(id);
         return ResponseEntity.ok("deleted user with id: " + id);
     }
 }
