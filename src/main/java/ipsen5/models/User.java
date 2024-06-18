@@ -6,9 +6,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.validator.constraints.URL;
 
 import java.util.UUID;
 
@@ -39,15 +41,14 @@ public class User {
     @NotBlank
     private String password;
 
-    @NotBlank
-    @Pattern(regexp = "^https?://(?:www\\.)?[a-zA-Z0-9-]+\\.[a-zA-Z]{2,}(?:/[^\\s]*)?$", message = "Invalid URL format")
+    @URL
     private String imageUrl;
 
-    @NotBlank
-    @Pattern(regexp = "^https?://(?:www\\.)?[a-zA-Z0-9-]+\\.[a-zA-Z]{2,}(?:/[^\\s]*)?$", message = "Invalid URL format")
+    @URL
     private String donation_link;
 
     @ManyToOne
+    @NotNull
     private Role role;
 
     public User() {
