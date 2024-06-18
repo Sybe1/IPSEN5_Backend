@@ -1,10 +1,12 @@
 package ipsen5.utils;
 
-import ipsen5.dao.*;
+import ipsen5.repository.RubricRepository;
+import ipsen5.repository.StatusRepository;
+import ipsen5.repository.SubmissionRespository;
+import ipsen5.repository.UserRepository;
 import ipsen5.models.*;
 import org.springframework.stereotype.Component;
 
-import java.sql.PreparedStatement;
 import java.util.List;
 
 @Component

@@ -1,7 +1,10 @@
-package ipsen5.dao;
+package ipsen5.services;
 
 import ipsen5.dto.FeedbackPerElementDTO;
 import ipsen5.models.*;
+import ipsen5.repository.CriteriaRepository;
+import ipsen5.repository.FeedbackPerElementRepository;
+import ipsen5.repository.SubmissionRespository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,15 +12,15 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
-public class FeedbackPerElementDAO {
+public class FeedbackPerElementService {
 
     private final FeedbackPerElementRepository feedbackPerElementRepository;
     private final CriteriaRepository criteriaRepository;
     private final SubmissionRespository submissionRepository;
 
-    public FeedbackPerElementDAO(FeedbackPerElementRepository feedbackPerElementRepository,
-                                 CriteriaRepository criteriaRepository,
-                                 SubmissionRespository submissionRepository) {
+    public FeedbackPerElementService(FeedbackPerElementRepository feedbackPerElementRepository,
+                                     CriteriaRepository criteriaRepository,
+                                     SubmissionRespository submissionRepository) {
         this.feedbackPerElementRepository = feedbackPerElementRepository;
         this.criteriaRepository = criteriaRepository;
         this.submissionRepository = submissionRepository;

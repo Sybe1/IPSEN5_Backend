@@ -1,9 +1,6 @@
 package ipsen5.utils;
 
-import ipsen5.dao.PostRepository;
-import ipsen5.dao.StatusRepository;
-import ipsen5.dao.SubmissionRespository;
-import ipsen5.dao.UserRepository;
+import ipsen5.repository.StatusRepository;
 import ipsen5.models.Status;
 import org.springframework.stereotype.Component;
 

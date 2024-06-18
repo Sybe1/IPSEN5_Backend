@@ -1,8 +1,8 @@
 package ipsen5.utils;
 
-import ipsen5.dao.CategoryRepository;
-import ipsen5.dao.PostCategoryRepository;
-import ipsen5.dao.PostRepository;
+import ipsen5.repository.CategoryRepository;
+import ipsen5.repository.PostCategoryRepository;
+import ipsen5.repository.PostRepository;
 import ipsen5.models.Category;
 import ipsen5.models.Post;
 import ipsen5.models.PostCategory;

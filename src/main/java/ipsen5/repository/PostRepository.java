@@ -1,7 +1,6 @@
-package ipsen5.dao;
+package ipsen5.repository;
 
 import ipsen5.models.Post;
-import ipsen5.models.Reaction;
 import ipsen5.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

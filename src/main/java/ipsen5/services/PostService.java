@@ -1,8 +1,10 @@
-package ipsen5.dao;
+package ipsen5.services;
 
 import ipsen5.dto.PostDTO;
 import ipsen5.models.Post;
 import ipsen5.models.User;
+import ipsen5.repository.PostRepository;
+import ipsen5.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,12 +12,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
-public class PostDAO {
+public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
 
-    public PostDAO(PostRepository postRepository,
-                   UserRepository userRepository) {
+    public PostService(PostRepository postRepository,
+                       UserRepository userRepository) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
     }

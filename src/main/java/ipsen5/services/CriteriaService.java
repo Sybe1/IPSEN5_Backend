@@ -1,7 +1,8 @@
-package ipsen5.dao;
+package ipsen5.services;
 
 import ipsen5.dto.CriteriaDTO;
 import ipsen5.models.Criteria;
+import ipsen5.repository.CriteriaRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -9,10 +10,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
-public class CriteriaDAO {
+public class CriteriaService {
     private final CriteriaRepository criteriaRepository;
 
-    public CriteriaDAO(CriteriaRepository criteriaRepository) {
+    public CriteriaService(CriteriaRepository criteriaRepository) {
         this.criteriaRepository = criteriaRepository;
     }
 

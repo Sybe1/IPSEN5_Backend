@@ -1,6 +1,6 @@
 package ipsen5.utils;
 
-import ipsen5.dao.RoleRepository;
+import ipsen5.repository.RoleRepository;
 import ipsen5.models.Role;
 import org.springframework.stereotype.Component;
 

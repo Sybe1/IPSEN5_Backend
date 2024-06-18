@@ -1,6 +1,6 @@
 package ipsen5.utils;
 
-import ipsen5.dao.CategoryRepository;
+import ipsen5.repository.CategoryRepository;
 import ipsen5.models.Category;
 import org.springframework.stereotype.Component;
 

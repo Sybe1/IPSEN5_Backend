@@ -1,11 +1,10 @@
 package ipsen5.controller;
 
-import ipsen5.dao.SocialMediaDAO;
+import ipsen5.services.SocialMediaService;
 import ipsen5.dto.SocialMediaDTO;
 import ipsen5.models.SocialMedia;
 import ipsen5.models.enums.SocialMediaCategories;
 import ipsen5.models.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,22 +19,22 @@ import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:4200")
 public class SocialMediaController {
 
-    private final SocialMediaDAO socialMediaDAO;
+    private final SocialMediaService socialMediaService;
 
-    public SocialMediaController(SocialMediaDAO socialMediaDAO) {
-        this.socialMediaDAO = socialMediaDAO;
+    public SocialMediaController(SocialMediaService socialMediaService) {
+        this.socialMediaService = socialMediaService;
     }
 
     @GetMapping
     @PreAuthorize("hasAuthority('SOCIALMEDIA_GET') || hasAuthority('SOCIALMEDIA') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public List<SocialMedia> getAllSocialMedia() {
-        return socialMediaDAO.getAllSocialMedia();
+        return socialMediaService.getAllSocialMedia();
     }
 
     @GetMapping("/user/{username}")
     @PreAuthorize("hasAuthority('SOCIALMEDIA_GET') || hasAuthority('SOCIALMEDIA') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public ResponseEntity<List<SocialMedia>> getSocialMediaByUsername(@PathVariable String username){
-        return ResponseEntity.ok(this.socialMediaDAO.getSocialMediaByUsername(username));
+        return ResponseEntity.ok(this.socialMediaService.getSocialMediaByUsername(username));
     }
 
     @PostMapping
@@ -45,21 +44,21 @@ public class SocialMediaController {
         SocialMediaCategories socialMediaCategory = socialMediaDTO.socialMediaCategories;
 
         SocialMedia socialMedia = new SocialMedia(UUID.randomUUID(), user, socialMediaCategory, socialMediaDTO.socialMediaLink);
-        SocialMedia savedSocialMedia = socialMediaDAO.saveSocialMedia(socialMedia);
+        SocialMedia savedSocialMedia = socialMediaService.saveSocialMedia(socialMedia);
         return new ResponseEntity<>(savedSocialMedia, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('SOCIALMEDIA_PUT') || hasAuthority('SOCIALMEDIA') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<SocialMedia> updateSocialMedia(@PathVariable UUID id, @RequestBody SocialMediaDTO socialMediaDTO) {
-        Optional<SocialMedia> existingSocialMedia = socialMediaDAO.getSocialMediaById(id);
+        Optional<SocialMedia> existingSocialMedia = socialMediaService.getSocialMediaById(id);
         if (existingSocialMedia.isPresent()) {
             SocialMedia socialMedia = existingSocialMedia.get();
             socialMedia.setUser(socialMediaDTO.user);
             socialMedia.setSocialMediaCategory(socialMediaDTO.socialMediaCategories);
             socialMedia.setSocialMediaLink(socialMediaDTO.socialMediaLink);
 
-            SocialMedia updatedSocialMedia = socialMediaDAO.saveSocialMedia(socialMedia);
+            SocialMedia updatedSocialMedia = socialMediaService.saveSocialMedia(socialMedia);
             return new ResponseEntity<>(updatedSocialMedia, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -69,9 +68,9 @@ public class SocialMediaController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('SOCIALMEDIA_DELETE') || hasAuthority('SOCIALMEDIA') || hasAuthority('ALL') || hasAuthority('DELETEN')")
     public ResponseEntity<Void> deleteSocialMedia(@PathVariable UUID id) {
-        Optional<SocialMedia> existingSocialMedia = socialMediaDAO.getSocialMediaById(id);
+        Optional<SocialMedia> existingSocialMedia = socialMediaService.getSocialMediaById(id);
         if (existingSocialMedia.isPresent()) {
-            socialMediaDAO.deleteSocialMedia(id);
+            socialMediaService.deleteSocialMedia(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

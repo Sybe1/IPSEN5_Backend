@@ -1,6 +1,8 @@
 package ipsen5.utils;
 
-import ipsen5.dao.*;
+import ipsen5.repository.CriteriaRepository;
+import ipsen5.repository.FeedbackPerElementRepository;
+import ipsen5.repository.SubmissionRespository;
 import ipsen5.models.*;
 import org.springframework.stereotype.Component;
 

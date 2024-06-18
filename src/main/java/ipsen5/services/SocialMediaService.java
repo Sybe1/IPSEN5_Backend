@@ -1,10 +1,9 @@
-package ipsen5.dao;
+package ipsen5.services;
 
-import ipsen5.models.Post;
 import ipsen5.models.SocialMedia;
-import ipsen5.dao.SocialMediaRepository;
 import ipsen5.models.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import ipsen5.repository.SocialMediaRepository;
+import ipsen5.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -12,12 +11,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
-public class SocialMediaDAO {
+public class SocialMediaService {
 
     private final SocialMediaRepository repository;
     private final UserRepository userRepository;
 
-    public SocialMediaDAO(SocialMediaRepository repository, UserRepository userRepository) {
+    public SocialMediaService(SocialMediaRepository repository, UserRepository userRepository) {
         this.repository = repository;
         this.userRepository = userRepository;
     }
