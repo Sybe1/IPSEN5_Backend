@@ -45,6 +45,7 @@ public class RoleController {
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ROLE_PUT') || hasAuthority('ROLE') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<String> editRole(@PathVariable UUID id, @RequestBody RoleDTO roleDTO){
+        System.out.println("huh " + roleDTO.name);
         this.roleDAO.editRole(id, roleDTO);
         return ResponseEntity.ok("Edited role with id: " + id);
     }

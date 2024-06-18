@@ -16,7 +16,7 @@ public class Submission {
     private UUID id;
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "1")
     private String name;
 
     @NotBlank
@@ -24,35 +24,31 @@ public class Submission {
     private String email;
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "1")
     private String online_profiles;
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "2")
     private String story_title;
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "3")
     private String type;
-
-    @NotBlank
-    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
-    private String text;
 
     @NotNull
     @Min(0)
     private int wordCount;
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "5")
     private String genre;
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "6")
     private String additional_notes;
 
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$")
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "7")
     private String prefferd_destination;
 
     @NotNull
@@ -80,13 +76,12 @@ public class Submission {
     private byte[] pdf;
 
 
-    public Submission(String name, String email, String online_profiles, String story_title, String type, String text, int wordCount, String genre, String additional_notes, String prefferd_destination, Boolean platform_presence, Boolean extra_feedback, Boolean express_experience, Status statusID, User user_id, Rubric rubric) {
+    public Submission(String name, String email, String online_profiles, String story_title, String type, int wordCount, String genre, String additional_notes, String prefferd_destination, Boolean platform_presence, Boolean extra_feedback, Boolean express_experience, Status statusID, User user_id, Rubric rubric) {
         this.name = name;
         this.email = email;
         this.online_profiles = online_profiles;
         this.story_title = story_title;
         this.type = type;
-        this.text = text;
         this.wordCount = wordCount;
         this.genre = genre;
         this.additional_notes = additional_notes;

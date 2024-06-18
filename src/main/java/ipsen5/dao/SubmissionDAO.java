@@ -2,6 +2,7 @@ package ipsen5.dao;
 
 import ipsen5.dto.SubmissionDTO;
 
+import ipsen5.models.Rubric;
 import ipsen5.models.Submission;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,9 +16,12 @@ import java.util.UUID;
 @Component
 public class SubmissionDAO {
     private final SubmissionRespository submissionRespository;
+    private final RubricRepository rubricRepository;
 
-    public SubmissionDAO(SubmissionRespository submissionRespository) {
+    public SubmissionDAO(SubmissionRespository submissionRespository,
+                         RubricRepository rubricRepository) {
         this.submissionRespository = submissionRespository;
+        this.rubricRepository = rubricRepository;
     }
     public List<Submission> getAllSubmissions() {
         return this.submissionRespository.findAll();
@@ -31,10 +35,7 @@ public class SubmissionDAO {
         List<Submission> submissions = this.submissionRespository.findAll();
         List<Submission> submissionsByUserId = new ArrayList<>();
         for (Submission submission : submissions) {
-            System.out.println(submission.getUser_id().getId());
-            System.out.println(id);
             if (submission.getUser_id().getId() == id) {
-                System.out.println("test");
                 submissionsByUserId.add(submission);
             }
         }
@@ -46,8 +47,16 @@ public class SubmissionDAO {
 
     public Submission createSubmission(SubmissionDTO submissionDTO) {
         Submission submission = new Submission();
+
+        List<Rubric> rubrics = this.rubricRepository.findAll();
+        if (submissionDTO.type.equals("Text")){
+            submission.setRubric(rubrics.get(0));
+        }
+        else {
+            submission.setRubric(rubrics.get(1));
+        }
+
         submission.setName(submissionDTO.name);
-        submission.setText(submissionDTO.text);
         submission.setEmail(submissionDTO.email);
         submission.setOnline_profiles(submissionDTO.online_profiles);
         submission.setStory_title(submissionDTO.story_title);
@@ -77,7 +86,6 @@ public class SubmissionDAO {
     public void editSubmission(UUID id, SubmissionDTO submissionDTO) {
         Submission submission = this.submissionRespository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));;
         submission.setName(submissionDTO.name);
-        submission.setText(submissionDTO.text);
         submission.setEmail(submissionDTO.email);
         submission.setOnline_profiles(submissionDTO.online_profiles);
         submission.setStory_title(submissionDTO.story_title);

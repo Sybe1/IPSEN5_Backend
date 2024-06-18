@@ -42,7 +42,6 @@ public class SubmissionSeeder {
          submission.setAdditional_notes("additional_notes");
          submission.setPrefferd_destination("Babels CHOICE");
         submission.setStory_title("First story");
-        submission.setText("Dit is het eerste verhaal.");
         submission.setPlatform_presence(true);
          submission.setExtra_feedback(true);
          submission.setExpress_experience(true);
@@ -56,7 +55,6 @@ public class SubmissionSeeder {
          submission2.setStory_title("New story");
          submission2.setEmail("johan@mail.com");
         submission2.setOnline_profiles("dont have");
-        submission2.setText("Dit is het tweede verhaal.");
         submission2.setType("text");
          submission2.setWordCount(200);
         submission2.setGenre("Horror");
