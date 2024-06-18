@@ -69,10 +69,22 @@ public class SubmissionService {
         foundSubmission.setPdf(file.getBytes());
         submissionRespository.save(foundSubmission);
     }
+
+    public void saveSubmissionPicture(MultipartFile file, UUID submissionId) throws IOException {
+        Submission foundSubmission = getSubmissionById(submissionId).orElseThrow(() -> new RuntimeException("Post not found"));
+        foundSubmission.setPicture(file.getBytes());
+        submissionRespository.save(foundSubmission);
+    }
+
     public byte[] getUserPdf(UUID id) {
         Submission submission = submissionRespository.findById(id).orElse(null);
         byte[] submissionPDF = submission.getPdf();
         return submissionPDF;
+    }
+    public byte[] getUserPicture(UUID id) {
+        Submission submission = submissionRespository.findById(id).orElse(null);
+        byte[] submissionPicture = submission.getPicture();
+        return submissionPicture;
     }
 
     public void editSubmission(UUID id, SubmissionDTO submissionDTO) {
