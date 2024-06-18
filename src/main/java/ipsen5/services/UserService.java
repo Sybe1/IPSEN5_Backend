@@ -1,38 +1,27 @@
-package ipsen5.dao;
+package ipsen5.services;
 
-import ipsen5.config.JWTUtil;
-import ipsen5.dto.AuthenticationDTO;
-import ipsen5.dto.LoginResponse;
 import ipsen5.dto.UserDTO;
 import ipsen5.models.Role;
 import ipsen5.models.User;
 import ipsen5.repository.RoleRepository;
 import ipsen5.repository.UserRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Component
-public class UserDAO {
+public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final JWTUtil jwtUtil;
 
 
-    public UserDAO(UserRepository userRepository,
-                   RoleRepository roleRepository,
-                   PasswordEncoder passwordEncoder,
-                   JWTUtil jwtUtil) {
+    public UserService(UserRepository userRepository,
+                       RoleRepository roleRepository
+    ) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        this.jwtUtil = jwtUtil;
-        this.passwordEncoder = passwordEncoder;
     }
 
     public List<User> getAllUsers() {

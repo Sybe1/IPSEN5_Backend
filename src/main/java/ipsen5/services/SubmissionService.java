@@ -58,20 +58,7 @@ public class SubmissionService {
             submission.setRubric(rubrics.get(1));
         }
 
-        submission.setName(submissionDTO.name);
-        submission.setEmail(submissionDTO.email);
-        submission.setOnline_profiles(submissionDTO.online_profiles);
-        submission.setStory_title(submissionDTO.story_title);
-        submission.setType(submissionDTO.type);
-        submission.setWordCount(submissionDTO.wordCount);
-        submission.setGenre(submissionDTO.genre);
-        submission.setAdditional_notes(submissionDTO.additional_notes);
-        submission.setPrefferd_destination(submissionDTO.prefferd_destination);
-        submission.setPlatform_presence(submissionDTO.platform_presence);
-        submission.setExpress_experience(submissionDTO.express_experience);
-        submission.setExtra_feedback(submissionDTO.extra_feedback);
-        submission.setStatusID(submissionDTO.statusID);
-        submission.setUser_id(submissionDTO.user_id);
+        submission = this.makeSubmission(submission, submissionDTO);
         return this.submissionRespository.save(submission);
     }
     public void saveSubmissionPdf(MultipartFile file, UUID submissionId) throws IOException {
@@ -87,6 +74,16 @@ public class SubmissionService {
 
     public void editSubmission(UUID id, SubmissionDTO submissionDTO) {
         Submission submission = this.submissionRespository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));;
+        submission = this.makeSubmission(submission, submissionDTO);
+        this.submissionRespository.save(submission);
+    }
+
+    public void deleteSubmission(UUID id) {
+        this.submissionRespository.findById(id).orElseThrow(() -> new RuntimeException("Submission not found"));
+        this.submissionRespository.deleteById(id);
+    }
+
+    private Submission makeSubmission(Submission submission, SubmissionDTO submissionDTO){
         submission.setName(submissionDTO.name);
         submission.setEmail(submissionDTO.email);
         submission.setOnline_profiles(submissionDTO.online_profiles);
@@ -101,11 +98,6 @@ public class SubmissionService {
         submission.setExtra_feedback(submissionDTO.extra_feedback);
         submission.setStatusID(submissionDTO.statusID);
         submission.setUser_id(submissionDTO.user_id);
-        this.submissionRespository.save(submission);
-    }
-
-    public void deleteSubmission(UUID id) {
-        this.submissionRespository.findById(id).orElseThrow(() -> new RuntimeException("Submission not found"));
-        this.submissionRespository.deleteById(id);
+        return submission;
     }
 }
