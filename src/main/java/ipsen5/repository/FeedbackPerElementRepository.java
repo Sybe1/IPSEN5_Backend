@@ -1,4 +1,4 @@
-package ipsen5.dao;
+package ipsen5.repository;
 
 import ipsen5.models.*;
 import org.springframework.data.jpa.repository.JpaRepository;

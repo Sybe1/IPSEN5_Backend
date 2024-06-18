@@ -1,6 +1,6 @@
 package ipsen5.utils;
 
-import ipsen5.dao.RubricRepository;
+import ipsen5.repository.RubricRepository;
 import ipsen5.models.Rubric;
 import org.springframework.stereotype.Component;
 

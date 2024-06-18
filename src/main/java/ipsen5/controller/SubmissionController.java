@@ -1,6 +1,6 @@
 package ipsen5.controller;
 
-import ipsen5.dao.SubmissionDAO;
+import ipsen5.services.SubmissionService;
 import ipsen5.dto.SubmissionDTO;
 import ipsen5.models.Submission;
 
@@ -19,40 +19,40 @@ import java.util.UUID;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/submission")
 public class SubmissionController {
-    private final SubmissionDAO submissionDAO;
+    private final SubmissionService submissionService;
 
-    public SubmissionController(SubmissionDAO submissionDAO) {
-        this.submissionDAO = submissionDAO;
+    public SubmissionController(SubmissionService submissionService) {
+        this.submissionService = submissionService;
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('SUBMISSION_GET') || hasAuthority('SUBMISSION') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public ResponseEntity<Optional<Submission>> getSubmissionById(@PathVariable UUID id){
-        return ResponseEntity.ok(this.submissionDAO.getSubmissionById(id));
+        return ResponseEntity.ok(this.submissionService.getSubmissionById(id));
     }
 
     @GetMapping("/user/{id}")
     @PreAuthorize("hasAuthority('SUBMISSION_GET') || hasAuthority('SUBMISSION') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public ResponseEntity<List<Submission>> getSubmissionByUserId(@PathVariable UUID id){
-        return ResponseEntity.ok(this.submissionDAO.getSubmissionByUserId(id));
+        return ResponseEntity.ok(this.submissionService.getSubmissionByUserId(id));
     }
 
     @GetMapping
     @PreAuthorize("hasAuthority('SUBMISSION_GET') || hasAuthority('SUBMISSION') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public ResponseEntity<List<Submission>> getAllSubmissions(){
-        return ResponseEntity.ok(this.submissionDAO.getAllSubmissions());
+        return ResponseEntity.ok(this.submissionService.getAllSubmissions());
     }
 
     @PostMapping
     @PreAuthorize("hasAuthority('SUBMISSION_POST') || hasAuthority('SUBMISSION') || hasAuthority('ALL') || hasAuthority('POSTEN')")
     public ResponseEntity<Submission> createSubmission(@RequestBody SubmissionDTO submissionDTO){
-        Submission submission = this.submissionDAO.createSubmission(submissionDTO);
+        Submission submission = this.submissionService.createSubmission(submissionDTO);
         return ResponseEntity.ok(submission);
     }
     @GetMapping("/{id}/pdf")
     @PreAuthorize("hasAuthority('SUBMISSION_GET') || hasAuthority('SUBMISSION') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public ResponseEntity<byte[]> getUserPdf(@PathVariable UUID id) {
-        byte[] pdf = submissionDAO.getUserPdf(id);
+        byte[] pdf = submissionService.getUserPdf(id);
         if (pdf != null) {
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_PDF)
@@ -64,13 +64,13 @@ public class SubmissionController {
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('SUBMISSION_PUT') || hasAuthority('SUBMISSION') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
     public ResponseEntity<String> editSubmission(@PathVariable UUID id, @RequestBody SubmissionDTO submissionDTO){
-        this.submissionDAO.editSubmission(id, submissionDTO);
+        this.submissionService.editSubmission(id, submissionDTO);
         return ResponseEntity.ok("Edited Submission with id: " + id);
     }
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('SUBMISSION_DELETE') || hasAuthority('SUBMISSION') || hasAuthority('ALL') || hasAuthority('DELETEN')")
     public ResponseEntity<?> deleteSubmission(@PathVariable("id") UUID id){
-        this.submissionDAO.deleteSubmission(id);
+        this.submissionService.deleteSubmission(id);
         return ResponseEntity.ok("deleted Submission with id: " + id);
     }
 
@@ -80,7 +80,7 @@ public class SubmissionController {
     public ResponseEntity<Void> uploadUserPdf(@RequestParam("file") MultipartFile file, @PathVariable("submissionId") UUID id) {
         try {
             System.out.println("hup");
-            submissionDAO.saveSubmissionPdf(file, id);
+            submissionService.saveSubmissionPdf(file, id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             System.out.println(e);

@@ -1,23 +1,22 @@
-package ipsen5.dao;
+package ipsen5.services;
 
-import ipsen5.dto.RatingDTO;
 import ipsen5.dto.ReactionDTO;
 import ipsen5.models.Post;
-import ipsen5.models.Rating;
 import ipsen5.models.Reaction;
+import ipsen5.repository.PostRepository;
+import ipsen5.repository.ReactionRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Component
-public class ReactionDAO {
+public class ReactionService {
     private final ReactionRepository reactionRepository;
     private final PostRepository postRepository;
 
-    public ReactionDAO(ReactionRepository reactionRepository, PostRepository postRepository) {
+    public ReactionService(ReactionRepository reactionRepository, PostRepository postRepository) {
         this.reactionRepository = reactionRepository;
         this.postRepository = postRepository;
     }

@@ -1,8 +1,9 @@
-package ipsen5.dao;
+package ipsen5.services;
 
 import ipsen5.dto.RubricDTO;
 import ipsen5.models.Criteria;
 import ipsen5.models.Rubric;
+import ipsen5.repository.RubricRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,10 +11,10 @@ import java.util.Set;
 import java.util.UUID;
 
 @Component
-public class RubricDAO {
+public class RubricService {
     private final RubricRepository rubricRepository;
 
-    public RubricDAO(RubricRepository rubricRepository) {
+    public RubricService(RubricRepository rubricRepository) {
         this.rubricRepository = rubricRepository;
     }
 

@@ -1,18 +1,18 @@
-package ipsen5.dao;
+package ipsen5.services;
 
-import ipsen5.dto.PostDTO;
 import ipsen5.dto.RatingDTO;
 import ipsen5.models.*;
+import ipsen5.repository.RatingRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 
 @Component
-public class RatingDAO {
+public class RatingService {
     private final RatingRepository ratingRepository;
 
-    public RatingDAO(RatingRepository ratingRepository) {
+    public RatingService(RatingRepository ratingRepository) {
         this.ratingRepository = ratingRepository;
     }
     public List<Rating> getAllRatings() {

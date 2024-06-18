@@ -1,7 +1,7 @@
 package ipsen5.utils;
 
-import ipsen5.dao.RoleRepository;
-import ipsen5.dao.UserRepository;
+import ipsen5.repository.RoleRepository;
+import ipsen5.repository.UserRepository;
 import ipsen5.models.Role;
 import ipsen5.models.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

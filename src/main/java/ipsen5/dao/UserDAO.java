@@ -1,10 +1,10 @@
 package ipsen5.dao;
 
-import ipsen5.dto.StatusDTO;
 import ipsen5.dto.UserDTO;
 import ipsen5.models.Role;
-import ipsen5.models.Status;
 import ipsen5.models.User;
+import ipsen5.repository.RoleRepository;
+import ipsen5.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

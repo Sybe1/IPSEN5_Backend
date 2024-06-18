@@ -1,9 +1,9 @@
 package ipsen5.services;
 
-import ipsen5.dao.RolePriviligesRepository;
-import ipsen5.dao.UserRepository;
 import ipsen5.models.RolePriviliges;
 import ipsen5.models.User;
+import ipsen5.repository.RolePriviligesRepository;
+import ipsen5.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -1,4 +1,4 @@
-package ipsen5.dao;
+package ipsen5.repository;
 
 import ipsen5.models.PostCategory;
 import ipsen5.models.PostCategoryId;

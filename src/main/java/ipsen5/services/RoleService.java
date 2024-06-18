@@ -1,11 +1,8 @@
-package ipsen5.dao;
+package ipsen5.services;
 
-import ipsen5.dto.PostDTO;
 import ipsen5.dto.RoleDTO;
-import ipsen5.models.Category;
-import ipsen5.models.Post;
-import ipsen5.models.PostCategoryId;
 import ipsen5.models.Role;
+import ipsen5.repository.RoleRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,10 +10,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Component
-public class RoleDAO {
+public class RoleService {
     private final RoleRepository roleRepository;
 
-    public RoleDAO(RoleRepository roleRepository) {
+    public RoleService(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
     }
 
