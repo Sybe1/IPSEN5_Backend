@@ -79,12 +79,32 @@ public class SubmissionController {
     @PreAuthorize("hasAuthority('SUBMISSION_POST') || hasAuthority('SUBMISSION') || hasAuthority('ALL') || hasAuthority('POSTEN')")
     public ResponseEntity<Void> uploadUserPdf(@RequestParam("file") MultipartFile file, @PathVariable("submissionId") UUID id) {
         try {
-            System.out.println("hup");
             submissionService.saveSubmissionPdf(file, id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @PostMapping("/{submissionId}/picture" )
+    @PreAuthorize("hasAuthority('SUBMISSION_POST') || hasAuthority('SUBMISSION') || hasAuthority('ALL') || hasAuthority('POSTEN')")
+    public ResponseEntity<Void> uploadUserPicture(@RequestParam("file") MultipartFile file, @PathVariable("submissionId") UUID id) {
+        try {
+            submissionService.saveSubmissionPicture(file, id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+    @GetMapping("/{id}/picture")
+    @PreAuthorize("hasAuthority('SUBMISSION_GET') || hasAuthority('SUBMISSION') || hasAuthority('ALL') || hasAuthority('GETTEN')")
+    public ResponseEntity<byte[]> getUserPicture(@PathVariable UUID id) {
+        byte[] picture = submissionService.getUserPicture(id);
+        if (picture != null) {
+            return ResponseEntity.ok()
+                    .contentType(MediaType.IMAGE_JPEG)
+                    .body(picture);
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 }
