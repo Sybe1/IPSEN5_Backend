@@ -7,6 +7,7 @@ import ipsen5.repository.UserRepository;
 import ipsen5.dto.AuthenticationDTO;
 import ipsen5.dto.LoginResponse;
 import ipsen5.models.User;
+import ipsen5.services.AuthService;
 import ipsen5.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,58 +22,22 @@ import org.springframework.web.server.ResponseStatusException;
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/auth")
 public class AuthController {
+    private final AuthService authService;
 
-    private final UserRepository userRepository;
-    private final UserDAO userDAO;
-    private final RoleRepository roleRepository;
-    private final JWTUtil jwtUtil;
-    private final AuthenticationManager authManager;
-    private final PasswordEncoder passwordEncoder;
-    private final UserService userService;
-
-    public AuthController(UserRepository userRepository,
-                          JWTUtil jwtUtil,
-                          AuthenticationManager authManager,
-                          PasswordEncoder passwordEncoder,
-                          RoleRepository roleRepository,
-                          UserService userService,
-                          UserDAO userDAO) {
-        this.userRepository = userRepository;
-        this.jwtUtil = jwtUtil;
-        this.authManager = authManager;
-        this.passwordEncoder = passwordEncoder;
-        this.roleRepository = roleRepository;
-        this.userService = userService;
-        this.userDAO = userDAO;
+    public AuthController(AuthService authService) {
+        this.authService = authService;
     }
 
     @PostMapping("/register")
     public ResponseEntity<LoginResponse> register(@RequestBody AuthenticationDTO authenticationDTO) {
-        LoginResponse loginResponse = userDAO.registerUser(authenticationDTO);
+        LoginResponse loginResponse = authService.registerUser(authenticationDTO);
         return ResponseEntity.ok(loginResponse);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody AuthenticationDTO body) {
-        try {
-            UsernamePasswordAuthenticationToken authInputToken =
-                    new UsernamePasswordAuthenticationToken(body.email, body.password);
-
-            authManager.authenticate(authInputToken);
-
-            String token = jwtUtil.generateToken(body.email);
-
-            User user = userRepository.findByEmail(body.email);
-            LoginResponse loginResponse = new LoginResponse(user.getEmail(), token);
-
-
-            return ResponseEntity.ok(loginResponse);
-
-        } catch (AuthenticationException authExc) {
-            throw new ResponseStatusException(
-                    HttpStatus.FORBIDDEN, "No valid credentials"
-            );
-        }
+    public ResponseEntity<LoginResponse> login(@RequestBody AuthenticationDTO authenticationDTO) {
+        LoginResponse loginResponse = authService.loginUser(authenticationDTO);
+        return ResponseEntity.ok(loginResponse);
     }
 
 }
