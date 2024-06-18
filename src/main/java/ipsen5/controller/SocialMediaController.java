@@ -32,7 +32,6 @@ public class SocialMediaController {
     }
 
     @GetMapping("/user/{username}")
-    @PreAuthorize("hasAuthority('SOCIALMEDIA_GET') || hasAuthority('SOCIALMEDIA') || hasAuthority('ALL') || hasAuthority('GETTEN')")
     public ResponseEntity<List<SocialMedia>> getSocialMediaByUsername(@PathVariable String username){
         return ResponseEntity.ok(this.socialMediaService.getSocialMediaByUsername(username));
     }
