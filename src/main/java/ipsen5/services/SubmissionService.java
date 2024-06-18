@@ -54,8 +54,11 @@ public class SubmissionService {
         if (submissionDTO.type.equals("Text")){
             submission.setRubric(rubrics.get(0));
         }
-        else {
+        else if(submissionDTO.type.equals("Audio")){
             submission.setRubric(rubrics.get(1));
+        }
+        else if(submissionDTO.type.equals("Video")){
+            submission.setRubric(rubrics.get(2));
         }
 
         submission.setName(submissionDTO.name);

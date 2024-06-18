@@ -29,6 +29,10 @@ public class CriteriaSeeder {
         UUID rubricId2 = rubricRepository.findAll().get(1).getId();
         Rubric rubric2 = rubricRepository.findById(rubricId2).orElse(null);
 
+        UUID rubricId3 = rubricRepository.findAll().get(2).getId();
+        Rubric rubric3 = rubricRepository.findById(rubricId3).orElse(null);
+
+
         System.out.println("de naam is..:" + rubric);
         if (rubric != null) {
             Criteria criteria1 = new Criteria();
@@ -41,12 +45,15 @@ public class CriteriaSeeder {
             criteria1.setFourPoints("Very good");
             criteria1.setFivePoints("Excillent");
             criteria1.getRubrics().add(rubric);
-            criteria1.getRubrics().add(rubric2);
+
             criteriaRepository.save(criteria1);
 
             rubric.getCriteria().add(criteria1);
+
             rubricRepository.save(rubric);
-            rubricRepository.save(rubric2);
+
+
+
 
 
             Criteria criteria3 = new Criteria();
@@ -58,11 +65,16 @@ public class CriteriaSeeder {
             criteria3.setThreePoints("Really good");
             criteria3.setFourPoints("Very good");
             criteria3.setFivePoints("Excillent");
-
+            criteria3.getRubrics().add(rubric2);
+            criteria3.getRubrics().add(rubric3);
             criteria3.getRubrics().add(rubric);
             criteriaRepository.save(criteria3);
             rubric.getCriteria().add(criteria3);
+            rubric2.getCriteria().add(criteria3);
+            rubric3.getCriteria().add(criteria3);
             rubricRepository.save(rubric);
+            rubricRepository.save(rubric2);
+            rubricRepository.save(rubric3);
 
             Criteria criteria4 = new Criteria();
             criteria4.setMainName("Immersion");
@@ -74,9 +86,15 @@ public class CriteriaSeeder {
             criteria4.setFourPoints("very good");
             criteria4.setFivePoints("Very good");
             criteria4.getRubrics().add(rubric);
+            criteria4.getRubrics().add(rubric2);
+            criteria4.getRubrics().add(rubric3);
             criteriaRepository.save(criteria4);
             rubric.getCriteria().add(criteria4);
+            rubric2.getCriteria().add(criteria4);
+            rubric3.getCriteria().add(criteria4);
             rubricRepository.save(rubric);
+            rubricRepository.save(rubric2);
+            rubricRepository.save(rubric3);
 
             Criteria criteria5 = new Criteria();
             criteria5.setMainName("Immersion");
@@ -89,9 +107,15 @@ public class CriteriaSeeder {
             criteria5.setFivePoints("Good details");
 
             criteria5.getRubrics().add(rubric);
+            criteria5.getRubrics().add(rubric2);
+            criteria5.getRubrics().add(rubric3);
             criteriaRepository.save(criteria5);
             rubric.getCriteria().add(criteria5);
+            rubric2.getCriteria().add(criteria5);
+            rubric3.getCriteria().add(criteria5);
             rubricRepository.save(rubric);
+            rubricRepository.save(rubric2);
+            rubricRepository.save(rubric3);
 
             Criteria criteria2 = new Criteria();
             criteria2.setMainName("Plot & Theme");
@@ -102,11 +126,17 @@ public class CriteriaSeeder {
             criteria2.setThreePoints("Really good");
             criteria2.setFourPoints("Very good");
             criteria2.setFivePoints("Excillent");
-            criteria2.getRubrics().add(rubric);
-            criteriaRepository.save(criteria2);
 
+            criteria2.getRubrics().add(rubric);
+            criteria2.getRubrics().add(rubric2);
+            criteria2.getRubrics().add(rubric3);
+            criteriaRepository.save(criteria2);
             rubric.getCriteria().add(criteria2);
+            rubric2.getCriteria().add(criteria2);
+            rubric3.getCriteria().add(criteria2);
             rubricRepository.save(rubric);
+            rubricRepository.save(rubric2);
+            rubricRepository.save(rubric3);
 
             Criteria criteria6 = new Criteria();
             criteria6.setMainName("Plot & Theme");
@@ -118,10 +148,15 @@ public class CriteriaSeeder {
             criteria6.setFourPoints("Very good");
             criteria6.setFivePoints("Excillent");
             criteria6.getRubrics().add(rubric);
+            criteria6.getRubrics().add(rubric2);
+            criteria6.getRubrics().add(rubric3);
             criteriaRepository.save(criteria6);
-
             rubric.getCriteria().add(criteria6);
+            rubric2.getCriteria().add(criteria6);
+            rubric3.getCriteria().add(criteria6);
             rubricRepository.save(rubric);
+            rubricRepository.save(rubric2);
+            rubricRepository.save(rubric3);
 
             Criteria criteria7 = new Criteria();
             criteria7.setMainName("Plot & Theme");
@@ -133,10 +168,16 @@ public class CriteriaSeeder {
             criteria7.setFourPoints("Very good");
             criteria7.setFivePoints("Excillent");
             criteria7.getRubrics().add(rubric);
+            criteria7.getRubrics().add(rubric2);
+            criteria7.getRubrics().add(rubric3);
             criteriaRepository.save(criteria7);
-
             rubric.getCriteria().add(criteria7);
+            rubric2.getCriteria().add(criteria7);
+            rubric3.getCriteria().add(criteria7);
             rubricRepository.save(rubric);
+            rubricRepository.save(rubric2);
+            rubricRepository.save(rubric3);
+
 
             Criteria criteria8 = new Criteria();
             criteria8.setMainName("Characters & Setting");
@@ -148,10 +189,15 @@ public class CriteriaSeeder {
             criteria8.setFourPoints("Very good");
             criteria8.setFivePoints("Excillent");
             criteria8.getRubrics().add(rubric);
+            criteria8.getRubrics().add(rubric2);
+            criteria8.getRubrics().add(rubric3);
             criteriaRepository.save(criteria8);
-
             rubric.getCriteria().add(criteria8);
+            rubric2.getCriteria().add(criteria8);
+            rubric3.getCriteria().add(criteria8);
             rubricRepository.save(rubric);
+            rubricRepository.save(rubric2);
+            rubricRepository.save(rubric3);
 
             Criteria criteria9 = new Criteria();
             criteria9.setMainName("Characters & Setting");
@@ -163,10 +209,16 @@ public class CriteriaSeeder {
             criteria9.setFourPoints("Very good");
             criteria9.setFivePoints("Excillent");
             criteria9.getRubrics().add(rubric);
+            criteria9.getRubrics().add(rubric2);
+            criteria9.getRubrics().add(rubric3);
             criteriaRepository.save(criteria9);
-
             rubric.getCriteria().add(criteria9);
+            rubric2.getCriteria().add(criteria9);
+            rubric3.getCriteria().add(criteria9);
             rubricRepository.save(rubric);
+            rubricRepository.save(rubric2);
+            rubricRepository.save(rubric3);
+
 
             Criteria criteria10 = new Criteria();
             criteria10.setMainName("Freshness of ideas");
@@ -178,10 +230,16 @@ public class CriteriaSeeder {
             criteria10.setFourPoints("Very good");
             criteria10.setFivePoints("Excillent");
             criteria10.getRubrics().add(rubric);
+            criteria10.getRubrics().add(rubric2);
+            criteria10.getRubrics().add(rubric3);
             criteriaRepository.save(criteria10);
 
             rubric.getCriteria().add(criteria10);
+            rubric2.getCriteria().add(criteria10);
+            rubric3.getCriteria().add(criteria10);
             rubricRepository.save(rubric);
+            rubricRepository.save(rubric2);
+            rubricRepository.save(rubric3);
 
             Criteria criteria11 = new Criteria();
             criteria11.setMainName("Freshness of ideas");
@@ -193,10 +251,16 @@ public class CriteriaSeeder {
             criteria11.setFourPoints("Very good");
             criteria11.setFivePoints("Excillent");
             criteria11.getRubrics().add(rubric);
+            criteria11.getRubrics().add(rubric2);
+            criteria11.getRubrics().add(rubric3);
             criteriaRepository.save(criteria11);
 
             rubric.getCriteria().add(criteria11);
+            rubric2.getCriteria().add(criteria11);
+            rubric3.getCriteria().add(criteria11);
             rubricRepository.save(rubric);
+            rubricRepository.save(rubric2);
+            rubricRepository.save(rubric3);
 
             Criteria criteria12 = new Criteria();
             criteria12.setMainName("Freshness of ideas");
@@ -208,10 +272,49 @@ public class CriteriaSeeder {
             criteria12.setFourPoints("Very good");
             criteria12.setFivePoints("Excillent");
             criteria12.getRubrics().add(rubric);
+            criteria12.getRubrics().add(rubric2);
+            criteria12.getRubrics().add(rubric3);
             criteriaRepository.save(criteria12);
-
             rubric.getCriteria().add(criteria12);
+            rubric2.getCriteria().add(criteria12);
+            rubric3.getCriteria().add(criteria12);
             rubricRepository.save(rubric);
+            rubricRepository.save(rubric2);
+            rubricRepository.save(rubric3);
+
+
+            Criteria criteria13 = new Criteria();
+            criteria13.setMainName("Technique");
+            criteria13.setSubName("Audio");
+            criteria13.setZeroPoints("Very bad");
+            criteria13.setOnePoints("Bad");
+            criteria13.setTwoPoints("Decent");
+            criteria13.setThreePoints("Really good");
+            criteria13.setFourPoints("Very good");
+            criteria13.setFivePoints("Excillent");
+
+            criteria13.getRubrics().add(rubric3);
+
+            criteriaRepository.save(criteria13);
+            rubric3.getCriteria().add(criteria13);
+            rubricRepository.save(rubric3);
+
+            Criteria criteria14 = new Criteria();
+            criteria14.setMainName("Technique");
+            criteria14.setSubName("Audio");
+            criteria14.setZeroPoints("Very bad");
+            criteria14.setOnePoints("Bad");
+            criteria14.setTwoPoints("Decent");
+            criteria14.setThreePoints("Really good");
+            criteria14.setFourPoints("Very good");
+            criteria14.setFivePoints("Excillent");
+
+            criteria14.getRubrics().add(rubric2);
+
+            criteriaRepository.save(criteria14);
+            rubric2.getCriteria().add(criteria14);
+            rubricRepository.save(rubric2);
+
         }
     }
 }
