@@ -1,8 +1,14 @@
 package ipsen5.utils;
 
+import ipsen5.dao.*;
+import ipsen5.models.*;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+import java.util.List;
 
 @Component
 public class Seeder {
@@ -54,7 +60,7 @@ public class Seeder {
     }
 
     @EventListener
-    public void seed(ContextRefreshedEvent event){
+    public void seed(ContextRefreshedEvent event) throws IOException {
         roleSeeder.seedRole();
         userSeeder.seedUser();
         postSeeder.seedPost();

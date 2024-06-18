@@ -25,9 +25,5 @@ public class RoleSeeder {
         Role role3 = new Role();
         role3.setName("Creator");
         roleRepository.save(role3);
-
-        Role role4 = new Role();
-        role4.setName("Registered User");
-        roleRepository.save(role4);
     }
 }
