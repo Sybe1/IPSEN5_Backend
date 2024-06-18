@@ -27,19 +27,19 @@ public class ReactionSeeder {
         List<Post> allPosts = postRepository.findAll();
 
         Reaction reaction = new Reaction();
-        reaction.setText("De post is erg mooi");
+        reaction.setText("Such a good story!");
         reaction.setUser_id(allUsers.get(0));
         reaction.setPostId(allPosts.get(0));
         reactionRepository.save(reaction);
 
         Reaction reaction2 = new Reaction();
-        reaction2.setText("De post is kort");
+        reaction2.setText("Story could have been longer!");
         reaction2.setUser_id(allUsers.get(0));
         reaction2.setPostId(allPosts.get(1));
         reactionRepository.save(reaction2);
 
         Reaction reaction3 = new Reaction();
-        reaction3.setText("De post had beter gekund!");
+        reaction3.setText("Love this story!!");
         reaction3.setUser_id(allUsers.get(1));
         reaction3.setPostId(allPosts.get(1));
         reactionRepository.save(reaction3);

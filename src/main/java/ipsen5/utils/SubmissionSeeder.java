@@ -1,12 +1,16 @@
 package ipsen5.utils;
 
+import ipsen5.models.*;
 import ipsen5.repository.RubricRepository;
 import ipsen5.repository.StatusRepository;
 import ipsen5.repository.SubmissionRespository;
 import ipsen5.repository.UserRepository;
-import ipsen5.models.*;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Component
@@ -27,10 +31,18 @@ public class SubmissionSeeder {
         this.rubricRepository = rubricRepository;
     }
 
-    public void seedSubmission(){
+    public byte[] readPdfAsBytes(String filePath) throws IOException {
+        Path path = Paths.get(filePath);
+        return Files.readAllBytes(path);
+    }
+
+    public void seedSubmission() throws IOException {
          List<User> allUsers = userRepository.findAll();
          List<Status> allStatus = statusRepository.findAll();
          List<Rubric> allRubrics = rubricRepository.findAll();
+
+        String pdfFilePath = "src/main/resources/pdfs/CouncilOfStones.pdf";
+        byte[] pdfData = readPdfAsBytes(pdfFilePath);
 
          Submission submission = new Submission();
          submission.setUser_id(allUsers.get(0));
@@ -48,7 +60,11 @@ public class SubmissionSeeder {
          submission.setExtra_feedback(true);
          submission.setExpress_experience(true);
          submission.setRubric(allRubrics.get(0));
-         submissionRespository.save(submission);
+        submission.setPdf(pdfData);
+        submissionRespository.save(submission);
+
+        pdfFilePath = "src/main/resources/pdfs/DepthsOfMountains.pdf";
+        pdfData = readPdfAsBytes(pdfFilePath);
 
          Submission submission2 = new Submission();
          submission2.setUser_id(allUsers.get(1));
@@ -68,7 +84,8 @@ public class SubmissionSeeder {
         submission2.setRubric(allRubrics.get(0));
          submission2.setExtra_feedback(true);
          submission2.setRubric(allRubrics.get(0));
-         submissionRespository.save(submission2);
+        submission2.setPdf(pdfData);
+        submissionRespository.save(submission2);
 
 
     }

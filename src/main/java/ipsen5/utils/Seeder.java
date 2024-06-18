@@ -4,6 +4,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 @Component
 public class Seeder {
     private final PostSeeder postSeeder;
@@ -54,7 +56,7 @@ public class Seeder {
     }
 
     @EventListener
-    public void seed(ContextRefreshedEvent event){
+    public void seed(ContextRefreshedEvent event) throws IOException {
         roleSeeder.seedRole();
         userSeeder.seedUser();
         postSeeder.seedPost();
