@@ -12,7 +12,10 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,8 +43,13 @@ public class SubmissionServiceTest {
     private List<Rubric> rubrics;
     private SubmissionDTO submissionDTO;
 
+    @Mock
+    private MultipartFile file;
+
     @BeforeEach
     public void setup(){
+        MockitoAnnotations.openMocks(this);
+
         submissionRepository = Mockito.mock(SubmissionRespository.class);
         rubricRepository = Mockito.mock(RubricRepository.class);
         submissionService = new SubmissionService(submissionRepository, rubricRepository);
@@ -240,7 +248,41 @@ public class SubmissionServiceTest {
         verify(submissionRepository, times(1)).save(any(Submission.class));
     }
 
-    
+    @Test
+    public void testSaveSubmissionPdf() throws IOException {
+        byte[] fileContent = "Test PDF content".getBytes();
+
+        // Mock the behavior of file and repository methods
+        when(file.getBytes()).thenReturn(fileContent);
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
+        when(submissionRepository.save(any(Submission.class))).thenReturn(submission);
+
+        // Call the service method
+        submissionService.saveSubmissionPdf(file, submission.getId());
+
+        // Verify that the PDF content was set correctly
+        assertArrayEquals(fileContent, submission.getPdf());
+
+        // Verify repository methods were called
+        verify(submissionRepository, times(1)).findById(submission.getId());
+        verify(submissionRepository, times(1)).save(submission);
+    }
+
+    @Test
+    public void testSaveSubmissionPdfSubmissionNotFound() {
+        // Mock the behavior of repository methods
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
+
+        // Expect a RuntimeException when the submission is not found
+        assertThrows(RuntimeException.class, () -> {
+            submissionService.saveSubmissionPdf(file, submission.getId());
+        });
+
+        // Verify repository methods were called
+        verify(submissionRepository, times(1)).findById(submission.getId());
+        verify(submissionRepository, never()).save(any(Submission.class));
+    }
+
 
 
 
