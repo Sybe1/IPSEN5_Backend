@@ -1,6 +1,7 @@
 package ipsen5.utils;
 
 import ipsen5.models.*;
+import ipsen5.models.enums.PrefferedDestination;
 import ipsen5.repository.RubricRepository;
 import ipsen5.repository.StatusRepository;
 import ipsen5.repository.SubmissionRespository;
@@ -54,7 +55,7 @@ public class SubmissionSeeder {
          submission.setWordCount(100);
          submission.setGenre("romance");
          submission.setAdditional_notes("additional_notes");
-         submission.setPrefferd_destination("Babels CHOICE");
+         submission.setPrefferd_destination(PrefferedDestination.OFFICIAL_SELECTION);
         submission.setStory_title("First story");
         submission.setPlatform_presence(true);
          submission.setExtra_feedback(true);
@@ -77,7 +78,7 @@ public class SubmissionSeeder {
          submission2.setWordCount(200);
         submission2.setGenre("Horror");
         submission2.setAdditional_notes("Thank you!");
-        submission2.setPrefferd_destination("Official Selection");
+        submission2.setPrefferd_destination(PrefferedDestination.BABELs_CHOICE);
         submission2.setPlatform_presence(true);
         submission2.setExtra_feedback(true);
         submission2.setExpress_experience(true);

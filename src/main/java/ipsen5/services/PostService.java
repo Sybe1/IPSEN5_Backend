@@ -4,6 +4,7 @@ import ipsen5.dto.PostDTO;
 import ipsen5.models.Post;
 import ipsen5.models.Reaction;
 import ipsen5.models.User;
+import ipsen5.models.enums.PrefferedDestination;
 import ipsen5.repository.*;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +36,7 @@ public class PostService {
     }
 
     public void createPost(PostDTO postDTO) {
-        this.postRepository.save(new Post(postDTO.title, postDTO.text, postDTO.imageUrl, LocalDate.now(), postDTO.genres, postDTO.user));
+        this.postRepository.save(new Post(postDTO.title, postDTO.text, postDTO.imageUrl, postDTO.prefferedDestination, LocalDate.now(), postDTO.genres, postDTO.user));
     }
 
     public void editPost(UUID id, PostDTO postDTO) {
@@ -43,6 +44,7 @@ public class PostService {
         post.setText(postDTO.text);
         post.setUser(postDTO.user);
         post.setImageUrl(postDTO.imageUrl);
+        post.setPrefferedDestination(postDTO.prefferedDestination);
         post.setLocalDate(postDTO.localDate);
         post.setTitle(postDTO.title);
         this.postRepository.save(post);
@@ -69,5 +71,9 @@ public class PostService {
     public List<Post> getPostsByUserId(String username) {
         User user = this.userRepository.findByUsername(username);
         return this.postRepository.findByUser(user);
+    }
+
+    public List<Post> getPostsByPrefferedDestination(PrefferedDestination prefferedDestination) {
+        return this.postRepository.findByPrefferedDestination(prefferedDestination);
     }
 }

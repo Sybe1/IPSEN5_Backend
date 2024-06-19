@@ -1,5 +1,6 @@
 package ipsen5.repository;
 
+import ipsen5.models.enums.PrefferedDestination;
 import ipsen5.models.Post;
 import ipsen5.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -20,6 +21,8 @@ public interface PostRepository extends JpaRepository<Post, UUID>{
     List<Post> findByTitleContaining(@Param("title") String title);
 
     List<Post> findByUser(User user);
+
+    List<Post> findByPrefferedDestination(PrefferedDestination prefferedDestination);
 }
 
 
