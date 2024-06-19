@@ -101,6 +101,46 @@ public class RoleServiceTest {
         verify(roleRepository, Mockito.times(1)).save(any(Role.class));
     }
 
+    @Test
+    public void testEditRole() {
+
+        RoleDTO updatedRoleDTO = new RoleDTO();
+        updatedRoleDTO.setName("Creator");
+
+        // Mocking behavior
+        when(roleRepository.findById(role.getId())).thenReturn(Optional.of(role));
+        when(roleRepository.save(any(Role.class))).thenReturn(role); // Mock the save operation
+
+        // When
+        roleService.editRole(role.getId(), updatedRoleDTO);
+
+        // Then
+        verify(roleRepository, Mockito.times(1)).findById(role.getId()); // Verify findById was called once
+        verify(roleRepository, Mockito.times(1)).save(role); // Verify save was called once with the updated role
+
+        // Assert the updated name
+        assertEquals(updatedRoleDTO.getName(), role.getName());
+    }
+
+    @Test
+    public void testEditRoleNotFound() {
+        // Given
+        UUID nonExistingId = UUID.randomUUID();
+        RoleDTO roleDTO = new RoleDTO();
+        roleDTO.setName("Creator");
+
+        // Mocking behavior for a non-existing role
+        when(roleRepository.findById(nonExistingId)).thenReturn(Optional.empty());
+
+        // When
+        try {
+            roleService.editRole(nonExistingId, roleDTO);
+        } catch (RuntimeException ex) {
+            // Then
+            assertEquals("Role not found", ex.getMessage());
+        }
+    }
+
 
 
 
