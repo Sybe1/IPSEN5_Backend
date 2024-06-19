@@ -65,6 +65,7 @@ public class Submission {
     @NotNull
     private Status statusID;
 
+    @Getter
     @ManyToOne
     @NotNull
     private User user_id;
