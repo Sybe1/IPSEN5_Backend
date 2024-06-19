@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres2
-    username: postgres2
-    password: 1234
+    url: jdbc:postgresql://db-ipsen5-do-user-16136531-0.c.db.ondigitalocean.com:25060/defaultdb
+    username: test
+    password: test
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -17,6 +17,10 @@ jwt:
   expiration: 86400000
 
 server:
-  error:
-    include-stacktrace: never
-
+  port: 8080
+  address: 159.223.228.6
+  ssl:
+    key-store: /etc/ssl/keystore.p12
+    key-store-password: ipsen5
+    key-store-type: PKCS12
+    key-alias: www.websiteiprwc.site
