@@ -36,11 +36,16 @@ public class SocialMediaController {
         return ResponseEntity.ok(this.socialMediaService.getSocialMediaByUsername(username));
     }
 
+    @GetMapping("/user/{username}/category/{category}")
+    public ResponseEntity<SocialMedia> getSocialMediaByUsernameAndCategory(@PathVariable String username, @PathVariable SocialMediaCategories category){
+        return ResponseEntity.ok(this.socialMediaService.getSocialMediaByUsernameAndCategory(username, category));
+    }
+
     @PostMapping
     @PreAuthorize("hasAuthority('SOCIALMEDIA_POST') || hasAuthority('SOCIALMEDIA') || hasAuthority('ALL') || hasAuthority('POSTEN')")
     public ResponseEntity<SocialMedia> createSocialMedia(@RequestBody SocialMediaDTO socialMediaDTO) {
         User user = socialMediaDTO.user;
-        SocialMediaCategories socialMediaCategory = socialMediaDTO.socialMediaCategories;
+        SocialMediaCategories socialMediaCategory = socialMediaDTO.socialMediaCategory;
 
         SocialMedia socialMedia = new SocialMedia(UUID.randomUUID(), user, socialMediaCategory, socialMediaDTO.socialMediaLink);
         SocialMedia savedSocialMedia = socialMediaService.saveSocialMedia(socialMedia);
@@ -54,7 +59,7 @@ public class SocialMediaController {
         if (existingSocialMedia.isPresent()) {
             SocialMedia socialMedia = existingSocialMedia.get();
             socialMedia.setUser(socialMediaDTO.user);
-            socialMedia.setSocialMediaCategory(socialMediaDTO.socialMediaCategories);
+            socialMedia.setSocialMediaCategory(socialMediaDTO.socialMediaCategory);
             socialMedia.setSocialMediaLink(socialMediaDTO.socialMediaLink);
 
             SocialMedia updatedSocialMedia = socialMediaService.saveSocialMedia(socialMedia);
