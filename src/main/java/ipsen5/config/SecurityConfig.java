@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/post/**").permitAll()
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/reaction/**").permitAll()
+                        .requestMatchers("/reaction/post/**").permitAll()
                         .requestMatchers("/users/username/**").permitAll()
                         .requestMatchers("/users/mail/**").permitAll()
                         .requestMatchers("/rating/**").permitAll()

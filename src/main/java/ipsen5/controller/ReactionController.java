@@ -20,7 +20,7 @@ public class ReactionController {
         this.reactionService = reactionService;
     }
 
-    @GetMapping("/{postId}")
+    @GetMapping("/post/{postId}")
     public ResponseEntity<List<Reaction>> getAllReactionsByPostId(@PathVariable UUID postId) {
         List<Reaction> reactions = reactionService.getAllReactionsByPostId(postId);
         return ResponseEntity.ok(reactions);
