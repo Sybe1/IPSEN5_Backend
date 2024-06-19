@@ -24,7 +24,7 @@ public class StatusSeeder {
 
         Status status2 = new Status();
         UUID id1 = UUID.fromString("c56a4180-65aa-42ec-a945-5fd21dec0538");
-        status2.setId(id1);  // Use status2 to set id
+        status2.setId(id1);
         status2.setStatus("In Review...");
         statusRepository.save(status2);
 

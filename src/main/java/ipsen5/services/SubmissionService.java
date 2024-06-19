@@ -54,24 +54,14 @@ public class SubmissionService {
         if (submissionDTO.type.equals("Text")){
             submission.setRubric(rubrics.get(0));
         }
-        else {
+        else if(submissionDTO.type.equals("Audio")){
             submission.setRubric(rubrics.get(1));
         }
+        else if(submissionDTO.type.equals("Video")){
+            submission.setRubric(rubrics.get(2));
+        }
 
-        submission.setName(submissionDTO.name);
-        submission.setEmail(submissionDTO.email);
-        submission.setOnline_profiles(submissionDTO.online_profiles);
-        submission.setStory_title(submissionDTO.story_title);
-        submission.setType(submissionDTO.type);
-        submission.setWordCount(submissionDTO.wordCount);
-        submission.setGenre(submissionDTO.genre);
-        submission.setAdditional_notes(submissionDTO.additional_notes);
-        submission.setPrefferd_destination(submissionDTO.prefferd_destination);
-        submission.setPlatform_presence(submissionDTO.platform_presence);
-        submission.setExpress_experience(submissionDTO.express_experience);
-        submission.setExtra_feedback(submissionDTO.extra_feedback);
-        submission.setStatusID(submissionDTO.statusID);
-        submission.setUser_id(submissionDTO.user_id);
+        submission = this.makeSubmission(submission, submissionDTO);
         return this.submissionRespository.save(submission);
     }
     public void saveSubmissionPdf(MultipartFile file, UUID submissionId) throws IOException {
@@ -79,14 +69,36 @@ public class SubmissionService {
         foundSubmission.setPdf(file.getBytes());
         submissionRespository.save(foundSubmission);
     }
+
+    public void saveSubmissionPicture(MultipartFile file, UUID submissionId) throws IOException {
+        Submission foundSubmission = getSubmissionById(submissionId).orElseThrow(() -> new RuntimeException("Post not found"));
+        foundSubmission.setPicture(file.getBytes());
+        submissionRespository.save(foundSubmission);
+    }
+
     public byte[] getUserPdf(UUID id) {
         Submission submission = submissionRespository.findById(id).orElse(null);
         byte[] submissionPDF = submission.getPdf();
         return submissionPDF;
     }
+    public byte[] getUserPicture(UUID id) {
+        Submission submission = submissionRespository.findById(id).orElse(null);
+        byte[] submissionPicture = submission.getPicture();
+        return submissionPicture;
+    }
 
     public void editSubmission(UUID id, SubmissionDTO submissionDTO) {
         Submission submission = this.submissionRespository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));;
+        submission = this.makeSubmission(submission, submissionDTO);
+        this.submissionRespository.save(submission);
+    }
+
+    public void deleteSubmission(UUID id) {
+        this.submissionRespository.findById(id).orElseThrow(() -> new RuntimeException("Submission not found"));
+        this.submissionRespository.deleteById(id);
+    }
+
+    private Submission makeSubmission(Submission submission, SubmissionDTO submissionDTO){
         submission.setName(submissionDTO.name);
         submission.setEmail(submissionDTO.email);
         submission.setOnline_profiles(submissionDTO.online_profiles);
@@ -101,11 +113,6 @@ public class SubmissionService {
         submission.setExtra_feedback(submissionDTO.extra_feedback);
         submission.setStatusID(submissionDTO.statusID);
         submission.setUser_id(submissionDTO.user_id);
-        this.submissionRespository.save(submission);
-    }
-
-    public void deleteSubmission(UUID id) {
-        this.submissionRespository.findById(id).orElseThrow(() -> new RuntimeException("Submission not found"));
-        this.submissionRespository.deleteById(id);
+        return submission;
     }
 }

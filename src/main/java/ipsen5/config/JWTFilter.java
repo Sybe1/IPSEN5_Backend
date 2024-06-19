@@ -1,7 +1,7 @@
 package ipsen5.config;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import ipsen5.services.UserService;
+import ipsen5.services.UserCredentialsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,11 +16,11 @@ import java.io.IOException;
 @Component
 public class JWTFilter extends OncePerRequestFilter {
 
-    private final UserService userService;
+    private final UserCredentialsService userCredentialsService;
     private final JWTUtil jwtTokenUtil;
 
-    public JWTFilter(UserService userService, JWTUtil jwtTokenUtil) {
-        this.userService = userService;
+    public JWTFilter(UserCredentialsService userCredentialsService, JWTUtil jwtTokenUtil) {
+        this.userCredentialsService = userCredentialsService;
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
@@ -35,7 +35,7 @@ public class JWTFilter extends OncePerRequestFilter {
             } else {
                 try {
                     String email = jwtTokenUtil.validateTokenAndRetrieveSubject(jwt);
-                    UserDetails userDetails = userService.loadUserByUsername(email);
+                    UserDetails userDetails = userCredentialsService.loadUserByUsername(email);
                     UsernamePasswordAuthenticationToken authToken =
                             new UsernamePasswordAuthenticationToken(email, userDetails.getPassword(), userDetails.getAuthorities());
                     if (SecurityContextHolder.getContext().getAuthentication() == null) {

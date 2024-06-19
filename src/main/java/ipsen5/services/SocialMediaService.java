@@ -2,6 +2,7 @@ package ipsen5.services;
 
 import ipsen5.models.SocialMedia;
 import ipsen5.models.User;
+import ipsen5.models.enums.SocialMediaCategories;
 import ipsen5.repository.SocialMediaRepository;
 import ipsen5.repository.UserRepository;
 import org.springframework.stereotype.Component;
@@ -40,5 +41,13 @@ public class SocialMediaService {
 
     public void deleteSocialMedia(UUID id) {
         repository.deleteById(id);
+    }
+
+    public SocialMedia getSocialMediaByUsernameAndCategory(String username, SocialMediaCategories category) {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            return null;
+        }
+        return repository.findByUserAndSocialMediaCategory(user, category);
     }
 }
