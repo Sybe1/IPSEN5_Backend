@@ -30,9 +30,8 @@ public class Post {
     @NotBlank
     private String text;
 
-    @NotBlank
-    @URL
-    private String imageUrl;
+    @Lob
+    private byte[] imageUrl;
 
     @NotNull
     private LocalDate localDate;
@@ -51,10 +50,9 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, String text, String imageUrl, LocalDate localDate, List<String> genres, User user) {
+    public Post(String title, String text, LocalDate localDate, List<String> genres, User user) {
         this.title = title;
         this.text = text;
-        this.imageUrl = imageUrl;
         this.localDate = localDate;
         this.genres = genres;
         this.user = user;
