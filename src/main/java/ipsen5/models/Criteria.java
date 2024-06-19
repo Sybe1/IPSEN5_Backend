@@ -61,8 +61,7 @@ public class Criteria {
     public Criteria() {
     }
 
-    public Criteria(UUID id, String mainName, String subName, String zeroPoints, String onePoints, String twoPoints, String threePoints, String fourPoints, String fivePoints, Set<Rubric> rubrics) {
-        this.id = id;
+    public Criteria(String mainName, String subName, String zeroPoints, String onePoints, String twoPoints, String threePoints, String fourPoints, String fivePoints) {
         this.mainName = mainName;
         this.subName = subName;
         this.zeroPoints = zeroPoints;
@@ -71,9 +70,5 @@ public class Criteria {
         this.threePoints = threePoints;
         this.fourPoints = fourPoints;
         this.fivePoints = fivePoints;
-        this.rubrics = rubrics;
-    }
-
-    public Criteria(String mainName, String subName, String zeroPoints, String twoPoints, String fourPoints, String threePoints, String onePoints, String fivePoints) {
     }
 }

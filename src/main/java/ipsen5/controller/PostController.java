@@ -1,5 +1,6 @@
 package ipsen5.controller;
 
+import ipsen5.models.enums.PrefferedDestination;
 import ipsen5.services.PostService;
 import ipsen5.dto.PostDTO;
 import ipsen5.models.Post;
@@ -26,6 +27,11 @@ public class PostController {
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Post>> getPostById(@PathVariable UUID id){
         return ResponseEntity.ok(this.postService.getPostById(id));
+    }
+
+    @GetMapping("/destination/{preffered_destination}")
+    public ResponseEntity<List<Post>> getPostByPrefferedDestination(@PathVariable PrefferedDestination preffered_destination){
+        return ResponseEntity.ok(this.postService.getPostsByPrefferedDestination(preffered_destination));
     }
 
     @GetMapping("/user/{user}")

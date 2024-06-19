@@ -28,6 +28,7 @@ public class SubmissionService {
     public List<Submission> getAllSubmissions() {
         return this.submissionRespository.findAll();
     }
+
     public Optional<Submission> getSubmissionById(UUID id) {
         return this.submissionRespository.findById(id);
     }
@@ -78,13 +79,20 @@ public class SubmissionService {
 
     public byte[] getUserPdf(UUID id) {
         Submission submission = submissionRespository.findById(id).orElse(null);
-        byte[] submissionPDF = submission.getPdf();
-        return submissionPDF;
+        if(submission != null) {
+            byte[] submissionPDF = submission.getPdf();
+            return submissionPDF;
+        }
+        return null;
     }
     public byte[] getUserPicture(UUID id) {
         Submission submission = submissionRespository.findById(id).orElse(null);
-        byte[] submissionPicture = submission.getPicture();
-        return submissionPicture;
+        if(submission != null) {
+            byte[] submissionPicture = submission.getPicture();
+            return submissionPicture;
+        }
+        return null;
+
     }
 
     public void editSubmission(UUID id, SubmissionDTO submissionDTO) {

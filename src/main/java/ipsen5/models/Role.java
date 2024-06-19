@@ -19,6 +19,7 @@ public class Role {
     @GeneratedValue
     private UUID id;
 
+
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'-]+$")
     @Column(unique = true)

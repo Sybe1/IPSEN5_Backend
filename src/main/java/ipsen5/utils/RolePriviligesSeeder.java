@@ -25,7 +25,8 @@ public class RolePriviligesSeeder {
 
         Rights[] rightsArrayForAdmin = {
                 Rights.ALL, Rights.GUARD_USER_ROLES, Rights.GUARD_SUBMISSIONS,
-                Rights.GUARD_ROLES, Rights.REVIEW_SUBMISSIONS, Rights.GUARD_NOTIFICATIONS
+                Rights.GUARD_ROLES, Rights.REVIEW_SUBMISSIONS, Rights.GUARD_NOTIFICATIONS,
+                Rights.GUARD_SUBMISSION_TO_POST
         };
 
 

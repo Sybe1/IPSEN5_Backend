@@ -43,9 +43,11 @@ public class UserController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('USER_PUT') || hasAuthority('USER') || hasAuthority('ALL') || hasAuthority('UPDATEN')")
-    public ResponseEntity<String> editUser(@PathVariable UUID id, @RequestBody UserDTO userDTO){
+    public ResponseEntity<Map<String, String>> editUser(@PathVariable UUID id, @RequestBody UserDTO userDTO){
         this.userService.editUser(id, userDTO);
-        return ResponseEntity.ok("Edited user with id: " + id);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Edited user with id: " + id);
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/role/{roleId}")
