@@ -16,11 +16,10 @@ import java.util.UUID;
 @Setter
 public class Role {
     @Id
-    @Getter
     @GeneratedValue
     private UUID id;
 
-    @Getter
+
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'-]+$")
     @Column(unique = true)
@@ -33,11 +32,4 @@ public class Role {
         this.name = name;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }
