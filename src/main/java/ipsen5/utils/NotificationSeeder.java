@@ -1,21 +1,13 @@
 package ipsen5.utils;
 
-import ipsen5.dao.PostRepository;
-import ipsen5.dao.ReactionRepository;
+import ipsen5.repository.NotificationRepository;
+import ipsen5.repository.UserRepository;
 import ipsen5.models.Notification;
-import ipsen5.models.Post;
-import ipsen5.models.Reaction;
 import ipsen5.models.User;
-import ipsen5.dao.NotificationRepository;
-import ipsen5.dao.UserRepository;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Component
 public class NotificationSeeder {

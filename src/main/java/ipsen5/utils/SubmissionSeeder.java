@@ -45,7 +45,7 @@ public class SubmissionSeeder {
         byte[] pdfData = readPdfAsBytes(pdfFilePath);
 
          Submission submission = new Submission();
-         submission.setUser_id(allUsers.get(0));
+         submission.setUser_id(allUsers.get(2));
          submission.setStatusID(allStatus.get(0));
          submission.setName("name");
          submission.setEmail("mvamstel@mail.com");
@@ -67,7 +67,7 @@ public class SubmissionSeeder {
         pdfData = readPdfAsBytes(pdfFilePath);
 
          Submission submission2 = new Submission();
-         submission2.setUser_id(allUsers.get(1));
+         submission2.setUser_id(allUsers.get(2));
          submission2.setStatusID(allStatus.get(0));
          submission2.setName("Johan");
          submission2.setStory_title("New story");
