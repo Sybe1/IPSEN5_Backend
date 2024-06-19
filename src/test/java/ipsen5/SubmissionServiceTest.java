@@ -124,126 +124,99 @@ public class SubmissionServiceTest {
 
     @Test
     public void testGetSubmissionById() {
-        // Mock the repository call
+
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
 
-        // Call the service method
+
         Optional<Submission> foundSubmission = submissionService.getSubmissionById(submission.getId());
 
-        // Verify the result
+
         assertTrue(foundSubmission.isPresent());
         assertEquals(submission.getId(), foundSubmission.get().getId());
-        assertEquals("test1", foundSubmission.get().getName()); // Adjust according to your Submission fields
+        assertEquals("test1", foundSubmission.get().getName());
 
-        // Verify the repository method was called once
         verify(submissionRepository, times(1)).findById(submission.getId());
     }
 
     @Test
     public void testGetSubmissionByIdNotFound() {
-        // Mock the repository call
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
 
-        // Call the service method
         Optional<Submission> foundSubmission = submissionService.getSubmissionById(submission.getId());
 
-        // Verify the result
         assertFalse(foundSubmission.isPresent());
 
-        // Verify the repository method was called once
         verify(submissionRepository, times(1)).findById(submission.getId());
     }
 
     @Test
     public void testGetSubmissionByUserId() {
-        // Mock the repository call
         when(submissionRepository.findAll()).thenReturn(submissions);
 
-        // Call the service method
         List<Submission> foundSubmissions = submissionService.getSubmissionByUserId(user1.getId());
 
-        // Verify the result
         assertNotNull(foundSubmissions);
         assertEquals(1, foundSubmissions.size());
         assertEquals(submission.getId(), foundSubmissions.get(0).getId());
 
-        // Verify the repository method was called once
         verify(submissionRepository, times(1)).findAll();
     }
 
     @Test
     public void testGetSubmissionByUserIdNoMatches() {
-        // Mock the repository call
         when(submissionRepository.findAll()).thenReturn(submissions);
 
-        // Call the service method
         List<Submission> foundSubmissions = submissionService.getSubmissionByUserId(UUID.randomUUID());
 
-        // Verify the result
         assertNotNull(foundSubmissions);
         assertTrue(foundSubmissions.isEmpty());
 
-        // Verify the repository method was called once
         verify(submissionRepository, times(1)).findAll();
     }
 
     @Test
     public void testCreateSubmissionText() {
         submissionDTO.type = "Text";
-        // Mock the repository call
         when(rubricRepository.findAll()).thenReturn(rubrics);
         when(submissionRepository.save(any(Submission.class))).thenReturn(submission);
 
-        // Call the service method
         Submission createdSubmission = submissionService.createSubmission(submissionDTO);
 
-        // Verify the result
         assertNotNull(createdSubmission);
         assertEquals(rubrics.get(0), createdSubmission.getRubric());
 
-        // Verify the repository methods were called once
         verify(rubricRepository, times(1)).findAll();
         verify(submissionRepository, times(1)).save(any(Submission.class));
     }
 
     @Test
     public void testCreateSubmissionAudio() {
-        // Adjust the DTO type for this test
         submissionDTO.type = "Audio";
 
-        // Mock the repository call
         when(rubricRepository.findAll()).thenReturn(rubrics);
         when(submissionRepository.save(any(Submission.class))).thenReturn(submission2);
 
-        // Call the service method
         Submission createdSubmission = submissionService.createSubmission(submissionDTO);
-        // Verify the result
+
         assertNotNull(createdSubmission);
         assertEquals(rubrics.get(1), createdSubmission.getRubric());
 
-
-        // Verify the repository methods were called once
         verify(rubricRepository, times(1)).findAll();
         verify(submissionRepository, times(1)).save(any(Submission.class));
     }
 
     @Test
     public void testCreateSubmissionVideo() {
-        // Adjust the DTO type for this test
         submissionDTO.type = "Video";
 
-        // Mock the repository call
         when(rubricRepository.findAll()).thenReturn(rubrics);
         when(submissionRepository.save(any(Submission.class))).thenReturn(submission3);
 
-        // Call the service method
         Submission createdSubmission = submissionService.createSubmission(submissionDTO);
 
-        // Verify the result
         assertNotNull(createdSubmission);
         assertEquals(rubrics.get(2), createdSubmission.getRubric());
 
-        // Verify the repository methods were called once
         verify(rubricRepository, times(1)).findAll();
         verify(submissionRepository, times(1)).save(any(Submission.class));
     }
@@ -252,33 +225,26 @@ public class SubmissionServiceTest {
     public void testSaveSubmissionPdf() throws IOException {
         byte[] fileContent = "Test PDF content".getBytes();
 
-        // Mock the behavior of file and repository methods
         when(file.getBytes()).thenReturn(fileContent);
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
         when(submissionRepository.save(any(Submission.class))).thenReturn(submission);
 
-        // Call the service method
         submissionService.saveSubmissionPdf(file, submission.getId());
 
-        // Verify that the PDF content was set correctly
         assertArrayEquals(fileContent, submission.getPdf());
 
-        // Verify repository methods were called
         verify(submissionRepository, times(1)).findById(submission.getId());
         verify(submissionRepository, times(1)).save(submission);
     }
 
     @Test
     public void testSaveSubmissionPdfSubmissionNotFound() {
-        // Mock the behavior of repository methods
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
 
-        // Expect a RuntimeException when the submission is not found
         assertThrows(RuntimeException.class, () -> {
             submissionService.saveSubmissionPdf(file, submission.getId());
         });
 
-        // Verify repository methods were called
         verify(submissionRepository, times(1)).findById(submission.getId());
         verify(submissionRepository, never()).save(any(Submission.class));
     }
@@ -287,33 +253,26 @@ public class SubmissionServiceTest {
     public void testSaveSubmissionPicture() throws IOException {
         byte[] fileContent = "Test Picture content".getBytes();
 
-        // Mock the behavior of file and repository methods
         when(file.getBytes()).thenReturn(fileContent);
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
         when(submissionRepository.save(any(Submission.class))).thenReturn(submission);
 
-        // Call the service method
         submissionService.saveSubmissionPicture(file, submission.getId());
 
-        // Verify that the picture content was set correctly
         assertArrayEquals(fileContent, submission.getPicture());
 
-        // Verify repository methods were called
         verify(submissionRepository, times(1)).findById(submission.getId());
         verify(submissionRepository, times(1)).save(submission);
     }
 
     @Test
     public void testSaveSubmissionPictureSubmissionNotFound() {
-        // Mock the behavior of repository methods
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
 
-        // Expect a RuntimeException when the submission is not found
         assertThrows(RuntimeException.class, () -> {
             submissionService.saveSubmissionPicture(file, submission.getId());
         });
 
-        // Verify repository methods were called
         verify(submissionRepository, times(1)).findById(submission.getId());
         verify(submissionRepository, never()).save(any(Submission.class));
     }
@@ -322,32 +281,24 @@ public class SubmissionServiceTest {
     public void testGetUserPdf() {
         byte[] pdfContent = "Test PDF content".getBytes();
         submission.setPdf(pdfContent);
-        // Mock the behavior of repository methods
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
 
-        // Call the service method
         byte[] result = submissionService.getUserPdf(submission.getId());
 
-        // Verify the PDF content was returned correctly
         assertNotNull(result);
         assertArrayEquals(submission.getPdf(), result);
 
-        // Verify repository method was called
         verify(submissionRepository, times(1)).findById(submission.getId());
     }
 
     @Test
     public void testGetUserPdfSubmissionNotFound() {
-        // Mock the behavior of repository methods
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
 
-        // Call the service method
         byte[] result = submissionService.getUserPdf(submission.getId());
 
-        // Verify that the result is null
         assertNull(result);
 
-        // Verify repository method was called
         verify(submissionRepository, times(1)).findById(submission.getId());
     }
 
@@ -355,17 +306,13 @@ public class SubmissionServiceTest {
     public void testGetUserPicture() {
         byte[] pictureContent = "Test Picture content".getBytes();
         submission.setPicture(pictureContent);
-        // Mock the behavior of repository methods
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
 
-        // Call the service method
         byte[] result = submissionService.getUserPicture(submission.getId());
 
-        // Verify the picture content was returned correctly
         assertNotNull(result);
         assertArrayEquals(submission.getPicture(), result);
 
-        // Verify repository method was called
         verify(submissionRepository, times(1)).findById(submission.getId());
     }
 
@@ -373,57 +320,44 @@ public class SubmissionServiceTest {
     public void testGetUserPictureSubmissionNotFound() {
         byte[] pictureContent = "Test Picture content".getBytes();
         submission.setPicture(pictureContent);
-        // Mock the behavior of repository methods
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
 
-        // Call the service method
         byte[] result = submissionService.getUserPicture(submission.getId());
 
-        // Verify that the result is null
         assertNull(result);
 
-        // Verify repository method was called
         verify(submissionRepository, times(1)).findById(submission.getId());
     }
 
     @Test
     public void testEditSubmission() {
-        // Mock the behavior of repository methods
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
 
-        // Create a DTO with updated information
         SubmissionDTO updatedDTO = new SubmissionDTO();
         updatedDTO.setType("Audio");
         updatedDTO.setStory_title("Updated title");
 
-        // Call the service method
         submissionService.editSubmission(submission.getId(), updatedDTO);
 
-        // Verify that the submission was updated and saved
         verify(submissionRepository, times(1)).findById(submission.getId());
         verify(submissionRepository, times(1)).save(submission);
 
-        // Verify the updated fields
         assertEquals(updatedDTO.getType(), submission.getType());
         assertEquals(updatedDTO.getStory_title(), submission.getStory_title());
     }
 
     @Test
     public void testEditSubmissionNotFound() {
-        // Mock the behavior of repository methods
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
 
-        // Create a DTO with updated information
         SubmissionDTO updatedDTO = new SubmissionDTO();
         updatedDTO.setType("Audio");
         updatedDTO.setStory_title("Updated Title");
 
-        // Call the service method and expect a RuntimeException
         assertThrows(RuntimeException.class, () -> {
             submissionService.editSubmission(submission.getId(), updatedDTO);
         });
 
-        // Verify that findById and save methods were called appropriately
         verify(submissionRepository, times(1)).findById(submission.getId());
         verify(submissionRepository, never()).save(any());
     }
@@ -432,25 +366,20 @@ public class SubmissionServiceTest {
     public void testDeleteSubmission() {
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
 
-        // Call the service method
         submissionService.deleteSubmission(submission.getId());
 
-        // Verify that findById and deleteById methods were called appropriately
         verify(submissionRepository, times(1)).findById(submission.getId());
         verify(submissionRepository, times(1)).deleteById(submission.getId());
     }
 
     @Test
     public void testDeleteSubmissionNotFound() {
-        // Mock the behavior of repository methods
         when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
 
-        // Call the service method and expect a RuntimeException
         assertThrows(RuntimeException.class, () -> {
             submissionService.deleteSubmission(submission.getId());
         });
 
-        // Verify that findById was called once and deleteById was never called
         verify(submissionRepository, times(1)).findById(submission.getId());
         verify(submissionRepository, never()).deleteById(any());
     }

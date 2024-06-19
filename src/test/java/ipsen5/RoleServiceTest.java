@@ -104,73 +104,57 @@ public class RoleServiceTest {
         RoleDTO updatedRoleDTO = new RoleDTO();
         updatedRoleDTO.setName("Creator");
 
-        // Mocking behavior
         when(roleRepository.findById(role.getId())).thenReturn(Optional.of(role));
-        when(roleRepository.save(any(Role.class))).thenReturn(role); // Mock the save operation
+        when(roleRepository.save(any(Role.class))).thenReturn(role);
 
-        // When
         roleService.editRole(role.getId(), updatedRoleDTO);
 
-        // Then
-        verify(roleRepository, Mockito.times(1)).findById(role.getId()); // Verify findById was called once
-        verify(roleRepository, Mockito.times(1)).save(role); // Verify save was called once with the updated role
+        verify(roleRepository, Mockito.times(1)).findById(role.getId());
+        verify(roleRepository, Mockito.times(1)).save(role);
 
-        // Assert the updated name
         assertEquals(updatedRoleDTO.getName(), role.getName());
     }
 
     @Test
     public void testEditRoleNotFound() {
-        // Given
         UUID nonExistingId = UUID.randomUUID();
         RoleDTO roleDTO = new RoleDTO();
         roleDTO.setName("Creator");
 
-        // Mocking behavior for a non-existing role
         when(roleRepository.findById(nonExistingId)).thenReturn(Optional.empty());
 
-        // When
         try {
             roleService.editRole(nonExistingId, roleDTO);
         } catch (RuntimeException ex) {
-            // Then
             assertEquals("Role not found", ex.getMessage());
         }
     }
 
     @Test
     public void testDeleteRole() {
-        // Given
         UUID roleId = UUID.randomUUID();
 
-        // Mocking behavior
         when(roleRepository.findById(roleId)).thenReturn(Optional.of(new Role()));
 
-        // When
         roleService.deleteRole(roleId);
 
-        // Then
-        verify(roleRepository, Mockito.times(1)).findById(roleId); // Verify findById was called once
-        verify(roleRepository, Mockito.times(1)).deleteById(roleId); // Verify deleteById was called once
+        verify(roleRepository, Mockito.times(1)).findById(roleId);
+        verify(roleRepository, Mockito.times(1)).deleteById(roleId);
     }
 
     @Test
     public void testDeleteRoleNotFound() {
-        // Given
         UUID nonExistingId = UUID.randomUUID();
 
-        // Mocking behavior for a non-existing role
         when(roleRepository.findById(nonExistingId)).thenReturn(Optional.empty());
 
-        // When
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
             roleService.deleteRole(nonExistingId);
         });
 
-        // Then
-        verify(roleRepository, Mockito.times(1)).findById(nonExistingId); // Verify findById was called once
-        verify(roleRepository, Mockito.never()).deleteById(nonExistingId); // Verify deleteById was never called
-        // Assert the exception message
+        verify(roleRepository, Mockito.times(1)).findById(nonExistingId);
+        verify(roleRepository, Mockito.never()).deleteById(nonExistingId);
+
         String expectedMessage = "Role not found";
         String actualMessage = exception.getMessage();
         assert(actualMessage.contains(expectedMessage));
