@@ -3,9 +3,12 @@ package ipsen5.dto;
 import ipsen5.models.Rubric;
 import ipsen5.models.Status;
 import ipsen5.models.User;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
-
+@Getter
+@Setter
 public class SubmissionDTO {
         public String name;
         public String email;
