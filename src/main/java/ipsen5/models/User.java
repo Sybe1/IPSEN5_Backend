@@ -67,12 +67,4 @@ public class User {
         this.donation_link = donation_link;
         this.role = role;
     }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
 }
