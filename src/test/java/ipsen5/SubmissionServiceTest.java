@@ -386,6 +386,50 @@ public class SubmissionServiceTest {
         verify(submissionRepository, times(1)).findById(submission.getId());
     }
 
+    @Test
+    public void testEditSubmission() {
+        // Mock the behavior of repository methods
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
+
+        // Create a DTO with updated information
+        SubmissionDTO updatedDTO = new SubmissionDTO();
+        updatedDTO.setType("Audio");
+        updatedDTO.setStory_title("Updated title");
+
+        // Call the service method
+        submissionService.editSubmission(submission.getId(), updatedDTO);
+
+        // Verify that the submission was updated and saved
+        verify(submissionRepository, times(1)).findById(submission.getId());
+        verify(submissionRepository, times(1)).save(submission);
+
+        // Verify the updated fields
+        assertEquals(updatedDTO.getType(), submission.getType());
+        assertEquals(updatedDTO.getStory_title(), submission.getStory_title());
+    }
+
+    @Test
+    public void testEditSubmissionNotFound() {
+        // Mock the behavior of repository methods
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
+
+        // Create a DTO with updated information
+        SubmissionDTO updatedDTO = new SubmissionDTO();
+        updatedDTO.setType("Audio");
+        updatedDTO.setStory_title("Updated Title");
+
+        // Call the service method and expect a RuntimeException
+        assertThrows(RuntimeException.class, () -> {
+            submissionService.editSubmission(submission.getId(), updatedDTO);
+        });
+
+        // Verify that findById and save methods were called appropriately
+        verify(submissionRepository, times(1)).findById(submission.getId());
+        verify(submissionRepository, never()).save(any());
+    }
+
+
+
 
 
 }
