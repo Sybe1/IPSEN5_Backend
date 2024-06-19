@@ -63,6 +63,31 @@ public class RoleServiceTest {
     }
 
 
+    @Test
+    public void testGetAllRoles() {
+        List<Role> roles = Arrays.asList(new Role("Admin"), new Role("User"));
+
+        when(roleRepository.findAll()).thenReturn(roles);
+
+        List<Role> foundRoles = roleService.getAllRoles();
+
+        assertNotNull(foundRoles);
+        assertEquals(2, foundRoles.size());
+        assertEquals("Admin", foundRoles.get(0).getName());
+        assertEquals("User", foundRoles.get(1).getName());
+    }
+
+    @Test
+    public void testGetAllRolesEmpty() {
+        when(roleRepository.findAll()).thenReturn(Collections.emptyList());
+
+        List<Role> foundRoles = roleService.getAllRoles();
+
+        assertNotNull(foundRoles);
+        assertTrue(foundRoles.isEmpty());
+    }
+
+
 
 
 }
