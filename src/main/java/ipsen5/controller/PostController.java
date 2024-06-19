@@ -34,8 +34,9 @@ public class PostController {
     }
 
     @GetMapping("/user/{user}")
-    public ResponseEntity<List<Post>> getPostsByUserId(@PathVariable String user){
-        return ResponseEntity.ok(this.postService.getPostsByUserId(user));
+    public List<PostDTO> getPostsByUsername(@PathVariable String user){
+        List<Post> posts = this.postService.getPostsByUsername(user);
+        return posts.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     @PostMapping

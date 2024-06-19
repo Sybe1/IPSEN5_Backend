@@ -3,7 +3,6 @@ package ipsen5.services;
 import ipsen5.dto.PostDTO;
 import ipsen5.models.Post;
 import ipsen5.models.Reaction;
-import ipsen5.models.Submission;
 import ipsen5.models.User;
 import ipsen5.repository.*;
 import org.springframework.stereotype.Component;
@@ -68,7 +67,7 @@ public class PostService {
         return this.postRepository.findByTitleContaining(title);
     }
 
-    public List<Post> getPostsByUserId(String username) {
+    public List<Post> getPostsByUsername(String username) {
         User user = this.userRepository.findByUsername(username);
         return this.postRepository.findByUser(user);
     }
