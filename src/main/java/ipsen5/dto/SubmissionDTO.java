@@ -4,9 +4,12 @@ import ipsen5.models.Rubric;
 import ipsen5.models.Status;
 import ipsen5.models.User;
 import ipsen5.models.enums.PrefferedDestination;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.UUID;
-
+@Getter
+@Setter
 public class SubmissionDTO {
         public String name;
         public String email;
