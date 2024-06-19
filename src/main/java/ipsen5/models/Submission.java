@@ -100,8 +100,4 @@ public class Submission {
     public Submission() {
 
     }
-
-    public User getUser_id() {
-        return user_id;
-    }
 }
