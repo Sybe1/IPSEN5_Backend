@@ -1,6 +1,8 @@
 package ipsen5.models;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import ipsen5.models.enums.PrefferedDestination;
+import ipsen5.models.enums.SocialMediaCategories;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,6 +32,10 @@ public class Post {
     @NotBlank
     private String text;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private PrefferedDestination prefferedDestination;
+
     @NotBlank
     @URL
     private String imageUrl;
@@ -51,10 +57,11 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, String text, String imageUrl, LocalDate localDate, List<String> genres, User user) {
+    public Post(String title, String text, String imageUrl, PrefferedDestination prefferedDestination, LocalDate localDate, List<String> genres, User user) {
         this.title = title;
         this.text = text;
         this.imageUrl = imageUrl;
+        this.prefferedDestination = prefferedDestination;
         this.localDate = localDate;
         this.genres = genres;
         this.user = user;

@@ -35,7 +35,6 @@ public class UserSeeder {
         userRepository.save(user);
 
 
-
         User user2 = new User();
         user2.setFirst_name("Pim");
         user2.setLast_name("van Dijk");

@@ -1,5 +1,6 @@
 package ipsen5.models;
 
+import ipsen5.models.enums.PrefferedDestination;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -47,9 +48,9 @@ public class Submission {
     @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "6")
     private String additional_notes;
 
-    @NotBlank
-    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "7")
-    private String prefferd_destination;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private PrefferedDestination prefferd_destination;
 
     @NotNull
     private Boolean platform_presence;
@@ -79,7 +80,7 @@ public class Submission {
     private byte[] picture;
 
 
-    public Submission(String name, String email, String online_profiles, String story_title, String type, int wordCount, String genre, String additional_notes, String prefferd_destination, Boolean platform_presence, Boolean extra_feedback, Boolean express_experience, Status statusID, User user_id, Rubric rubric) {
+    public Submission(String name, String email, String online_profiles, String story_title, String type, int wordCount, String genre, String additional_notes, PrefferedDestination prefferd_destination, Boolean platform_presence, Boolean extra_feedback, Boolean express_experience, Status statusID, User user_id, Rubric rubric) {
         this.name = name;
         this.email = email;
         this.online_profiles = online_profiles;

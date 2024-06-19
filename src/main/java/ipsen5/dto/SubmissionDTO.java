@@ -3,6 +3,7 @@ package ipsen5.dto;
 import ipsen5.models.Rubric;
 import ipsen5.models.Status;
 import ipsen5.models.User;
+import ipsen5.models.enums.PrefferedDestination;
 
 import java.util.UUID;
 
@@ -15,7 +16,7 @@ public class SubmissionDTO {
         public int wordCount;
         public String genre;
         public String additional_notes;
-        public String prefferd_destination;
+        public PrefferedDestination prefferd_destination;
         public Boolean platform_presence;
         public Boolean extra_feedback;
         public Boolean express_experience;
