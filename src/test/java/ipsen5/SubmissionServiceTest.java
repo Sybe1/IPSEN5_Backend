@@ -428,8 +428,30 @@ public class SubmissionServiceTest {
         verify(submissionRepository, never()).save(any());
     }
 
+    @Test
+    public void testDeleteSubmission() {
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
 
+        // Call the service method
+        submissionService.deleteSubmission(submission.getId());
 
+        // Verify that findById and deleteById methods were called appropriately
+        verify(submissionRepository, times(1)).findById(submission.getId());
+        verify(submissionRepository, times(1)).deleteById(submission.getId());
+    }
 
+    @Test
+    public void testDeleteSubmissionNotFound() {
+        // Mock the behavior of repository methods
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
 
+        // Call the service method and expect a RuntimeException
+        assertThrows(RuntimeException.class, () -> {
+            submissionService.deleteSubmission(submission.getId());
+        });
+
+        // Verify that findById was called once and deleteById was never called
+        verify(submissionRepository, times(1)).findById(submission.getId());
+        verify(submissionRepository, never()).deleteById(any());
+    }
 }
