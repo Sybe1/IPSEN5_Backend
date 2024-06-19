@@ -7,9 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -51,9 +49,11 @@ public class PostController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('POST_DELETE') || hasAuthority('POST') || hasAuthority('ALL') || hasAuthority('DELETEN')")
-    public ResponseEntity<?> deletePost(@PathVariable("id") UUID id){
+    public ResponseEntity<Map<String, String>> deletePost(@PathVariable("id") UUID id){
         this.postService.deletePost(id);
-        return ResponseEntity.ok("deleted post with id: " + id);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "deleted post with id: " + id);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/search/{title}")

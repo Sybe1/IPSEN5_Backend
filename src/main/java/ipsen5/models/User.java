@@ -1,9 +1,7 @@
 package ipsen5.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity(name = "Users")
@@ -50,6 +49,10 @@ public class User {
     @ManyToOne
     @NotNull
     private Role role;
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private List<Notification> notifications;
 
     public User() {
     }

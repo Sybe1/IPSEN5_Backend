@@ -8,9 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -61,8 +59,10 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('USER_DELETE') || hasAuthority('USER') || hasAuthority('ALL') || hasAuthority('DELETEN')")
-    public ResponseEntity<?> deleteUser(@PathVariable UUID id){
+    public ResponseEntity<Map<String, String>> deleteUser(@PathVariable UUID id){
         this.userService.deleteUser(id);
-        return ResponseEntity.ok("deleted user with id: " + id);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "deleted post with id: " + id);
+        return ResponseEntity.ok(response);
     }
 }
