@@ -318,6 +318,39 @@ public class SubmissionServiceTest {
         verify(submissionRepository, never()).save(any(Submission.class));
     }
 
+    @Test
+    public void testGetUserPdf() {
+        byte[] pdfContent = "Test PDF content".getBytes();
+        submission.setPdf(pdfContent);
+        // Mock the behavior of repository methods
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
+
+        // Call the service method
+        byte[] result = submissionService.getUserPdf(submission.getId());
+
+        // Verify the PDF content was returned correctly
+        assertNotNull(result);
+        assertArrayEquals(submission.getPdf(), result);
+
+        // Verify repository method was called
+        verify(submissionRepository, times(1)).findById(submission.getId());
+    }
+
+    @Test
+    public void testGetUserPdfSubmissionNotFound() {
+        // Mock the behavior of repository methods
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
+
+        // Call the service method
+        byte[] result = submissionService.getUserPdf(submission.getId());
+
+        // Verify that the result is null
+        assertNull(result);
+
+        // Verify repository method was called
+        verify(submissionRepository, times(1)).findById(submission.getId());
+    }
+
 
 
 
