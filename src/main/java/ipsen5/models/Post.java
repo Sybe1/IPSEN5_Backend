@@ -26,8 +26,8 @@ public class Post {
     @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:`'-]+$", message = "Title not right format")
     private String title;
 
+    @Column(columnDefinition = "TEXT")
     @NotBlank
-    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'-]+$", message = "Text not right format")
     private String text;
 
     @NotBlank
@@ -38,7 +38,6 @@ public class Post {
     private LocalDate localDate;
 
     @ElementCollection
-    @NotNull
     private List<String> genres;
 
     @ManyToOne
