@@ -283,6 +283,41 @@ public class SubmissionServiceTest {
         verify(submissionRepository, never()).save(any(Submission.class));
     }
 
+    @Test
+    public void testSaveSubmissionPicture() throws IOException {
+        byte[] fileContent = "Test Picture content".getBytes();
+
+        // Mock the behavior of file and repository methods
+        when(file.getBytes()).thenReturn(fileContent);
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
+        when(submissionRepository.save(any(Submission.class))).thenReturn(submission);
+
+        // Call the service method
+        submissionService.saveSubmissionPicture(file, submission.getId());
+
+        // Verify that the picture content was set correctly
+        assertArrayEquals(fileContent, submission.getPicture());
+
+        // Verify repository methods were called
+        verify(submissionRepository, times(1)).findById(submission.getId());
+        verify(submissionRepository, times(1)).save(submission);
+    }
+
+    @Test
+    public void testSaveSubmissionPictureSubmissionNotFound() {
+        // Mock the behavior of repository methods
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
+
+        // Expect a RuntimeException when the submission is not found
+        assertThrows(RuntimeException.class, () -> {
+            submissionService.saveSubmissionPicture(file, submission.getId());
+        });
+
+        // Verify repository methods were called
+        verify(submissionRepository, times(1)).findById(submission.getId());
+        verify(submissionRepository, never()).save(any(Submission.class));
+    }
+
 
 
 
