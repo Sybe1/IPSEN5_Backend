@@ -1,5 +1,6 @@
 package ipsen5.utils;
 
+import ipsen5.models.enums.PrefferedDestination;
 import ipsen5.repository.PostRepository;
 import ipsen5.repository.UserRepository;
 import ipsen5.models.Post;
@@ -31,6 +32,7 @@ public class PostSeeder {
         post1.setTitle("Rediscovering Babylon: The Truth Behind the Hanging Gardens");
         post1.setImageUrl("https://escapewelt.com/image/catalog/products/v.3/QuestTower/Landing/01.jpg");
         post1.setLocalDate(LocalDate.now());
+        post1.setPrefferedDestination(PrefferedDestination.OFFICIAL_SELECTION);
         post1.setGenres(List.of("Fantasy", "Adventure"));
         postRepository.save(post1);
 
@@ -43,6 +45,7 @@ public class PostSeeder {
         post2.setTitle("Verdant Wonders: Exploring the Enigmatic");
         post2.setImageUrl("https://cdn.openart.ai/stable_diffusion/171ddbee400feccf4e534dc4a85bd4b4c633b9a7_2000x2000.webp");
         post2.setLocalDate(LocalDate.now().minusDays(9));
+        post2.setPrefferedDestination(PrefferedDestination.BABELs_CHOICE);
         post2.setGenres(List.of("Science", "Fiction"));
         postRepository.save(post2);
 
@@ -57,6 +60,7 @@ public class PostSeeder {
         post3.setImageUrl("https://img.freepik.com/premium-photo/mythical-creatures-fairytale-landscapes-magical-symbols-together-generative-ai_830962-3645.jpg");
         post3.setLocalDate(LocalDate.now());
         post3.setGenres(List.of("Horror", "Mystery"));
+        post3.setPrefferedDestination(PrefferedDestination.OFFICIAL_SELECTION);
         postRepository.save(post3);
 
         Post post4 = new Post();
@@ -70,6 +74,7 @@ public class PostSeeder {
         post4.setImageUrl("https://i.pinimg.com/736x/42/04/c6/4204c696523e94019d819ae8f6455011.jpg");
         post4.setLocalDate(LocalDate.now());
         post4.setGenres(List.of("Thriller", "Romance"));
+        post4.setPrefferedDestination(PrefferedDestination.SANDBOX);
         postRepository.save(post4);
 
         Post post5 = new Post();
@@ -80,9 +85,10 @@ public class PostSeeder {
                 "For those who dare to venture into Wonderland, the journey is not just a physical one but a journey of the soul. It is a place where dreams and reality merge, where the line between the two fades into oblivion. In Wonderland, you are free to explore the depths of your imagination, to discover the magic that lies within.\n\n" +
                 "As you leap into Wonderland, you leave behind the constraints of the mundane world. Here, you are free to dream, to imagine, and to become anything you desire. So take the leap, and let the wonders of this magical realm unfold before you.");
         post5.setTitle("A Jump into Wonderland");
-        post5.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
+        post5.setImageUrl("https://static.vecteezy.com/system/resources/previews/030/605/983/large_2x/fantasy-night-landscape-with-magical-power-ancient-stones-with-magical-power-and-light-runes-passage-to-another-world-magic-door-light-neon-ai-generative-free-photo.jpg");
         post5.setLocalDate(LocalDate.now().minusDays(1));
         post5.setGenres(List.of("Drama", "Satire"));
+        post5.setPrefferedDestination(PrefferedDestination.OFFICIAL_SELECTION);
         postRepository.save(post5);
 
 
@@ -94,9 +100,10 @@ public class PostSeeder {
                 "In the heart of this rugged frontier lies the essence of the adventure: the quest for freedom and the pursuit of dreams. It is a land where the rules are few, and the possibilities are endless. Each day brings a new challenge, a new opportunity to discover the world and oneself.\n\n" +
                 "So, saddle up and join the ride. The adventures of the wild west are waiting, filled with excitement, danger, and the promise of a life lived on the edge. In this land of endless horizons, the spirit of adventure knows no bounds.");
         post6.setTitle("Adventures!!");
-        post6.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
+        post6.setImageUrl("https://www.creativefabrica.com/wp-content/uploads/2022/09/29/Labyrinth-Of-Minos-Greek-Myth-Landscape-By-Guido-Borel-39539484-1.png");
         post6.setLocalDate(LocalDate.now().minusDays(5));
         post6.setGenres(List.of("Western", "Poetry"));
+        post6.setPrefferedDestination(PrefferedDestination.BABELs_CHOICE);
         postRepository.save(post6);
 
         Post post7 = new Post();
@@ -107,9 +114,10 @@ public class PostSeeder {
                 "These creatures, though born from the imagination, hold a mirror to our deepest fears and desires. They represent the unknown and the untamed, the power and the mystery that lie beyond the boundaries of our everyday lives. Through them, we explore the limits of our understanding and the depths of our courage.\n\n" +
                 "As we delve into the myths and legends of these creatures, we are not just uncovering tales of old but exploring the rich tapestry of human imagination. The stories of these mythical beasts continue to inspire and captivate, reminding us of the wonder and mystery that lie at the heart of our world.");
         post7.setTitle("Mythical Beast!");
-        post7.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
+        post7.setImageUrl("https://i.pinimg.com/736x/2c/a7/29/2ca729e1c15bacbb9aad9797cf6fb323.jpg");
         post7.setLocalDate(LocalDate.now().minusDays(8));
         post7.setGenres(List.of("Historical", "Non-fiction"));
+        post7.setPrefferedDestination(PrefferedDestination.SANDBOX);
         postRepository.save(post7);
 
         Post post8 = new Post();
@@ -123,6 +131,7 @@ public class PostSeeder {
         post8.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
         post8.setLocalDate(LocalDate.now().minusDays(3));
         post8.setGenres(List.of("Erotica", "Adventure"));
+        post8.setPrefferedDestination(PrefferedDestination.BABELs_CHOICE);
         postRepository.save(post8);
 
         Post post9 = new Post();
@@ -133,9 +142,10 @@ public class PostSeeder {
                 "But speed was not just about the physical act of running. For our hero, it was a way of life, a philosophy that guided their every action. It was about seizing the moment, living life at full throttle, and never looking back. Each race, each challenge, was a step towards a greater understanding of themselves and the world around them.\n\n" +
                 "The tale of the fast running hero is a reminder that speed is not just about how fast we move but about how we live our lives. It is about embracing the journey, pushing beyond our limits, and running towards our dreams with unwavering determination.");
         post9.setTitle("Fast Running");
-        post9.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
+        post9.setImageUrl("https://img.freepik.com/free-photo/mountain-landscape-with-fantasy-style-scene_23-2151125180.jpg");
         post9.setLocalDate(LocalDate.now().minusDays(2));
         post9.setGenres(List.of("Satire", "Adventure"));
+        post9.setPrefferedDestination(PrefferedDestination.OFFICIAL_SELECTION);
         postRepository.save(post9);
 
         Post post10 = new Post();
@@ -146,10 +156,166 @@ public class PostSeeder {
                 "As the end draws near, our protagonist faces their mortality with courage and grace. They come to accept the inevitable, finding peace in the knowledge that death is not an end but a transition. It is a return to the unknown, a journey to whatever lies beyond the veil of life.\n\n" +
                 "The story of 'The Dying Human' is a poignant reminder of the fragility of life and the strength of the human spirit. It is a testament to the power of hope, love, and the enduring will to live, even in the face of death.");
         post10.setTitle("The Dying Human");
-        post10.setImageUrl("https://images2.alphacoders.com/249/249810.jpg");
+        post10.setImageUrl("https://cdna.artstation.com/p/assets/images/images/060/567/946/large/joshua-jackson-blablo3450-a-whimsical-fantastical-world-inhabited-by-mythical-56ce79bb-3ac4-4439-827d-0f5fe1c13dd8.jpg?1678853242");
         post10.setLocalDate(LocalDate.now().minusDays(7));
         post10.setGenres(List.of("Erotica", "Horror"));
+        post10.setPrefferedDestination(PrefferedDestination.SANDBOX);
         postRepository.save(post10);
+
+        Post post11 = new Post();
+        post11.setUser(allUsers.get(1));
+        post11.setText("In the heart of the enchanted forest, there lies a realm untouched by time, where the fairies dance under the silver light of the moon. This is the story of the Fairy Queen, a being of ethereal beauty and ancient magic.\n\n" +
+                "With wings that sparkle like the morning dew and a voice that echoes like a gentle breeze, the Fairy Queen rules her domain with grace and wisdom. Her subjects, creatures of light and shadow, look to her for guidance in times of joy and sorrow.\n\n" +
+                "The Fairy Queen's power is rooted in the very essence of the forest. Her magic nurtures the trees, brings forth the blooms, and calls forth the rain. She is the guardian of nature's balance, ensuring that every living thing thrives in harmony.\n\n" +
+                "Through her, we see the delicate interplay between strength and gentleness, power and compassion. The Fairy Queen reminds us that true leadership is about nurturing those we lead and protecting the beauty and balance of our world.\n\n" +
+                "In the tales of the Fairy Queen, we find inspiration to seek harmony in our own lives, to cherish the natural world, and to embrace the magic that resides within us all.");
+        post11.setTitle("The Fairy Queen");
+        post11.setImageUrl("https://www.kunstkopie.nl/kunst/pierre_henri_de_valenciennes/Landscape-of-Ancient-Greece.jpg");
+        post11.setLocalDate(LocalDate.now().minusDays(10));
+        post11.setGenres(List.of("Fantasy", "Romance"));
+        post11.setPrefferedDestination(PrefferedDestination.BABELs_CHOICE);
+        postRepository.save(post11);
+
+        Post post12 = new Post();
+        post12.setUser(allUsers.get(2));
+        post12.setText("Beneath the waves, in the shadowy depths of the ocean, lies a kingdom as vast and mysterious as the night sky. This is the domain of the Sea Serpent, a creature of myth and legend, feared and revered by sailors for centuries.\n\n" +
+                "With a body that glides through the water like a ribbon of darkness and eyes that gleam with an ancient wisdom, the Sea Serpent commands the ocean's depths. It is said to guard the treasures of the deep and to possess knowledge of the secrets hidden beneath the waves.\n\n" +
+                "The Sea Serpent embodies the dual nature of the sea itself: serene and beautiful, yet capable of unleashing untold fury. It represents the mystery of the unknown and the fear that lies in the dark corners of our imagination.\n\n" +
+                "In its presence, we are reminded of the vastness of the world and the power of the forces that shape it. The Sea Serpent challenges us to confront our fears and to explore the depths of our own courage and curiosity.\n\n" +
+                "Through the legends of the Sea Serpent, we are drawn to the wonders of the ocean and the boundless mysteries that it holds, urging us to dive deeper into the unknown.");
+        post12.setTitle("The Sea Serpent");
+        post12.setImageUrl("https://wallpapers.com/images/hd/mythical-1920-x-1080-background-d8fegyij9fleni0b.jpg");
+        post12.setLocalDate(LocalDate.now().minusDays(6));
+        post12.setGenres(List.of("Mystery", "Adventure"));
+        post12.setPrefferedDestination(PrefferedDestination.SANDBOX);
+        postRepository.save(post12);
+
+        Post post13 = new Post();
+        post13.setUser(allUsers.get(1));
+        post13.setText("High in the mountains, where the air is thin and the peaks kiss the sky, there lives a creature of strength and majesty. This is the tale of the Mountain Giant, a being of immense power and timeless wisdom.\n\n" +
+                "With limbs as strong as the ancient oaks and a heart as deep as the earth itself, the Mountain Giant roams the rugged landscape. Its footsteps echo through the valleys, a reminder of the might of nature's forces.\n\n" +
+                "The Mountain Giant is a guardian of the high places, protecting the fragile beauty of the alpine world. It watches over the flora and fauna, ensuring that life flourishes even in the harshest conditions.\n\n" +
+                "In the story of the Mountain Giant, we see a reflection of the strength and resilience that lie within us. It teaches us that even in the face of overwhelming challenges, we can stand tall and weather the storms.\n\n" +
+                "Through the legend of the Mountain Giant, we are inspired to seek out the heights in our own lives, to find our inner strength, and to appreciate the beauty and power of the natural world.");
+        post13.setTitle("The Mountain Giant");
+        post13.setImageUrl("https://cdn.openart.ai/stable_diffusion/658569d4129fbded20333bf7ba658db35938bf99_2000x2000.webp");
+        post13.setLocalDate(LocalDate.now().minusDays(5));
+        post13.setGenres(List.of("Mythology", "Inspirational"));
+        post13.setPrefferedDestination(PrefferedDestination.OFFICIAL_SELECTION);
+        postRepository.save(post13);
+
+        Post post14 = new Post();
+        post14.setUser(allUsers.get(0));
+        post14.setText("In the twilight hours, when the boundary between day and night blurs, the Shadow Walker emerges. This is the story of a creature that moves through the darkness, unseen and unknown, a phantom of the night.\n\n" +
+                "With eyes that pierce the deepest shadows and a form that shifts with the flicker of the moonlight, the Shadow Walker is a master of stealth. It navigates the night with a grace that is both eerie and captivating.\n\n" +
+                "The Shadow Walker is a being of mystery, embodying the fear of the unseen and the allure of the hidden. It represents the unknown forces that move in the dark, beyond the reach of our understanding.\n\n" +
+                "In the presence of the Shadow Walker, we are reminded of the hidden aspects of our own nature, the parts of ourselves that we keep in the shadows. It challenges us to confront these hidden truths and to explore the depths of our own souls.\n\n" +
+                "Through the legend of the Shadow Walker, we are drawn into the mysteries of the night, exploring the realms of the unseen and the unknown, and finding the courage to face the darkness within.");
+        post14.setTitle("The Shadow Walker");
+        post14.setImageUrl("https://i.seadn.io/gae/FGxFFkeUuECAIJ_vwa0PmC08Pb0MZv-nCIpqdLlRIF6rSLAkcdn0umjydCDmPZb5GlJKjhLAuhMyJXbNFdbjSxN6Iae673MgLjv2LQ?auto=format&dpr=1&w=1000");
+        post14.setLocalDate(LocalDate.now().minusDays(4));
+        post14.setGenres(List.of("Thriller", "Fantasy"));
+        post14.setPrefferedDestination(PrefferedDestination.BABELs_CHOICE);
+        postRepository.save(post14);
+
+        Post post15 = new Post();
+        post15.setUser(allUsers.get(1));
+        post15.setText("In the golden glow of dawn, where the first light touches the earth, the Phoenix rises. This is the tale of a bird born from the ashes, a symbol of rebirth and renewal.\n\n" +
+                "With feathers that blaze like the sun and a cry that echoes across the skies, the Phoenix soars high above, a beacon of hope and transformation. Its flight is a dance of flames, a testament to the power of renewal.\n\n" +
+                "The Phoenix embodies the cycle of life and death, the eternal process of transformation that governs all things. It is a reminder that from the ashes of the old, the new can always arise.\n\n" +
+                "In the legend of the Phoenix, we find inspiration to embrace change and to find strength in our ability to renew and transform. It teaches us that no matter how dark the night, the dawn will always come.\n\n" +
+                "Through the story of the Phoenix, we are encouraged to rise from our own challenges, to find the fire within, and to embrace the endless possibilities of a new beginning.");
+        post15.setTitle("The Phoenix Rising");
+        post15.setImageUrl("https://www.ancient-origins.net/sites/default/files/field/image/mythical-creatures.jpg");
+        post15.setLocalDate(LocalDate.now().minusDays(1));
+        post15.setGenres(List.of("Fantasy", "Inspirational"));
+        post15.setPrefferedDestination(PrefferedDestination.OFFICIAL_SELECTION);
+        postRepository.save(post15);
+
+        Post post16 = new Post();
+        post16.setUser(allUsers.get(2));
+        post16.setText("In the icy reaches of the far north, where the auroras dance across the night sky, lives a creature of ancient majesty. This is the story of the Ice Dragon, a beast of frost and legend.\n\n" +
+                "With scales that glisten like frozen stars and breath that chills the air, the Ice Dragon is a master of the winter realms. It roams the glaciers and snowy peaks, its presence a testament to the raw power of the cold.\n\n" +
+                "The Ice Dragon embodies the harsh beauty of the frozen wilderness. It represents the strength and resilience needed to survive in the most unforgiving environments.\n\n" +
+                "In its icy domain, the Ice Dragon challenges us to find our own inner strength, to endure the coldest trials, and to emerge stronger and more determined.\n\n" +
+                "Through the legends of the Ice Dragon, we are reminded of the power and beauty of the natural world, and the strength that lies within us to conquer any adversity.");
+        post16.setTitle("The Ice Dragon");
+        post16.setImageUrl("https://www.stairsainty.com/wp-content/uploads/2016/03/classical-greek-landscape-with-girls-sacrificing-their-hair-to-diana-on-the-bank-of-a-river.jpg");
+        post16.setLocalDate(LocalDate.now().minusDays(11));
+        post16.setGenres(List.of("Fantasy", "Adventure"));
+        post16.setPrefferedDestination(PrefferedDestination.SANDBOX);
+        postRepository.save(post16);
+
+        Post post17 = new Post();
+        post17.setUser(allUsers.get(0));
+        post17.setText("In the heart of the desert, under the scorching sun and shifting sands, there lives a creature of endurance and mystery. This is the story of the Desert Wanderer, a mythical beast that roams the vast dunes.\n\n" +
+                "With eyes that can see through the blinding sandstorms and a body that withstands the harshest heat, the Desert Wanderer is a master of survival. It moves with grace across the arid landscape, a symbol of resilience and adaptation.\n\n" +
+                "The Desert Wanderer represents the strength required to navigate life's toughest challenges. It teaches us the importance of persistence and the ability to thrive even in the most difficult circumstances.\n\n" +
+                "In its journey through the endless desert, the Desert Wanderer inspires us to embrace our own paths, no matter how arduous, and to find strength in our ability to endure.\n\n" +
+                "Through the stories of the Desert Wanderer, we are reminded of the beauty and power of perseverance, and the boundless capacity for resilience within us all.");
+        post17.setTitle("The Desert Wanderer");
+        post17.setImageUrl("https://cdn.openart.ai/stable_diffusion/da1b74ecba09cef06317cdcb0b7385f0dc8aac01_2000x2000.webp");
+        post17.setLocalDate(LocalDate.now().minusDays(9));
+        post17.setGenres(List.of("Adventure", "Inspirational"));
+        post17.setPrefferedDestination(PrefferedDestination.BABELs_CHOICE);
+        postRepository.save(post17);
+
+        Post post18 = new Post();
+        post18.setUser(allUsers.get(1));
+        post18.setText("In the quiet corners of the enchanted woods, where the light filters through the leaves in a magical dance, there is a creature of wisdom and tranquility. This is the story of the Forest Guardian, a protector of nature’s secrets.\n\n" +
+                "With antlers that rise like the ancient trees and eyes that reflect the depths of the forest, the Forest Guardian watches over the woodland creatures and the delicate balance of life.\n\n" +
+                "The Forest Guardian embodies the harmony and peace found in the natural world. It reminds us of the importance of protecting and cherishing the environment that sustains us.\n\n" +
+                "In the presence of the Forest Guardian, we are called to reconnect with nature, to find solace in its beauty, and to respect the intricate web of life that surrounds us.\n\n" +
+                "Through the tales of the Forest Guardian, we are inspired to become stewards of the earth, to safeguard the precious ecosystems, and to nurture the world for future generations.");
+        post18.setTitle("The Forest Guardian");
+        post18.setImageUrl("https://as2.ftcdn.net/v2/jpg/05/62/87/35/1000_F_562873570_etl5RBJjQT0FsbWqKh2KI3frcTqUPwYa.jpg");
+        post18.setLocalDate(LocalDate.now().minusDays(8));
+        post18.setGenres(List.of("Fantasy", "Environmental"));
+        post18.setPrefferedDestination(PrefferedDestination.OFFICIAL_SELECTION);
+        postRepository.save(post18);
+
+        Post post19 = new Post();
+        post19.setUser(allUsers.get(2));
+        post19.setText("In the shimmering heat of the savannah, where the golden grass waves like a sea, there prowls a creature of elegance and power. This is the story of the Lioness Queen, a symbol of grace and strength.\n\n" +
+                "With a stride that speaks of regal authority and a gaze that commands respect, the Lioness Queen rules over her domain with a blend of fierceness and maternal care. She is the heart of the pride, the protector and the provider.\n\n" +
+                "The Lioness Queen represents the duality of power and nurturing, showing us that true strength lies in the balance of force and compassion.\n\n" +
+                "In her role, the Lioness Queen teaches us the value of leadership, the importance of caring for our communities, and the power of unity and cooperation.\n\n" +
+                "Through the story of the Lioness Queen, we are reminded to embrace our own power, to lead with kindness, and to find strength in our connections with others.");
+        post19.setTitle("The Lioness Queen");
+        post19.setImageUrl("https://img.freepik.com/premium-photo/full-moon-dark-fantasy-landscape_776674-198200.jpg");
+        post19.setLocalDate(LocalDate.now().minusDays(7));
+        post19.setGenres(List.of("Adventure", "Leadership"));
+        post19.setPrefferedDestination(PrefferedDestination.SANDBOX);
+        postRepository.save(post19);
+
+        Post post20 = new Post();
+        post20.setUser(allUsers.get(1));
+        post20.setText("In the ancient ruins of forgotten civilizations, where time has eroded the grandeur of empires, there resides a creature of profound mystery. This is the story of the Stone Sentinel, a guardian of lost secrets.\n\n" +
+                "With a form carved from the very rock of the earth and eyes that have seen centuries pass, the Stone Sentinel stands vigil over the remnants of the past. Its presence is a bridge between the world that was and the world that is.\n\n" +
+                "The Stone Sentinel symbolizes the endurance of history and the lessons embedded in the ruins of bygone eras. It reminds us to look to the past to understand the present and to build a future with the wisdom we gather.\n\n" +
+                "In the shadow of the Stone Sentinel, we are encouraged to cherish the heritage of humanity, to honor the stories that have shaped us, and to protect the legacies we leave behind.\n\n" +
+                "Through the legend of the Stone Sentinel, we find the importance of memory and the enduring strength of the human spirit as it weaves the tapestry of history.");
+        post20.setTitle("The Stone Sentinel");
+        post20.setImageUrl("https://avid-archer.com/wp-content/uploads/2023/12/legendary-archery-mythology-1140x651.webp");
+        post20.setLocalDate(LocalDate.now().minusDays(6));
+        post20.setGenres(List.of("Historical", "Mystery"));
+        post20.setPrefferedDestination(PrefferedDestination.BABELs_CHOICE);
+        postRepository.save(post20);
+
+        Post post21 = new Post();
+        post21.setUser(allUsers.get(2));
+        post21.setText("In the twilight sky, where the last light of day meets the deep blue of night, there soars a creature of ethereal beauty. This is the story of the Sky Dancer, a bird of elegance and grace.\n\n" +
+                "With wings that shimmer like the stars and a song that enchants all who hear it, the Sky Dancer glides through the air, a living poem of movement and melody.\n\n" +
+                "The Sky Dancer represents the freedom and joy found in the simplest of life's moments. It reminds us to embrace the beauty around us and to find happiness in the everyday wonders of the world.\n\n" +
+                "In its flight, the Sky Dancer inspires us to soar beyond our limitations, to explore the skies of our potential, and to find our own rhythm in the dance of life.\n\n" +
+                "Through the story of the Sky Dancer, we are encouraged to live with grace and to find the poetry in our own journeys, celebrating the beauty and joy that life offers.");
+        post21.setTitle("The Sky Dancer");
+        post21.setImageUrl("https://media.istockphoto.com/id/887259720/photo/fantasy-tree-house.jpg?s=612x612&w=0&k=20&c=268Jkh8w5SQsxRmi8KEW3swjhRYesvfN_1T_KBGNtSE=");
+        post21.setLocalDate(LocalDate.now().minusDays(5));
+        post21.setGenres(List.of("Fantasy", "Inspirational"));
+        post21.setPrefferedDestination(PrefferedDestination.OFFICIAL_SELECTION);
+        postRepository.save(post21);
+
     }
 
 }
