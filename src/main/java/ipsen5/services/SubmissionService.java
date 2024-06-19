@@ -28,6 +28,7 @@ public class SubmissionService {
     public List<Submission> getAllSubmissions() {
         return this.submissionRespository.findAll();
     }
+
     public Optional<Submission> getSubmissionById(UUID id) {
         return this.submissionRespository.findById(id);
     }
