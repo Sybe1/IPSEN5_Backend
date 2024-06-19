@@ -107,13 +107,13 @@ public class SubmissionServiceTest {
         List<Submission> foundSubmissions = submissionService.getAllSubmissions();
 
         assertNotNull(foundSubmissions);
-        assertEquals(2, foundSubmissions.size());
+        assertEquals(3, foundSubmissions.size());
         assertEquals("test1", foundSubmissions.get(0).getName());
         assertEquals("test2", foundSubmissions.get(1).getName());
     }
 
     @Test
-    public void testGetAllRolesEmpty() {
+    public void testGetAllSubmissionsEmpty() {
         when(submissionRepository.findAll()).thenReturn(Collections.emptyList());
 
         List<Submission> foundSubmissions = submissionService.getAllSubmissions();
