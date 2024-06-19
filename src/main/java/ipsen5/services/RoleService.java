@@ -30,14 +30,14 @@ public class RoleService {
     }
 
     public void editRole(UUID id, RoleDTO roleDTO) {
-        Role role = this.roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
+        Role role = this.roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Role not found"));
         role.setName(roleDTO.name);
         System.out.println("miss hiero " + roleDTO.name);
         this.roleRepository.save(role);
     }
 
     public void deleteRole(UUID id) {
-        this.roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
+        this.roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Role not found"));
         this.roleRepository.deleteById(id);
     }
 }
