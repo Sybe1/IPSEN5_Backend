@@ -2,10 +2,11 @@ package ipsen5.services;
 
 import ipsen5.dto.PostDTO;
 import ipsen5.models.Post;
+import ipsen5.models.Reaction;
 import ipsen5.models.User;
-import ipsen5.repository.PostRepository;
-import ipsen5.repository.UserRepository;
+import ipsen5.repository.*;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,11 +16,17 @@ import java.util.UUID;
 public class PostService {
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final RatingRepository ratingRepository;
+    private final ReactionRepository reactionRepository;
+    private final PostCategoryRepository postCategoryRepository;
 
     public PostService(PostRepository postRepository,
-                       UserRepository userRepository) {
+                       UserRepository userRepository, RatingRepository ratingRepository, ReactionRepository reactionRepository, CategoryRepository categoryRepository, PostCategoryRepository postCategoryRepository) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
+        this.ratingRepository = ratingRepository;
+        this.reactionRepository = reactionRepository;
+        this.postCategoryRepository = postCategoryRepository;
     }
 
     public List<Post> getAllPosts() {
@@ -40,8 +47,13 @@ public class PostService {
         this.postRepository.save(post);
     }
 
+    @Transactional
     public void deletePost(UUID id) {
-        this.postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
+        Post post = this.postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
+        this.ratingRepository.deleteByPostId(id);
+        List<Reaction> reactionsToDelete = this.reactionRepository.findByPostId(post);
+        this.reactionRepository.deleteAll(reactionsToDelete);
+        this.postCategoryRepository.deleteById_PostId(post);
         this.postRepository.deleteById(id);
     }
 

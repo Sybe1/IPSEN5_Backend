@@ -25,7 +25,7 @@ public class RolePriviligesSeeder {
 
         Rights[] rightsArrayForAdmin = {
                 Rights.ALL, Rights.GUARD_USER_ROLES, Rights.GUARD_SUBMISSIONS,
-                Rights.GUARD_ROLES, Rights.REVIEW_SUBMISSIONS
+                Rights.GUARD_ROLES, Rights.REVIEW_SUBMISSIONS, Rights.GUARD_NOTIFICATIONS
         };
 
 
@@ -34,14 +34,16 @@ public class RolePriviligesSeeder {
                 Rights.SOCIALMEDIA, Rights.RUBRIC, Rights.ROLEPRIVILIGES, Rights.ROLE,
                 Rights.REACTION, Rights.RATING, Rights.POSTCATEGORY, Rights.POST,
                 Rights.FEEDBACKPERELEMENT, Rights.CRITERIA, Rights.CATEGORY,
-                Rights.GUARD_SUBMISSIONS, Rights.CATEGORY_GET, Rights.REVIEW_SUBMISSIONS
+                Rights.GUARD_SUBMISSIONS, Rights.CATEGORY_GET, Rights.REVIEW_SUBMISSIONS,
+                Rights.GUARD_NOTIFICATIONS
         };
 
         Rights[] rightsArrayForRole2 = {
                 Rights.SUBMISSION, Rights.USER, Rights.STATUS,
                 Rights.SOCIALMEDIA, Rights.RUBRIC,
                 Rights.REACTION, Rights.RATING, Rights.POSTCATEGORY, Rights.POST_GET,
-                Rights.FEEDBACKPERELEMENT_GET, Rights.GUARD_SUBMISSIONS
+                Rights.FEEDBACKPERELEMENT_GET, Rights.GUARD_SUBMISSIONS,
+                Rights.GUARD_NOTIFICATIONS
         };
 
         for (Rights rights : rightsArrayForAdmin) {

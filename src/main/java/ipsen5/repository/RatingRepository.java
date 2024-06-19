@@ -18,4 +18,6 @@ public interface RatingRepository extends JpaRepository<Rating, RatingId>{
 
     @Query("SELECT r FROM Rating r WHERE r.id.post_id.id = :postId")
     List<Rating> findRatingsByPostId(@Param("postId") UUID postId);
+
+    void deleteByPostId(UUID id);
 }

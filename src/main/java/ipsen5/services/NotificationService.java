@@ -1,25 +1,26 @@
-package ipsen5.dao;
+package ipsen5.services;
 
 import ipsen5.dto.NotificationDTO;
 import ipsen5.models.Notification;
 import ipsen5.models.Role;
 import ipsen5.models.User;
-import org.aspectj.weaver.ast.Not;
+import ipsen5.repository.NotificationRepository;
+import ipsen5.repository.RoleRepository;
+import ipsen5.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 
 @Component
-public class NotificationDAO {
+public class NotificationService {
     private final NotificationRepository notificationRepository;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
-    public NotificationDAO(NotificationRepository notificationRepository, UserRepository userRepository, RoleRepository roleRepository) {
+    public NotificationService(NotificationRepository notificationRepository, UserRepository userRepository, RoleRepository roleRepository) {
         this.notificationRepository = notificationRepository;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
