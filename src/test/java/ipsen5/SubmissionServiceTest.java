@@ -1,5 +1,7 @@
 package ipsen5;
 
+import ipsen5.dto.SubmissionDTO;
+import ipsen5.models.Rubric;
 import ipsen5.models.Submission;
 import ipsen5.models.User;
 import ipsen5.repository.RubricRepository;
@@ -28,34 +30,61 @@ public class SubmissionServiceTest {
 
     private Submission submission;
     private Submission submission2;
+    private Submission submission3;
     private List submissions;
 
     private User user1;
     private User user2;
+    private User user3;
+
+    private List<Rubric> rubrics;
+    private SubmissionDTO submissionDTO;
 
     @BeforeEach
     public void setup(){
         submissionRepository = Mockito.mock(SubmissionRespository.class);
+        rubricRepository = Mockito.mock(RubricRepository.class);
         submissionService = new SubmissionService(submissionRepository, rubricRepository);
 
         user1 = new User();
         user2 = new User();
+        user3 = new User();
         user1.setId(UUID.randomUUID());
         user1.setFirst_name("testUser1");
         user2.setId(UUID.randomUUID());
         user2.setFirst_name("testUser2");
+        user3.setId(UUID.randomUUID());
+        user3.setFirst_name("testUser3");
+
+        Rubric rubric1 = new Rubric("Text Rubric");
+        rubric1.setId(UUID.randomUUID());
+        Rubric rubric2 = new Rubric("Audio Rubric");
+        rubric2.setId(UUID.randomUUID());
+        Rubric rubric3 = new Rubric("Video Rubric");
+        rubric3.setId(UUID.randomUUID());
+        rubrics = Arrays.asList(rubric1, rubric2, rubric3);
 
         submission = new Submission();
         submission.setId(UUID.randomUUID());
+        submission.setRubric(rubric1);
         submission.setName("test1");
         submission.setUser_id(user1);
-        
+
         submission2 = new Submission();
         submission2.setId(UUID.randomUUID());
+        submission2.setRubric(rubric2);
         submission2.setName("test2");
         submission2.setUser_id(user2);
 
-        submissions = Arrays.asList(submission, submission2);
+        submission3 = new Submission();
+        submission3.setId(UUID.randomUUID());
+        submission3.setRubric(rubric3);
+        submission3.setName("test3");
+        submission3.setUser_id(user3);
+
+        submissions = Arrays.asList(submission, submission2, submission3);
+
+        submissionDTO = new SubmissionDTO();
 
 
 
@@ -149,6 +178,71 @@ public class SubmissionServiceTest {
         // Verify the repository method was called once
         verify(submissionRepository, times(1)).findAll();
     }
+
+    @Test
+    public void testCreateSubmissionText() {
+        submissionDTO.type = "Text";
+        // Mock the repository call
+        when(rubricRepository.findAll()).thenReturn(rubrics);
+        when(submissionRepository.save(any(Submission.class))).thenReturn(submission);
+
+        // Call the service method
+        Submission createdSubmission = submissionService.createSubmission(submissionDTO);
+
+        // Verify the result
+        assertNotNull(createdSubmission);
+        assertEquals(rubrics.get(0), createdSubmission.getRubric());
+
+        // Verify the repository methods were called once
+        verify(rubricRepository, times(1)).findAll();
+        verify(submissionRepository, times(1)).save(any(Submission.class));
+    }
+
+    @Test
+    public void testCreateSubmissionAudio() {
+        // Adjust the DTO type for this test
+        submissionDTO.type = "Audio";
+
+        // Mock the repository call
+        when(rubricRepository.findAll()).thenReturn(rubrics);
+        when(submissionRepository.save(any(Submission.class))).thenReturn(submission2);
+
+        // Call the service method
+        Submission createdSubmission = submissionService.createSubmission(submissionDTO);
+        // Verify the result
+        assertNotNull(createdSubmission);
+        assertEquals(rubrics.get(1), createdSubmission.getRubric());
+
+
+        // Verify the repository methods were called once
+        verify(rubricRepository, times(1)).findAll();
+        verify(submissionRepository, times(1)).save(any(Submission.class));
+    }
+
+    @Test
+    public void testCreateSubmissionVideo() {
+        // Adjust the DTO type for this test
+        submissionDTO.type = "Video";
+
+        // Mock the repository call
+        when(rubricRepository.findAll()).thenReturn(rubrics);
+        when(submissionRepository.save(any(Submission.class))).thenReturn(submission3);
+
+        // Call the service method
+        Submission createdSubmission = submissionService.createSubmission(submissionDTO);
+
+        // Verify the result
+        assertNotNull(createdSubmission);
+        assertEquals(rubrics.get(2), createdSubmission.getRubric());
+
+        // Verify the repository methods were called once
+        verify(rubricRepository, times(1)).findAll();
+        verify(submissionRepository, times(1)).save(any(Submission.class));
+    }
+
+    
+
+
 
 
 }
