@@ -66,6 +66,37 @@ public class SubmissionServiceTest {
         assertTrue(foundSubmissions.isEmpty());
     }
 
+    @Test
+    public void testGetSubmissionById() {
+        // Mock the repository call
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
+
+        // Call the service method
+        Optional<Submission> foundSubmission = submissionService.getSubmissionById(submission.getId());
+
+        // Verify the result
+        assertTrue(foundSubmission.isPresent());
+        assertEquals(submission.getId(), foundSubmission.get().getId());
+        assertEquals("test1", foundSubmission.get().getName()); // Adjust according to your Submission fields
+
+        // Verify the repository method was called once
+        verify(submissionRepository, times(1)).findById(submission.getId());
+    }
+
+    @Test
+    public void testGetSubmissionByIdNotFound() {
+        // Mock the repository call
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
+
+        // Call the service method
+        Optional<Submission> foundSubmission = submissionService.getSubmissionById(submission.getId());
+
+        // Verify the result
+        assertFalse(foundSubmission.isPresent());
+
+        // Verify the repository method was called once
+        verify(submissionRepository, times(1)).findById(submission.getId());
+    }
 
 
 }
