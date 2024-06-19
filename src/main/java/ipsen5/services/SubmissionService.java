@@ -87,8 +87,12 @@ public class SubmissionService {
     }
     public byte[] getUserPicture(UUID id) {
         Submission submission = submissionRespository.findById(id).orElse(null);
-        byte[] submissionPicture = submission.getPicture();
-        return submissionPicture;
+        if(submission != null) {
+            byte[] submissionPicture = submission.getPicture();
+            return submissionPicture;
+        }
+        return null;
+
     }
 
     public void editSubmission(UUID id, SubmissionDTO submissionDTO) {

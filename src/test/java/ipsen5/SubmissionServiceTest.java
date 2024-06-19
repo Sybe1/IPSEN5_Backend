@@ -351,7 +351,40 @@ public class SubmissionServiceTest {
         verify(submissionRepository, times(1)).findById(submission.getId());
     }
 
+    @Test
+    public void testGetUserPicture() {
+        byte[] pictureContent = "Test Picture content".getBytes();
+        submission.setPicture(pictureContent);
+        // Mock the behavior of repository methods
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.of(submission));
 
+        // Call the service method
+        byte[] result = submissionService.getUserPicture(submission.getId());
+
+        // Verify the picture content was returned correctly
+        assertNotNull(result);
+        assertArrayEquals(submission.getPicture(), result);
+
+        // Verify repository method was called
+        verify(submissionRepository, times(1)).findById(submission.getId());
+    }
+
+    @Test
+    public void testGetUserPictureSubmissionNotFound() {
+        byte[] pictureContent = "Test Picture content".getBytes();
+        submission.setPicture(pictureContent);
+        // Mock the behavior of repository methods
+        when(submissionRepository.findById(submission.getId())).thenReturn(Optional.empty());
+
+        // Call the service method
+        byte[] result = submissionService.getUserPicture(submission.getId());
+
+        // Verify that the result is null
+        assertNull(result);
+
+        // Verify repository method was called
+        verify(submissionRepository, times(1)).findById(submission.getId());
+    }
 
 
 
