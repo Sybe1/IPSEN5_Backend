@@ -79,8 +79,11 @@ public class SubmissionService {
 
     public byte[] getUserPdf(UUID id) {
         Submission submission = submissionRespository.findById(id).orElse(null);
-        byte[] submissionPDF = submission.getPdf();
-        return submissionPDF;
+        if(submission != null) {
+            byte[] submissionPDF = submission.getPdf();
+            return submissionPDF;
+        }
+        return null;
     }
     public byte[] getUserPicture(UUID id) {
         Submission submission = submissionRespository.findById(id).orElse(null);
