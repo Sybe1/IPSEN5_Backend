@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "https://clownfish-app-5x89u.ondigitalocean.app"})
 @RequestMapping("/rubric")
 public class RubricController {
     private final RubricService rubricService;
