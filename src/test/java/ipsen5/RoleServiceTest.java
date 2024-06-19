@@ -87,6 +87,20 @@ public class RoleServiceTest {
         assertTrue(foundRoles.isEmpty());
     }
 
+    @Test
+    public void testCreateRole() {
+        // Given
+        RoleDTO roleDTO = new RoleDTO();
+        roleDTO.setId("123");
+        roleDTO.setName("Admin");
+
+        // When
+        roleService.createRole(roleDTO);
+
+        // Then
+        verify(roleRepository, Mockito.times(1)).save(any(Role.class));
+    }
+
 
 
 
