@@ -26,8 +26,13 @@ public class CriteriaService {
     }
 
     public void createCriteria(CriteriaDTO criteriaDTO) {
-        this.criteriaRepository.save(new Criteria(criteriaDTO.mainName, criteriaDTO.subName, criteriaDTO.zeroPoints, criteriaDTO.twoPoints, criteriaDTO.fourPoints, criteriaDTO.threePoints, criteriaDTO.onePoints, criteriaDTO.fivePoints));
+        if (criteriaDTO.getMainName() == null || criteriaDTO.getMainName().isEmpty()) {
+            throw new RuntimeException("Main name cannot be null or empty");
+        }
+        Criteria criteria = new Criteria(criteriaDTO.mainName, criteriaDTO.subName, criteriaDTO.zeroPoints, criteriaDTO.onePoints, criteriaDTO.twoPoints, criteriaDTO.threePoints, criteriaDTO.fourPoints, criteriaDTO.fivePoints);
+        this.criteriaRepository.save(criteria);
     }
+
 
     public void editCriteria(UUID id, CriteriaDTO criteriaDTO) {
         Criteria criteria = this.criteriaRepository.findById(id).orElseThrow(() -> new RuntimeException("Criteria not found"));
