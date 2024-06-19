@@ -1,8 +1,8 @@
 package ipsen5.utils;
 
-import ipsen5.dao.CategoryRepository;
-import ipsen5.dao.PostCategoryRepository;
-import ipsen5.dao.PostRepository;
+import ipsen5.repository.CategoryRepository;
+import ipsen5.repository.PostCategoryRepository;
+import ipsen5.repository.PostRepository;
 import ipsen5.models.Category;
 import ipsen5.models.Post;
 import ipsen5.models.PostCategory;
@@ -13,9 +13,9 @@ import java.util.List;
 
 @Component
 public class PostCategorySeeder {
-    private PostRepository postRepository;
-    private CategoryRepository categoryRepository;
-    private PostCategoryRepository postCategoryRepository;
+    private final PostRepository postRepository;
+    private final CategoryRepository categoryRepository;
+    private final PostCategoryRepository postCategoryRepository;
 
     public PostCategorySeeder(PostRepository postRepository, CategoryRepository categoryRepository, PostCategoryRepository postCategoryRepository) {
         this.postRepository = postRepository;

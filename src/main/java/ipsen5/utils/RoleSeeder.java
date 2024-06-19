@@ -1,13 +1,13 @@
 package ipsen5.utils;
 
-import ipsen5.dao.RoleRepository;
+import ipsen5.repository.RoleRepository;
 import ipsen5.models.Role;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RoleSeeder {
 
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
     public RoleSeeder(RoleRepository roleRepository) {
         this.roleRepository = roleRepository;
@@ -25,9 +25,5 @@ public class RoleSeeder {
         Role role3 = new Role();
         role3.setName("Creator");
         roleRepository.save(role3);
-
-        Role role4 = new Role();
-        role4.setName("Registered User");
-        roleRepository.save(role4);
     }
 }

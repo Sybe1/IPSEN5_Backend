@@ -1,5 +1,6 @@
 package ipsen5.dto;
 
+import ipsen5.models.Rubric;
 import ipsen5.models.Status;
 import ipsen5.models.User;
 
@@ -9,7 +10,6 @@ public class SubmissionDTO {
         public String name;
         public String email;
         public String online_profiles;
-        public String text;
         public String story_title;
         public String type;
         public int wordCount;

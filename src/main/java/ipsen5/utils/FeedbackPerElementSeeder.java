@@ -1,6 +1,8 @@
 package ipsen5.utils;
 
-import ipsen5.dao.*;
+import ipsen5.repository.CriteriaRepository;
+import ipsen5.repository.FeedbackPerElementRepository;
+import ipsen5.repository.SubmissionRespository;
 import ipsen5.models.*;
 import org.springframework.stereotype.Component;
 
@@ -9,9 +11,9 @@ import java.util.List;
 @Component
 public class FeedbackPerElementSeeder {
 
-    private SubmissionRespository submissionRespository;
-    private CriteriaRepository criteriaRepository;
-    private FeedbackPerElementRepository feedbackPerElementRepository;
+    private final SubmissionRespository submissionRespository;
+    private final CriteriaRepository criteriaRepository;
+    private final FeedbackPerElementRepository feedbackPerElementRepository;
 
     public FeedbackPerElementSeeder(SubmissionRespository submissionRespository, CriteriaRepository criteriaRepository, FeedbackPerElementRepository feedbackPerElementRepository) {
         this.submissionRespository = submissionRespository;

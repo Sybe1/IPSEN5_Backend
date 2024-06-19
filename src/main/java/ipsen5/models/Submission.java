@@ -1,6 +1,7 @@
 package ipsen5.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,37 +14,77 @@ public class Submission {
     @Id
     @GeneratedValue
     private UUID id;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "1")
     private String name;
+
+    @NotBlank
+    @Email
     private String email;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "1")
     private String online_profiles;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "2")
     private String story_title;
+
+
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "3")
     private String type;
-    private String text;
+
+    @NotNull
+    @Min(0)
     private int wordCount;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "5")
     private String genre;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "6")
     private String additional_notes;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:'_-]+$", message = "7")
     private String prefferd_destination;
+
+    @NotNull
     private Boolean platform_presence;
+
+    @NotNull
     private Boolean extra_feedback;
+
+    @NotNull
     private Boolean express_experience;
 
     @ManyToOne
+    @NotNull
     private Status statusID;
 
     @ManyToOne
+    @NotNull
     private User user_id;
   
     @ManyToOne
+    @NotNull
     private Rubric rubric;
 
+    @Lob
+    private byte[] pdf;
 
-    public Submission(String name, String email, String online_profiles, String story_title, String type, String text, int wordCount, String genre, String additional_notes, String prefferd_destination, Boolean platform_presence, Boolean extra_feedback, Boolean express_experience, Status statusID, User user_id, Rubric rubric) {
+    @Lob
+    private byte[] picture;
+
+
+    public Submission(String name, String email, String online_profiles, String story_title, String type, int wordCount, String genre, String additional_notes, String prefferd_destination, Boolean platform_presence, Boolean extra_feedback, Boolean express_experience, Status statusID, User user_id, Rubric rubric) {
         this.name = name;
         this.email = email;
         this.online_profiles = online_profiles;
         this.story_title = story_title;
         this.type = type;
-        this.text = text;
         this.wordCount = wordCount;
         this.genre = genre;
         this.additional_notes = additional_notes;
@@ -58,5 +99,9 @@ public class Submission {
 
     public Submission() {
 
+    }
+
+    public User getUser_id() {
+        return user_id;
     }
 }

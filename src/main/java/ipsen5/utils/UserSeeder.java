@@ -1,7 +1,7 @@
 package ipsen5.utils;
 
-import ipsen5.dao.RoleRepository;
-import ipsen5.dao.UserRepository;
+import ipsen5.repository.RoleRepository;
+import ipsen5.repository.UserRepository;
 import ipsen5.models.Role;
 import ipsen5.models.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,8 +11,8 @@ import java.util.List;
 
 @Component
 public class UserSeeder {
-    private RoleRepository roleRepository;
-    private UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
 
     public UserSeeder(RoleRepository roleRepository, UserRepository userRepository) {
         this.roleRepository = roleRepository;
@@ -21,6 +21,7 @@ public class UserSeeder {
 
     public void seedUser(){
         List<Role> allRoles = roleRepository.findAll();
+
 
         User user = new User();
         user.setFirst_name("Mick");
@@ -32,6 +33,8 @@ public class UserSeeder {
         user.setDonation_link("https://www.paypal.com/nl/home");
         user.setRole(allRoles.get(0));
         userRepository.save(user);
+
+
 
         User user2 = new User();
         user2.setFirst_name("Pim");

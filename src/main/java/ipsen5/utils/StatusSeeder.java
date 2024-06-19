@@ -1,9 +1,6 @@
 package ipsen5.utils;
 
-import ipsen5.dao.PostRepository;
-import ipsen5.dao.StatusRepository;
-import ipsen5.dao.SubmissionRespository;
-import ipsen5.dao.UserRepository;
+import ipsen5.repository.StatusRepository;
 import ipsen5.models.Status;
 import org.springframework.stereotype.Component;
 
@@ -12,8 +9,7 @@ import java.util.UUID;
 @Component
 public class StatusSeeder {
 
-    private StatusRepository statusRepository;
-
+    private final StatusRepository statusRepository;
 
     public StatusSeeder(StatusRepository statusRepository) {
         this.statusRepository = statusRepository;
@@ -28,7 +24,7 @@ public class StatusSeeder {
 
         Status status2 = new Status();
         UUID id1 = UUID.fromString("c56a4180-65aa-42ec-a945-5fd21dec0538");
-        status2.setId(id1);  // Use status2 to set id
+        status2.setId(id1);
         status2.setStatus("In Review...");
         statusRepository.save(status2);
 

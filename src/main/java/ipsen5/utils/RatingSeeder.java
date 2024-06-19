@@ -1,8 +1,8 @@
 package ipsen5.utils;
 
-import ipsen5.dao.PostRepository;
-import ipsen5.dao.RatingRepository;
-import ipsen5.dao.UserRepository;
+import ipsen5.repository.PostRepository;
+import ipsen5.repository.RatingRepository;
+import ipsen5.repository.UserRepository;
 import ipsen5.models.Post;
 import ipsen5.models.Rating;
 import ipsen5.models.RatingId;
@@ -14,9 +14,9 @@ import java.util.Random;
 
 @Component
 public class RatingSeeder {
-    private UserRepository userRepository;
-    private PostRepository postRepository;
-    private RatingRepository ratingRepository;
+    private final UserRepository userRepository;
+    private final PostRepository postRepository;
+    private final RatingRepository ratingRepository;
 
     public RatingSeeder(UserRepository userRepository, PostRepository postRepository, RatingRepository ratingRepository) {
         this.userRepository = userRepository;

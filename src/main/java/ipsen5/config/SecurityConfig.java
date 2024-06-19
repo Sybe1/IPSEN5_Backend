@@ -1,6 +1,6 @@
 package ipsen5.config;
 
-import ipsen5.services.UserService;
+import ipsen5.services.UserCredentialsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,11 +21,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
     private final JWTFilter filter;
-    private final UserService userService;
+    private final UserCredentialsService userCredentialsService;
 
-    public SecurityConfig(JWTFilter filter, UserService userService) {
+    public SecurityConfig(JWTFilter filter, UserCredentialsService userCredentialsService) {
         this.filter = filter;
-        this.userService = userService;
+        this.userCredentialsService = userCredentialsService;
     }
 
     @Bean
@@ -35,14 +35,16 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .userDetailsService(userService)
+                .userDetailsService(userCredentialsService)
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/post/**").permitAll()
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/reaction/**").permitAll()
+                        .requestMatchers("/reaction/post/**").permitAll()
                         .requestMatchers("/users/username/**").permitAll()
+                        .requestMatchers("/users/mail/**").permitAll()
                         .requestMatchers("/rating/**").permitAll()
+                        .requestMatchers("/social-media/user/**").permitAll()
                         .requestMatchers("/error").anonymous()
                         .anyRequest().authenticated()
                 )

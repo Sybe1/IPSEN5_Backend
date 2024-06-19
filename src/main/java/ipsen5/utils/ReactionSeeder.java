@@ -1,8 +1,8 @@
 package ipsen5.utils;
 
-import ipsen5.dao.PostRepository;
-import ipsen5.dao.ReactionRepository;
-import ipsen5.dao.UserRepository;
+import ipsen5.repository.PostRepository;
+import ipsen5.repository.ReactionRepository;
+import ipsen5.repository.UserRepository;
 import ipsen5.models.Post;
 import ipsen5.models.Reaction;
 import ipsen5.models.User;
@@ -12,9 +12,9 @@ import java.util.List;
 
 @Component
 public class ReactionSeeder {
-    private PostRepository postRepository;
-    private UserRepository userRepository;
-    private ReactionRepository reactionRepository;
+    private final PostRepository postRepository;
+    private final UserRepository userRepository;
+    private final ReactionRepository reactionRepository;
 
     public ReactionSeeder(PostRepository postRepository, UserRepository userRepository, ReactionRepository reactionRepository) {
         this.postRepository = postRepository;
@@ -27,19 +27,19 @@ public class ReactionSeeder {
         List<Post> allPosts = postRepository.findAll();
 
         Reaction reaction = new Reaction();
-        reaction.setText("De post is erg mooi");
+        reaction.setText("Such a good story!");
         reaction.setUser_id(allUsers.get(0));
         reaction.setPostId(allPosts.get(0));
         reactionRepository.save(reaction);
 
         Reaction reaction2 = new Reaction();
-        reaction2.setText("De post is kort");
+        reaction2.setText("Story could have been longer!");
         reaction2.setUser_id(allUsers.get(0));
         reaction2.setPostId(allPosts.get(1));
         reactionRepository.save(reaction2);
 
         Reaction reaction3 = new Reaction();
-        reaction3.setText("De post had beter gekund!");
+        reaction3.setText("Love this story!!");
         reaction3.setUser_id(allUsers.get(1));
         reaction3.setPostId(allPosts.get(1));
         reactionRepository.save(reaction3);

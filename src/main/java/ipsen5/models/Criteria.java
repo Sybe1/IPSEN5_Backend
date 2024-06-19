@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,13 +21,38 @@ public class Criteria {
     @Id
     @GeneratedValue
     private UUID id;
-    private String name;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:`'-]+$")
+    private String mainName;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:`'-]+$")
+    private String subName;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:`'-]+$")
     private String zeroPoints;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:`'-]+$")
+    private String onePoints;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:`'-]+$")
     private String twoPoints;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:`'-]+$")
+    private String threePoints;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:`'-]+$")
     private String fourPoints;
-    private String sixPoints;
-    private String eightPoints;
-    private String tenPoints;
+
+    @NotBlank
+    @Pattern(regexp = "^[a-zA-Z0-9 .,!?()@&:`'-]+$")
+    private String fivePoints;
 
     @ManyToMany(mappedBy = "criteria")
     @JsonBackReference
@@ -34,13 +61,19 @@ public class Criteria {
     public Criteria() {
     }
 
-    public Criteria(String name, String zeroPoints, String twoPoints, String fourPoints, String sixPoints, String eightPoints, String tenPoints) {
-        this.name = name;
+    public Criteria(UUID id, String mainName, String subName, String zeroPoints, String onePoints, String twoPoints, String threePoints, String fourPoints, String fivePoints, Set<Rubric> rubrics) {
+        this.id = id;
+        this.mainName = mainName;
+        this.subName = subName;
         this.zeroPoints = zeroPoints;
+        this.onePoints = onePoints;
         this.twoPoints = twoPoints;
+        this.threePoints = threePoints;
         this.fourPoints = fourPoints;
-        this.sixPoints = sixPoints;
-        this.eightPoints = eightPoints;
-        this.tenPoints = tenPoints;
+        this.fivePoints = fivePoints;
+        this.rubrics = rubrics;
+    }
+
+    public Criteria(String mainName, String subName, String zeroPoints, String twoPoints, String fourPoints, String threePoints, String onePoints, String fivePoints) {
     }
 }

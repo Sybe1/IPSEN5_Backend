@@ -1,7 +1,7 @@
 package ipsen5.utils;
 
-import ipsen5.dao.RolePriviligesRepository;
-import ipsen5.dao.RoleRepository;
+import ipsen5.repository.RolePriviligesRepository;
+import ipsen5.repository.RoleRepository;
 import ipsen5.models.Role;
 import ipsen5.models.RolePriviliges;
 import ipsen5.models.RolePriviligesId;
@@ -12,8 +12,8 @@ import java.util.List;
 
 @Component
 public class RolePriviligesSeeder {
-    private RoleRepository roleRepository;
-    private RolePriviligesRepository rolePriviligesRepository;
+    private final RoleRepository roleRepository;
+    private final RolePriviligesRepository rolePriviligesRepository;
 
     public RolePriviligesSeeder(RoleRepository roleRepository, RolePriviligesRepository rolePriviligesRepository) {
         this.roleRepository = roleRepository;
@@ -23,24 +23,50 @@ public class RolePriviligesSeeder {
     public void seedRolePriviliges(){
         List<Role> allRoles = roleRepository.findAll();
 
-        RolePriviliges rolePriviliges = new RolePriviliges();
-        RolePriviligesId rolePriviligesId = new RolePriviligesId(allRoles.get(0), Rights.POSTEN);
-        rolePriviliges.setId(rolePriviligesId);
-        rolePriviligesRepository.save(rolePriviliges);
+        Rights[] rightsArrayForAdmin = {
+                Rights.ALL, Rights.GUARD_USER_ROLES, Rights.GUARD_SUBMISSIONS,
+                Rights.GUARD_ROLES, Rights.REVIEW_SUBMISSIONS, Rights.GUARD_NOTIFICATIONS
+        };
 
-        RolePriviliges rolePriviliges2 = new RolePriviliges();
-        RolePriviligesId rolePriviligesId2 = new RolePriviligesId(allRoles.get(0), Rights.GETTEN);
-        rolePriviliges2.setId(rolePriviligesId2);
-        rolePriviligesRepository.save(rolePriviliges2);
 
-        RolePriviliges rolePriviliges3 = new RolePriviliges();
-        RolePriviligesId rolePriviligesId3 = new RolePriviligesId(allRoles.get(0), Rights.UPDATEN);
-        rolePriviliges3.setId(rolePriviligesId3);
-        rolePriviligesRepository.save(rolePriviliges3);
+        Rights[] rightsArrayForModerator = {
+                Rights.SUBMISSION, Rights.USER, Rights.STATUS,
+                Rights.SOCIALMEDIA, Rights.RUBRIC, Rights.ROLEPRIVILIGES, Rights.ROLE,
+                Rights.REACTION, Rights.RATING, Rights.POSTCATEGORY, Rights.POST,
+                Rights.FEEDBACKPERELEMENT, Rights.CRITERIA, Rights.CATEGORY,
+                Rights.GUARD_SUBMISSIONS, Rights.CATEGORY_GET, Rights.REVIEW_SUBMISSIONS,
+                Rights.GUARD_NOTIFICATIONS
+        };
 
-        RolePriviliges rolePriviliges4 = new RolePriviliges();
-        RolePriviligesId rolePriviligesId4 = new RolePriviligesId(allRoles.get(0), Rights.DELETEN);
-        rolePriviliges4.setId(rolePriviligesId4);
-        rolePriviligesRepository.save(rolePriviliges4);
+        Rights[] rightsArrayForRole2 = {
+                Rights.SUBMISSION, Rights.USER, Rights.STATUS,
+                Rights.SOCIALMEDIA, Rights.RUBRIC,
+                Rights.REACTION, Rights.RATING, Rights.POSTCATEGORY, Rights.POST_GET,
+                Rights.FEEDBACKPERELEMENT_GET, Rights.GUARD_SUBMISSIONS,
+                Rights.GUARD_NOTIFICATIONS
+        };
+
+        for (Rights rights : rightsArrayForAdmin) {
+            RolePriviliges rolePriviliges = new RolePriviliges();
+            RolePriviligesId rolePriviligesId = new RolePriviligesId(allRoles.get(0), rights);
+            rolePriviliges.setId(rolePriviligesId);
+            rolePriviligesRepository.save(rolePriviliges);
+        }
+
+
+        for (Rights rights : rightsArrayForModerator) {
+            RolePriviliges rolePriviliges = new RolePriviliges();
+            RolePriviligesId rolePriviligesId = new RolePriviligesId(allRoles.get(1), rights);
+            rolePriviliges.setId(rolePriviligesId);
+            rolePriviligesRepository.save(rolePriviliges);
+        }
+
+        for (Rights rights : rightsArrayForRole2) {
+            RolePriviliges rolePriviliges = new RolePriviliges();
+            RolePriviligesId rolePriviligesId = new RolePriviligesId(allRoles.get(2), rights);
+            rolePriviliges.setId(rolePriviligesId);
+            rolePriviligesRepository.save(rolePriviliges);
+        }
     }
+
 }
